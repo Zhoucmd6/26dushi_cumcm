@@ -1,0 +1,13 @@
+{
+  "run_status": "diagnostic_pending_model_confirmation",
+  "source_time_interpretation": "record_order_only",
+  "power_integration": "piecewise_constant_over_10_minutes",
+  "eta_charge": 0.9,
+  "eta_discharge": 0.9,
+  "initial_kwh": 6000.0,
+  "solver_time_limit_s": 60.0,
+  "mip_rel_gap": 1e-9,
+  "methods": ["lp", "milp"],
+  "pending_items": ["time_interval_and_template_mapping", "efficiency_interpretation_for_formal_submission"],
+  "note": "参数来自建模手修订稿，仅用于诊断；不生成比赛正式模板。"
+}

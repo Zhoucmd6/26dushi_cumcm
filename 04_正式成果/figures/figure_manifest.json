@@ -1,0 +1,145 @@
+{
+  "style_version": "academic_v2_20260912",
+  "run_id": "full_20260911T130000Z_9942ba59",
+  "figure_count": 6,
+  "inputs_unchanged": true,
+  "input_sha256": {
+    "C:\\Users\\谷金龙\\Desktop\\数模\\C题_前两问_代码与成果\\05_复核记录\\本次完整运行\\full_20260911T130000Z_9942ba59\\experiment_summaries.json": "290e8c654360cbaeea5c20ad0b6ad555e253af40930259cb83f8ee833041edd4",
+    "C:\\Users\\谷金龙\\Desktop\\数模\\C题_前两问_代码与成果\\05_复核记录\\本次完整运行\\full_20260911T130000Z_9942ba59\\q1.json": "ee67d95a2bfec01596deb50f67378fe0011cbb0457dbe378984b46c921e33dad",
+    "C:\\Users\\谷金龙\\Desktop\\数模\\C题_前两问_代码与成果\\05_复核记录\\本次完整运行\\full_20260911T130000Z_9942ba59\\workbook_payload.json": "1e8310b16e11467cf81b59990e37948c10c845bb49fdd6f7c6189bb740dbfb8f",
+    "C:\\Users\\谷金龙\\Desktop\\数模\\C题_前两问_代码与成果\\05_复核记录\\本次完整运行\\full_20260911T130000Z_9942ba59\\independent_audit.json": "e776d3893b1e9eaf5c84169b8a0c48dcef13c6f39b366df55d80951bf782a564",
+    "C:\\Users\\谷金龙\\Desktop\\数模\\C题_前两问_代码与成果\\05_复核记录\\本次完整运行\\full_20260911T130000Z_9942ba59\\config.json": "fada54410da87a073cf6bf6b2593354b79fe216342d1d4a9d17d451a55cc9e46",
+    "C:\\Users\\谷金龙\\Desktop\\数模\\C题_前两问_代码与成果\\05_复核记录\\本次完整运行\\full_20260911T130000Z_9942ba59\\main_weighted28\\trajectories.npz": "61fd1aa021ae0345835f1062a6be35f3b476b7f9b7ee67c15e76fdd6b2e48cb9",
+    "C:\\Users\\谷金龙\\Desktop\\数模\\C题_前两问_代码与成果\\03_计算工程\\reports\\plot_payload.json": "d9d50ad01e79f1ec4d34f20bdd709e35dc12bd463a2a6f3c5c43da336a9af94d",
+    "C:\\Users\\谷金龙\\Desktop\\数模\\C题_前两问_代码与成果\\03_计算工程\\reports\\dataset_profile.json": "8e89e8644db9b9e1d98ec2d5310e06d583a349e38b4383dc8cba812f809d2f07"
+  },
+  "figures": [
+    {
+      "name": "第一问调度",
+      "width_mm": 182.9,
+      "height_mm": 198.1,
+      "png_dpi": 450,
+      "axes": 4,
+      "text_bounds": "passed",
+      "glyph_check": "passed",
+      "files": [
+        {
+          "file": "第一问调度.png",
+          "bytes": 371790,
+          "sha256": "0421a5f02ffb251c1f58d391b1618ba89b7106196ae38b12f719b5a38b046bff"
+        },
+        {
+          "file": "第一问调度.svg",
+          "bytes": 120355,
+          "sha256": "8e61c5fbe882108bcfd7dc3f07cad8ad1cd41c98f6686424df751639bc93f82b"
+        }
+      ]
+    },
+    {
+      "name": "第二问方法对照",
+      "width_mm": 182.9,
+      "height_mm": 152.4,
+      "png_dpi": 450,
+      "axes": 2,
+      "text_bounds": "passed",
+      "glyph_check": "passed",
+      "files": [
+        {
+          "file": "第二问方法对照.png",
+          "bytes": 358595,
+          "sha256": "9612853d4299489c121a2c5fb310b8ef37abd32af490a8e0a49434aae02ccadf"
+        },
+        {
+          "file": "第二问方法对照.svg",
+          "bytes": 19136,
+          "sha256": "0766dfd23ce15551386f19d25f9a61b5315ab4167d36c980c550a18b65e18466"
+        }
+      ]
+    },
+    {
+      "name": "第二问指定日期",
+      "width_mm": 182.9,
+      "height_mm": 185.4,
+      "png_dpi": 450,
+      "axes": 8,
+      "text_bounds": "passed",
+      "glyph_check": "passed",
+      "files": [
+        {
+          "file": "第二问指定日期.png",
+          "bytes": 326922,
+          "sha256": "bcf3535d8a8aee4bce054f60d232899580a79c1749f6bb3f5efaff36e495d3f8"
+        },
+        {
+          "file": "第二问指定日期.svg",
+          "bytes": 196679,
+          "sha256": "3169fc9cda182db8c13af55e317185855afff7efc14f8e47dd976ceec094cd03"
+        }
+      ]
+    },
+    {
+      "name": "第二问灵敏度",
+      "width_mm": 182.9,
+      "height_mm": 92.7,
+      "png_dpi": 450,
+      "axes": 2,
+      "text_bounds": "passed",
+      "glyph_check": "passed",
+      "files": [
+        {
+          "file": "第二问灵敏度.png",
+          "bytes": 217286,
+          "sha256": "bb8a684e14488473ef4909321e8fca71e5437cb9f73621d299de3c6b0371904e"
+        },
+        {
+          "file": "第二问灵敏度.svg",
+          "bytes": 15180,
+          "sha256": "92907cb8ca6d611b87f2d6f51981f149fa2df744ba62905afed9ff9496caae19"
+        }
+      ]
+    },
+    {
+      "name": "第二问全年调度热力图",
+      "width_mm": 182.9,
+      "height_mm": 190.5,
+      "png_dpi": 450,
+      "axes": 4,
+      "text_bounds": "passed",
+      "glyph_check": "passed",
+      "files": [
+        {
+          "file": "第二问全年调度热力图.png",
+          "bytes": 460682,
+          "sha256": "ccc56d8f68c88e818b008a46e41a9c5178addcd46bdf6c170e9d76c29d7f7b08"
+        },
+        {
+          "file": "第二问全年调度热力图.svg",
+          "bytes": 129026,
+          "sha256": "d09ea065d25e5df9c7696e41bca2b544e1292bbe75d520bb483cf4abaa9d6f7b"
+        }
+      ]
+    },
+    {
+      "name": "C题数据概览",
+      "width_mm": 182.9,
+      "height_mm": 149.9,
+      "png_dpi": 450,
+      "axes": 4,
+      "text_bounds": "passed",
+      "glyph_check": "passed",
+      "files": [
+        {
+          "file": "C题数据概览.png",
+          "bytes": 550244,
+          "sha256": "40633515f6184f9b438daf76b8bbbd6d5bf8bf59c45cd7ea0721082553f91202"
+        },
+        {
+          "file": "C题数据概览.svg",
+          "bytes": 72460,
+          "sha256": "aeea614e1d684a1f05bb54500c66f446737fa52cec870d189ed6b25f54479a3a"
+        }
+      ]
+    }
+  ],
+  "note": "程序边界与缺字检查通过；视觉审查结果另行记录。"
+}

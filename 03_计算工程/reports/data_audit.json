@@ -1,0 +1,66 @@
+{
+  "baseline_points": 144,
+  "actual_points": 52560,
+  "price_points": 52560,
+  "forecast_batches": 1460,
+  "forecast_points": 35040,
+  "forecast_date_labels_filled": 1095,
+  "date_start": "2025-01-01",
+  "date_end": "2025-12-31",
+  "checks": [
+    "原始副本SHA-256一致",
+    "全年日期连续且无重复",
+    "每日时间标签一致",
+    "数值均有限且无缺失",
+    "预报批次完整且无重复"
+  ],
+  "template_labels": [
+    {
+      "file": "result1.xlsx",
+      "first_interval": "0:10-0:20",
+      "last_interval": "0:00+1-0:10+1"
+    },
+    {
+      "file": "result2.xlsx",
+      "first_interval": "0:10-0:20",
+      "last_interval": "0:00-0:10+1"
+    },
+    {
+      "file": "result3.xlsx",
+      "first_interval": "0:10-0:20",
+      "last_interval": "0:00-0:10+1"
+    },
+    {
+      "file": "result4-2.xlsx",
+      "first_interval": "0:10-0:20",
+      "last_interval": "0:00-0:10+1"
+    },
+    {
+      "file": "result4-3.xlsx",
+      "first_interval": "0:10-0:20",
+      "last_interval": "0:00-0:10+1"
+    }
+  ],
+  "ranges": {
+    "load_kw": [
+      1995.7176,
+      7978.8849
+    ],
+    "pv_actual_kw": [
+      0,
+      10216.2
+    ],
+    "price_yuan_per_kwh": [
+      0.0076,
+      1.7936
+    ]
+  },
+  "unresolved": [
+    "输入时间点如何对应10分钟区间",
+    "模板首尾时间标签",
+    "充放电效率与接口口径",
+    "调减购电款是否退还及多次调整结算",
+    "未来电价何时可知",
+    "跨日及期末储电要求"
+  ]
+}
