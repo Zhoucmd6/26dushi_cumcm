@@ -1,0 +1,701 @@
+\documentclass[UTF8,11pt]{ctexart}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,longtable,array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+\renewcommand{\arraystretch}{1.25}
+
+\title{问题1与问题2的详细数学模型}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{统一建模约定}
+
+\subsection{时间粒度与下标}
+
+一天划分为144个长度相同的时段，时间步长为
+\begin{equation}
+    \Delta t=\frac{10}{60}=\frac{1}{6}\ \mathrm{h}.
+\end{equation}
+记日内时段集合为
+\begin{equation}
+    \mathcal{T}=\{1,2,\ldots,144\}.
+\end{equation}
+
+附件中的144个标签从00:10到0:00+1，而结果模板的时段文字整体向后10分钟。
+按题面0:00至24:00的物理日界，本文暂将附件标签解释为前一10分钟时段的终点，
+功率暂作该时段平均功率。于是第$t$段为$[(t-1)\Delta t,t\Delta t)$，
+$s_1$对应0:00、$s_{145}$对应24:00。
+这是待团队确认的假设，模板按行对应仅用于输出映射，不决定物理日界。
+作图只能辅助发现错位，不能证明标签语义；如收到澄清，全部时间序列与状态统一修正。
+这一声明替代旧版仅按模板位置决定时间的口径，详见假设文件A1。
+
+\subsection{功率与电量的统一}
+
+附件给出的负荷和光伏数据单位为kW，但购电量、充放电量和储能量的单位为kWh。因此，
+所有进入能量平衡方程的负荷和光伏都必须先乘以$\Delta t$：
+\begin{equation}
+    L_t=P^{\mathrm{load}}_t\Delta t,\qquad
+    G_t=P^{\mathrm{pv}}_t\Delta t,
+\end{equation}
+其中$P^{\mathrm{load}}_t$和$P^{\mathrm{pv}}_t$的单位是kW，
+$L_t$和$G_t$的单位是kWh。
+
+若最大充放电功率为$P^{\max}=5000\ \mathrm{kW}$，则一个10分钟时段内最多充入或放出的
+交流侧电量为
+\begin{equation}
+    B^{\max}=P^{\max}\Delta t=5000\times\frac{1}{6}
+    =833.333\ \mathrm{kWh}.
+\end{equation}
+
+\subsection{储能效率口径}
+
+本文主模型取充电效率和放电效率均为
+\begin{equation}
+    \eta_c=\eta_d=0.9.
+\end{equation}
+这里的充电量和放电量均定义在微网交流母线一侧。因此，交流侧充入$C_t$ kWh时，
+电池内部储能增加$\eta_c C_t$ kWh；交流侧得到$D_t$ kWh放电量时，
+电池内部储能减少$D_t/\eta_d$ kWh。
+
+题面“充放电效率为90\%”也可能被理解为总往返效率为90\%。为避免歧义，后续应把
+$\eta_c=\eta_d=\sqrt{0.9}$作为敏感性口径，但主模型的符号和结构保持不变。
+
+\section{问题1：固定日型下的计划购电模型}
+
+\subsection{建模思路}
+
+问题1中，全天电价、负荷和光伏预测在0:00均已知。模型需要同时决定每个10分钟时段的
+外网购电量和电池充放电量。电价较低或光伏富余时可以充电，电价较高或光伏不足时可以放电，
+但必须满足：
+\begin{enumerate}[label=(\arabic*)]
+    \item 每个时段的小区负荷均得到满足；
+    \item 储能量始终位于安全区间；
+    \item 充放电功率不超过设备上限；
+    \item 0:00和24:00的储能量相同；
+    \item 不允许向外网售电，无法利用的光伏可以弃掉；
+    \item 同一时段不能同时充电和放电。
+\end{enumerate}
+
+\subsection{已知参数}
+
+\begin{longtable}{>{\centering\arraybackslash}p{2.6cm}p{7.2cm}p{2.4cm}}
+\toprule
+符号 & 中文含义 & 单位 \\
+\midrule
+\endfirsthead
+\toprule
+符号 & 中文含义 & 单位 \\
+\midrule
+\endhead
+$p_t$ & 第$t$个时段的外网电价，由附件1给出 & 元/kWh \\
+$L_t$ & 第$t$个时段的小区负荷电量，等于负荷功率乘$\Delta t$ & kWh \\
+$G_t$ & 第$t$个时段的光伏预测发电量，等于光伏功率乘$\Delta t$ & kWh \\
+$S^{\min}$ & 储能量下限，$S^{\min}=1200$ & kWh \\
+$S^{\max}$ & 储能量上限，$S^{\max}=10800$ & kWh \\
+$S^{0}$ & 0:00初始储能量，$S^{0}=6000$ & kWh \\
+$B^{\max}$ & 单个时段最大充电量或放电量，$B^{\max}=833.333$ & kWh \\
+$\eta_c$ & 充电效率，主模型取$0.9$ & 无量纲 \\
+$\eta_d$ & 放电效率，主模型取$0.9$ & 无量纲 \\
+\bottomrule
+\end{longtable}
+
+\subsection{决策变量及取值范围}
+
+\begin{longtable}{>{\centering\arraybackslash}p{2.6cm}p{7.2cm}p{2.4cm}}
+\toprule
+变量 & 中文含义 & 取值范围及单位 \\
+\midrule
+\endfirsthead
+\toprule
+变量 & 中文含义 & 取值范围及单位 \\
+\midrule
+\endhead
+$Q_t$ & 第$t$个时段的计划购电量 & $Q_t\geq 0$，kWh \\
+$C_t$ & 第$t$个时段从微网交流侧送入电池的充电量 & $0\leq C_t\leq B^{\max}$，kWh \\
+$D_t$ & 第$t$个时段由电池送到微网交流侧的放电量 & $0\leq D_t\leq B^{\max}$，kWh \\
+$S_t$ & 第$t$个时段开始时的储能量；$S_{145}$表示日末储能量 & $[S^{\min},S^{\max}]$，kWh \\
+$W_t$ & 第$t$个时段无法被负荷或电池利用的弃光量 & $0\leq W_t\leq G_t$，kWh \\
+$Z_t$ & 第$t$个时段的充放电状态；1表示允许充电，0表示允许放电 & $Z_t\in\{0,1\}$ \\
+\bottomrule
+\end{longtable}
+
+\subsection{目标函数}
+
+题目要求尽可能节省外网购电费用，因此目标函数为
+\begin{equation}
+    \min\; F_1=\sum_{t\in\mathcal{T}}p_tQ_t.
+    \label{eq:q1-objective}
+\end{equation}
+由于$p_t$的单位为元/kWh，$Q_t$的单位为kWh，所以每一项$p_tQ_t$以及目标函数
+$F_1$的单位均为元。
+
+\subsection{约束条件}
+
+\subsubsection{每个时段的能量平衡}
+
+\begin{equation}
+    Q_t+G_t+D_t=L_t+C_t+W_t,
+    \qquad \forall t\in\mathcal{T}.
+    \label{eq:q1-balance}
+\end{equation}
+等式左边是可供微网使用的电量：外网购电、光伏发电和电池放电；右边是电量去向：
+小区负荷、电池充电和弃光。由于$L_t$必须完整出现在右侧，式\eqref{eq:q1-balance}
+自动保证微网供给不低于小区负荷。
+
+约束$0\leq W_t\leq G_t$表示弃掉的光伏不能为负，也不能超过该时段实际可用的光伏。
+把平衡式改写为
+\begin{equation}
+    Q_t+(G_t-W_t)+D_t=L_t+C_t
+\end{equation}
+后，$G_t-W_t$就是实际被微网利用的光伏电量。这里$W_t$只代表弃光，不能用来“弃掉”已经购买
+的外网电量；问题2中的富余变量$U^{\omega}_{d,t}$含义更宽，因此不受$G_t$作为上界。
+
+\subsubsection{储能状态转移}
+
+\begin{equation}
+    S_{t+1}=S_t+\eta_c C_t-\frac{D_t}{\eta_d},
+    \qquad \forall t\in\mathcal{T}.
+    \label{eq:q1-soc}
+\end{equation}
+
+\subsubsection{储能量边界}
+
+\begin{equation}
+    S^{\min}\leq S_t\leq S^{\max},
+    \qquad t=1,2,\ldots,145.
+    \label{eq:q1-soc-bound}
+\end{equation}
+
+\subsubsection{充放电功率边界及互斥}
+
+\begin{align}
+    0\leq C_t&\leq B^{\max}Z_t,
+    &&\forall t\in\mathcal{T}, \\
+    0\leq D_t&\leq B^{\max}(1-Z_t),
+    &&\forall t\in\mathcal{T}, \\
+    Z_t&\in\{0,1\},
+    &&\forall t\in\mathcal{T}.
+    \label{eq:q1-mode}
+\end{align}
+当$Z_t=1$时只能充电，当$Z_t=0$时只能放电，因此同一时段不可能同时充放电。
+
+\subsubsection{期初和期末储能量}
+
+\begin{equation}
+    S_1=S^0=6000,
+    \qquad
+    S_{145}=S_1.
+    \label{eq:q1-terminal}
+\end{equation}
+第二个等式使当天的优化不能通过无偿消耗初始电量来降低表面购电费用。
+
+\subsubsection{其他非负约束}
+
+\begin{equation}
+    Q_t\geq0,\qquad 0\leq W_t\leq G_t,
+    \qquad \forall t\in\mathcal{T}.
+    \label{eq:q1-nonnegative}
+\end{equation}
+题面没有给出外网最大购电功率，因此不人为设置$Q_t$的上界；如果赛题后续补充了并网容量，
+再增加$Q_t\leq Q^{\max}$即可。
+
+\subsection{LP与MILP两种建模方法及模型选择}
+
+问题1可以写成线性规划（LP）或混合整数线性规划（MILP）。两种方法的电量平衡、储能状态转移、
+容量边界和初末状态完全相同，差别只在于是否用二进制变量严格保证充放电互斥。
+
+\subsubsection{方法A：线性规划模型}
+
+在线性规划模型中，删除二进制变量$Z_t$和式\eqref{eq:q1-mode}，将充放电边界改为
+\begin{equation}
+    0\leq C_t\leq B^{\max},\qquad
+    0\leq D_t\leq B^{\max},
+    \qquad \forall t\in\mathcal{T}.
+    \label{eq:q1-lp-battery}
+\end{equation}
+此时全部变量连续，目标函数和约束均为线性式，因此得到标准LP。该模型变量少、求解快，
+还能给出MILP最优费用的下界。
+
+但应注意：正电价和充放电损耗通常会使同时充放电缺乏经济性，却不能在所有退化情形下自动保证
+$C_tD_t=0$。例如存在免费弃光和日末储能约束时，LP可能出现不改变购电费用的无意义能量循环。
+因此，若使用LP，应采用以下至少一种处理：
+\begin{enumerate}[label=(\arabic*)]
+    \item 在得到最小购电费$F_1^*$后，再在约束$F_1=F_1^*$下最小化
+    $\sum_t(C_t+D_t)$，即采用“购电费优先、吞吐量次优”的词典序目标；
+    \item 在目标中加入很小的储能吞吐惩罚
+    $\kappa\sum_t(C_t+D_t)$，并对$\kappa$做敏感性分析；
+    \item 求解后计算同时充放电诊断量
+    \begin{equation}
+        H^{\mathrm{sim}}=\sum_{t\in\mathcal{T}}\min\{C_t,D_t\},
+    \end{equation}
+    只有当$H^{\mathrm{sim}}$在数值容差内为0时，才接受该LP调度结果。
+\end{enumerate}
+
+\subsubsection{方法B：混合整数线性规划模型}
+
+保留$Z_t$及式\eqref{eq:q1-mode}即可得到MILP。它用144个二进制变量准确表达每个10分钟时段
+“充电或放电至多发生一种”的物理逻辑，不依赖目标函数自动排除同时充放电。问题1的规模只有
+一天144个时段，因此144个二进制变量通常不会构成明显负担。
+
+\subsubsection{建议的论文选择方式}
+
+建议把MILP作为问题1的主模型，把LP作为简化模型和对照模型。论文中可按以下证据进行选择：
+\begin{enumerate}[label=(\arabic*)]
+    \item 比较两种模型的最小购电费和求解时间；
+    \item 检查LP的$H^{\mathrm{sim}}$是否为0；
+    \item 比较两种模型的购电、充电、放电和储能轨迹；
+    \item 若LP不存在同时充放电，且费用与MILP一致，则说明LP在本数据上已经足够；
+    \item 若LP出现同时充放电或不合理循环，则采用MILP结果，并把LP仅作为费用下界。
+\end{enumerate}
+在尚未获得实际求解证据前，不能直接声称LP一定与MILP等价。基于物理严谨性和本问较小的规模，
+当前优先推荐MILP。
+
+\subsection{结果汇总}
+
+全天购电量和购电费分别为
+\begin{equation}
+    Q^{\mathrm{day}}=\sum_{t=1}^{144}Q_t,
+    \qquad
+    F^{\mathrm{day}}=\sum_{t=1}^{144}p_tQ_t.
+\end{equation}
+若$\mathcal{T}_{a:b}$表示某个指定时间段所包含的10分钟时段集合，则该时间段的充电量和
+放电量分别为
+\begin{equation}
+    C_{a:b}=\sum_{t\in\mathcal{T}_{a:b}}C_t,
+    \qquad
+    D_{a:b}=\sum_{t\in\mathcal{T}_{a:b}}D_t.
+\end{equation}
+因此表1和表2中的所有量都能由模型变量直接加总得到，无需另建模型。
+
+\section{问题2：存在预测误差和紧急购电的日前模型}
+
+\subsection{为什么问题2需要预测或场景}
+
+问题2要求每天0:00制定全天计划，但附件2给的是实际负荷和实际光伏。如果把当天全部实际值
+直接提前提供给0:00的优化模型，则模型通常可以通过正常计划购电避免5倍价格的紧急购电，
+紧急购电机制会失去意义。因此，本文采用如下信息边界：
+\begin{quote}
+在日期$d$的0:00，模型只能使用日期$d$以前的负荷和光伏数据构造日期$d$的预测场景；
+日期$d$的实际曲线只用于事后检验计划。
+\end{quote}
+附件提供2025年1月数据，而题目要求从2025年2月1日开始输出结果，这一结构可以自然地把1月
+作为初始历史窗口。
+
+\subsection{预测模型候选与选择}
+
+预测不是问题2的最终目标，而是构造当天0:00可用的负荷和光伏分布。为保证模型选择有基线、
+有改进、又不过度依赖复杂算法，建议比较以下三类模型。对负荷功率和光伏功率分别预测，并把
+同一天的两类预测残差配对保存，以保留“高负荷与低光伏可能同时出现”的相关关系。
+
+\subsubsection{模型P1：历史平均基线}
+
+令$X_{j,t}$表示历史日期$j$在第$t$时段的负荷功率或光伏功率，$\mathcal{H}_d$表示日期$d$
+之前可使用的相似日期集合，则加权历史平均预测为
+\begin{equation}
+    \widehat X^{\mathrm{HA}}_{d,t}
+    =\frac{\sum_{j\in\mathcal{H}_d}\alpha_{d,j}X_{j,t}}
+    {\sum_{j\in\mathcal{H}_d}\alpha_{d,j}},
+    \qquad \alpha_{d,j}\geq0.
+    \label{eq:historical-average}
+\end{equation}
+可优先选择同星期、相近月份的历史日，并让较近日期的权重更大。该方法透明、稳定，适合作为
+必须保留的基线；其不足是不能充分描述趋势和连续多日的相关性。
+
+\subsubsection{模型P2：ARIMA/SARIMA时间序列模型}
+
+10分钟序列具有显著的日周期，因此比普通ARIMA更合适的是带144点季节周期的SARIMA，或
+“日内时段虚拟变量（或傅里叶项）+ ARIMA误差”模型。其一般形式可写为
+\begin{equation}
+ \Phi(B^{144})\phi(B)(1-B)^a(1-B^{144})^A X_\tau
+ =\Theta(B^{144})\theta(B)\varepsilon_\tau,
+ \label{eq:sarima}
+\end{equation}
+其中$B$为滞后算子，$a,A$分别为普通差分和季节差分阶数。SARIMA能够利用相邻时段和前一日
+同一时刻的信息，但2月1日只有31天历史，模型阶数必须保持较低，不能仅凭样本内拟合优度选取
+复杂模型。
+
+\subsubsection{模型P3：机器学习候选模型}
+
+若希望加入非线性关系，可采用LightGBM、XGBoost或随机森林等树模型，输入特征可包括
+\begin{equation}
+ \bigl(X_{d-1,t},X_{d-7,t},\text{过去若干时段滞后值},
+ \text{日内时刻},\text{星期},\text{月份},\text{近期滚动均值}\bigr).
+\end{equation}
+题目没有提供天气数据，机器学习模型不能凭空获得云量、温度等信息；因此它只应作为与历史平均、
+SARIMA对照的候选方法，不预先假定一定更优。当前数据规模也没有必要使用深度神经网络。
+
+\subsubsection{无信息泄漏的选择标准}
+
+对每个候选模型采用滚动起点评价：在预测日期$d$时，只用$d$以前的数据训练和调参，再预测$d$。
+统计精度可比较MAE、RMSE；光伏还可只在日照时段计算误差。由于紧急购电价格是正常电价的5倍，
+最终还应比较由预测场景驱动后的总购电费、紧急购电量和计划富余量。统计误差最小的模型未必具有
+最低决策成本，因此建议保留“预测精度评价”和“调度费用评价”两组指标。
+
+模型选择结果必须由上述滚动回测给出。在没有计算结果前，只能把历史平均列为基线、SARIMA列为
+主要候选、树模型列为增强候选，不能提前宣布某一种方法最优。
+
+上述预测模型先输出功率预测，单位为kW；进入随机规划前仍需乘$\Delta t=1/6$，转化为
+$\widehat L_{d,t}$和$\widehat G_{d,t}$，单位为kWh。
+
+\subsection{日期、信息集与场景}
+
+记输出日期集合为
+\begin{equation}
+    \mathcal{D}=\{\text{2025-02-01},\ldots,\text{2025-12-31}\}.
+\end{equation}
+对每个日期$d\in\mathcal{D}$，记$\mathcal{I}_{d,0}$为当天0:00之前已经获得的信息，
+包括历史负荷、历史光伏、固定日内电价和上一日的期末储能量。
+
+根据$\mathcal{I}_{d,0}$构造场景集合$\Omega_d$。场景$\omega\in\Omega_d$包含一条完整的
+144点负荷电量轨迹$L^{\omega}_{d,t}$和光伏电量轨迹$G^{\omega}_{d,t}$，其概率为
+$\pi_{d,\omega}$，满足
+\begin{equation}
+    \pi_{d,\omega}\geq0,
+    \qquad
+    \sum_{\omega\in\Omega_d}\pi_{d,\omega}=1.
+\end{equation}
+
+一种清晰且不依赖复杂机器学习的场景生成方式是：
+\begin{enumerate}[label=(\arabic*)]
+    \item 用选定的P1、P2或P3模型构造点预测$\widehat L_{d,t}$和$\widehat G_{d,t}$；
+    \item 计算历史整日联合预测残差向量
+    $\bm\varepsilon_j=(\bm\varepsilon^L_j,\bm\varepsilon^G_j)$，而不是把每个10分钟误差
+    或负荷、光伏误差分别独立打乱；
+    \item 对整日联合残差向量做有放回抽样，并令
+    \begin{equation}
+        L^{\omega}_{d,t}=\max\{0,\widehat L_{d,t}+\varepsilon^{L,\omega}_{d,t}\},
+        \qquad
+        G^{\omega}_{d,t}=\max\{0,\widehat G_{d,t}+\varepsilon^{G,\omega}_{d,t}\};
+    \end{equation}
+    \item 可对同星期和距离日期$d$更近的历史日赋予较高概率。
+\end{enumerate}
+按“整日联合向量”抽样能够同时保留早晚峰、连续阴天等时间相关性，以及负荷与光伏之间的相关性。
+
+\subsection{两阶段决策的含义}
+
+为得到结构清楚且不会偷看未来的主模型，本文采用以下两阶段划分：
+\begin{itemize}
+    \item \textbf{第一阶段（当天0:00）：}确定计划购电量、名义充电量、名义放电量和储能轨迹。
+    这些变量在全部场景中必须相同。
+    \item \textbf{第二阶段（实际偏差出现后）：}如果计划电量不足，则进行紧急购电；如果计划电量
+    过多，则形成已经付费但没有利用的富余电量。紧急购电量和富余电量可以随场景变化。
+\end{itemize}
+
+这个主模型把电池的日内名义计划也固定在0:00，因此完全满足非预见性。若希望电池在日内根据
+已经观测到的偏差实时响应，则应使用本节末尾给出的多阶段扩展，不能让电池提前看到整个场景。
+
+\subsection{334个决策日与“两阶段”的关系}
+
+从2025年2月1日至12月31日一共有
+\begin{equation}
+    |\mathcal D|=334
+\end{equation}
+个输出日期。这里存在两个不同的层次：
+\begin{enumerate}[label=(\arabic*)]
+    \item \textbf{外层滚动日期：}每天0:00用当时已有历史更新预测和场景，给定当天初始储能量，
+    求解一次当天模型；当天结束后用实际数据回放，并把实际期末储能量传给下一天。因此按本模型
+    的实现口径，需要滚动求解334个日模型。
+    \item \textbf{内层两阶段结构：}每一个日模型内部，第一阶段是0:00统一确定的计划，第二阶段是
+    场景实现后的紧急购电和富余处置。若当天有$K_d=|\Omega_d|$个场景，则是一个共享第一阶段
+    决策、带$K_d$个补救块的优化模型，不是$K_d$个彼此独立的完整模型。
+\end{enumerate}
+因此可以说“滚动求解334次日内两阶段随机规划”，但不能说这是“334阶段随机规划”。同样，
+一天有144个10分钟时段，也不代表主模型有144个随机阶段，因为$Q_{d,t},C_{d,t},D_{d,t}$
+均在0:00一次性确定。只有允许储能在10分钟级根据逐步到达的信息改变决策时，日内模型才升级为
+多阶段随机规划或滚动控制模型。
+
+\subsection{问题2的已知参数}
+
+除问题1的储能参数外，再定义下列参数。
+
+\begin{longtable}{>{\centering\arraybackslash}p{3.0cm}p{7.0cm}p{2.2cm}}
+\toprule
+符号 & 中文含义 & 单位 \\
+\midrule
+\endfirsthead
+\toprule
+符号 & 中文含义 & 单位 \\
+\midrule
+\endhead
+$p_t$ & 第$t$个时段的正常计划购电价；每天重复附件1的日内电价 & 元/kWh \\
+$5p_t$ & 第$t$个时段的紧急购电价 & 元/kWh \\
+$L^{\omega}_{d,t}$ & 日期$d$、场景$\omega$下第$t$时段的负荷电量 & kWh \\
+$G^{\omega}_{d,t}$ & 日期$d$、场景$\omega$下第$t$时段的光伏发电量 & kWh \\
+$\pi_{d,\omega}$ & 日期$d$的场景$\omega$发生概率 & 无量纲 \\
+$S^{\mathrm{in}}_d$ & 日期$d$的0:00储能量，由上一日实际期末状态给出 & kWh \\
+$\Phi_d(s)$ & 日期$d$在0:00给定的日末储能终端代价近似 & 元 \\
+\bottomrule
+\end{longtable}
+
+\subsection{问题2的决策变量及取值范围}
+
+\begin{longtable}{>{\centering\arraybackslash}p{3.0cm}p{7.0cm}p{2.2cm}}
+\toprule
+变量 & 中文含义 & 取值范围及单位 \\
+\midrule
+\endfirsthead
+\toprule
+变量 & 中文含义 & 取值范围及单位 \\
+\midrule
+\endhead
+$Q_{d,t}$ & 日期$d$在0:00确定的第$t$时段计划购电量 & $Q_{d,t}\geq0$，kWh \\
+$C_{d,t}$ & 日期$d$在0:00确定的第$t$时段名义充电量 & $[0,B^{\max}]$，kWh \\
+$D_{d,t}$ & 日期$d$在0:00确定的第$t$时段名义放电量 & $[0,B^{\max}]$，kWh \\
+$S_{d,t}$ & 日期$d$第$t$时段开始时的名义储能量 & $[S^{\min},S^{\max}]$，kWh \\
+$Z_{d,t}$ & 日期$d$第$t$时段充放电状态 & $Z_{d,t}\in\{0,1\}$ \\
+$E^{\omega}_{d,t}$ & 场景$\omega$下第$t$时段的紧急购电量 & $E^{\omega}_{d,t}\geq0$，kWh \\
+$U^{\omega}_{d,t}$ & 场景$\omega$下已经付费但未被负荷或电池利用的富余电量 & $U^{\omega}_{d,t}\geq0$，kWh \\
+\bottomrule
+\end{longtable}
+
+\subsection{问题2的目标函数}
+
+对日期$d$，给定当天0:00的储能量$S^{\mathrm{in}}_d$，最小化正常计划购电费用、
+期望紧急购电费用和期末储能的终端代价：
+\begin{equation}
+\begin{aligned}
+    V_d\!\left(S^{\mathrm{in}}_d\right)
+    =\min\quad
+    &\sum_{t\in\mathcal{T}}p_tQ_{d,t}
+    +\sum_{\omega\in\Omega_d}\pi_{d,\omega}
+      \sum_{t\in\mathcal{T}}5p_tE^{\omega}_{d,t} \\
+    &+\Phi_d(S_{d,145}).
+\end{aligned}
+\label{eq:q2-objective}
+\end{equation}
+
+第一项按\textbf{计划购电量}收费，即使某个场景下计划电量没有完全使用，也不会减少第一项费用；
+第二项只对实际不足部分按5倍电价收费；第三项是当天0:00已知的终端价值近似，用于防止每天接近
+24:00时无理由把电池放空。使用确定的$\Phi_d$不会给当天模型增加新的随机阶段。
+
+终端代价$\Phi_d$可采用下列两种近似之一：
+\begin{enumerate}[label=(\arabic*)]
+    \item 使用48小时滚动时域，只执行前24小时的决策；
+    \item 对$S_{d,145}$加入基于下一日低价购电成本估计的线性终端价值。
+\end{enumerate}
+直接删除终端价值虽然最简单，但会造成模型在每天末尾过度放电，不建议作为最终口径。
+
+\subsection{问题2的约束条件}
+
+\subsubsection{每个场景下的能量平衡}
+
+\begin{equation}
+    Q_{d,t}+E^{\omega}_{d,t}+G^{\omega}_{d,t}+D_{d,t}
+    =L^{\omega}_{d,t}+C_{d,t}+U^{\omega}_{d,t},
+    \quad
+    \forall t\in\mathcal{T},\ \forall\omega\in\Omega_d.
+    \label{eq:q2-balance}
+\end{equation}
+若实际需要的电量高于正常计划能够提供的电量，等式会自动令$E^{\omega}_{d,t}>0$；
+若计划偏高，则由$U^{\omega}_{d,t}$吸收富余量。由于紧急购电有严格正成本，最优解中不会同时出现
+$E^{\omega}_{d,t}>0$和$U^{\omega}_{d,t}>0$，因此不需要额外二进制变量区分二者。
+
+\subsubsection{储能状态转移}
+
+\begin{equation}
+    S_{d,t+1}=S_{d,t}+\eta_c C_{d,t}-\frac{D_{d,t}}{\eta_d},
+    \qquad \forall t\in\mathcal{T}.
+    \label{eq:q2-soc}
+\end{equation}
+
+\subsubsection{储能量、充放电量及互斥}
+
+\begin{align}
+    S^{\min}\leq S_{d,t}&\leq S^{\max},
+    &&t=1,\ldots,145, \\
+    0\leq C_{d,t}&\leq B^{\max}Z_{d,t},
+    &&t\in\mathcal{T}, \\
+    0\leq D_{d,t}&\leq B^{\max}(1-Z_{d,t}),
+    &&t\in\mathcal{T}, \\
+    Z_{d,t}&\in\{0,1\},
+    &&t\in\mathcal{T}.
+    \label{eq:q2-battery-bound}
+\end{align}
+
+\subsubsection{日初状态和跨日衔接}
+
+\begin{equation}
+    S_{d,1}=S^{\mathrm{in}}_d,
+    \qquad
+    S^{\mathrm{in}}_{d+1}=S_{d,145}.
+    \label{eq:q2-day-link}
+\end{equation}
+2025年1月1日的初值为
+\begin{equation}
+    S^{\mathrm{in}}_{\text{2025-01-01}}=6000\ \mathrm{kWh}.
+\end{equation}
+建议从1月1日起按同一信息规则做热身推演，得到2月1日的$S^{\mathrm{in}}_d$；最早几天历史不足时，
+可把附件1的固定日型作为先验预测。全年最后可设置
+\begin{equation}
+    S_{\text{2025-12-31},145}=6000\ \mathrm{kWh}
+\end{equation}
+作为可持续运行的年度终端条件。若希望把这一硬约束写成终端代价，也可定义
+\begin{equation}
+\Phi_{\text{2025-12-31}}(s)=
+\begin{cases}
+0, & s=6000,\\
++\infty, & s\neq6000.
+\end{cases}
+\end{equation}
+
+\subsubsection{非负约束}
+
+\begin{equation}
+    Q_{d,t}\geq0,
+    \qquad E^{\omega}_{d,t}\geq0,
+    \qquad U^{\omega}_{d,t}\geq0.
+    \label{eq:q2-nonnegative}
+\end{equation}
+
+\subsection{两阶段随机规划的分解形式（Decomposed form）}
+
+为与标准两阶段随机规划记号对应，把日期$d$在0:00确定的全部变量合并为第一阶段向量
+\begin{equation}
+    \bm x_d=(\bm Q_d,\bm C_d,\bm D_d,\bm S_d,\bm Z_d),
+\end{equation}
+并记$\mathcal X_d$为所有不依赖场景的可行约束集合，即式\eqref{eq:q2-soc}、
+式\eqref{eq:q2-battery-bound}和给定的日初储能约束。对场景$\omega$，定义第二阶段向量
+\begin{equation}
+    \bm y_{d,\omega}=(\bm E_{d,\omega},\bm U_{d,\omega})\geq\bm0.
+\end{equation}
+于是日期$d$的模型可写成
+\begin{equation}
+    \min_{\bm x_d\in\mathcal X_d}
+    \left\{
+    \bm c_d^{\mathsf T}\bm x_d
+    +\Phi_d(S_{d,145})
+    +\sum_{\omega\in\Omega_d}\pi_{d,\omega}
+      h_d(\bm x_d,\omega)
+    \right\},
+    \label{eq:q2-decomposed-master}
+\end{equation}
+其中第一阶段费用为
+\begin{equation}
+    \bm c_d^{\mathsf T}\bm x_d=\sum_{t\in\mathcal T}p_tQ_{d,t},
+\end{equation}
+若希望整个模型保持线性，$\Phi_d$应取线性函数，或用辅助变量把凸分段线性终端代价线性化。
+场景$\omega$的补救函数为
+\begin{equation}
+\begin{aligned}
+ h_d(\bm x_d,\omega)=
+ \min_{\bm y_{d,\omega}\geq\bm0}\quad
+ &\bm q_d^{\mathsf T}\bm y_{d,\omega}\\
+ \text{s.t.}\quad
+ &\bm W\bm y_{d,\omega}
+ =\bm r_{d,\omega}-\bm T\bm x_d.
+\end{aligned}
+\label{eq:q2-recourse}
+\end{equation}
+本题中的矩阵和向量可以具体对应为
+\begin{equation}
+\begin{aligned}
+ \bm W&=[\bm I,-\bm I],\\
+ \bm r_{d,\omega}&=\bm L_{d,\omega}-\bm G_{d,\omega},\\
+ \bm T\bm x_d&=\bm Q_d-\bm C_d+\bm D_d,\\
+ \bm q_d^{\mathsf T}\bm y_{d,\omega}
+ &=\sum_{t\in\mathcal T}5p_tE^{\omega}_{d,t}.
+\end{aligned}
+\label{eq:q2-matrix-map}
+\end{equation}
+因为
+\begin{equation}
+ \bm E_{d,\omega}-\bm U_{d,\omega}
+ =\bm L_{d,\omega}-\bm G_{d,\omega}
+  -\bm Q_d+\bm C_d-\bm D_d,
+\end{equation}
+式\eqref{eq:q2-recourse}与逐时能量平衡式\eqref{eq:q2-balance}完全等价。
+
+若场景数为$K_d$，确定性等价模型就是“一组公共的$\bm x_d$约束，加上$K_d$组彼此分块的
+$\bm y_{d,\omega}$约束”。所谓分解形式并不是把$K_d$个场景完全独立求解，因为它们仍通过同一个
+第一阶段变量$\bm x_d$耦合；它的意义是清楚区分日前计划与事后补救，并为L-shaped/Benders分解
+提供结构基础。删除$\bm Z_d$时这是标准两阶段随机LP；保留$\bm Z_d$时则是两阶段随机MILP，
+经典连续型L-shaped方法不能不加修改地直接套用。
+
+\subsection{实际日期的事后评价}
+
+模型在日期$d$的0:00得到$Q_{d,t},C_{d,t},D_{d,t}$后，用附件2当天的实际负荷
+$L^{\mathrm{real}}_{d,t}$和实际光伏$G^{\mathrm{real}}_{d,t}$进行回放。实际紧急购电量为
+\begin{equation}
+E^{\mathrm{real}}_{d,t}
+=\max\left\{
+L^{\mathrm{real}}_{d,t}+C_{d,t}
+-Q_{d,t}-G^{\mathrm{real}}_{d,t}-D_{d,t},\ 0
+\right\},
+\end{equation}
+实际富余电量为
+\begin{equation}
+U^{\mathrm{real}}_{d,t}
+=\max\left\{
+Q_{d,t}+G^{\mathrm{real}}_{d,t}+D_{d,t}
+-L^{\mathrm{real}}_{d,t}-C_{d,t},\ 0
+\right\}.
+\end{equation}
+当天实际购电费用为
+\begin{equation}
+    F^{\mathrm{real}}_d
+    =\sum_{t\in\mathcal{T}}p_tQ_{d,t}
+    +\sum_{t\in\mathcal{T}}5p_tE^{\mathrm{real}}_{d,t}.
+\end{equation}
+
+\subsection{5倍紧急购电为何会使计划偏保守}
+
+忽略电池和时间耦合，只看一个时段。令随机净负荷为$N$，计划购电量为$q$，则期望费用为
+\begin{equation}
+    f(q)=pq+5p\,\mathbb{E}\left[(N-q)^+\right].
+\end{equation}
+在分布连续时，对$q$求导并令其为0：
+\begin{equation}
+    f'(q)=p-5p\Pr(N>q)=0,
+\end{equation}
+从而
+\begin{equation}
+    \Pr(N\leq q)=0.8.
+\end{equation}
+因此，没有电池时的最优计划接近净负荷的80\%分位数，而不是均值。正式模型中，电池状态把
+不同时段耦合起来，不能逐时直接套用80\%分位数，但这个推导能直观解释为何5倍紧急电价会让
+日前计划更保守。
+
+\subsection{允许电池实时响应时的多阶段扩展}
+
+如果团队认为问题2只固定外网计划购电，而电池可以根据已经观测到的负荷和光伏实时响应，
+可把$C_{d,t},D_{d,t},S_{d,t}$改为场景变量
+$C^{\omega}_{d,t},D^{\omega}_{d,t},S^{\omega}_{d,t}$。但必须加入非预见性约束：
+若两个场景$\omega$和$\omega'$在时段$t$以前具有相同的观测历史，则
+\begin{equation}
+\begin{aligned}
+C^{\omega}_{d,t}&=C^{\omega'}_{d,t},\\
+D^{\omega}_{d,t}&=D^{\omega'}_{d,t},\\
+S^{\omega}_{d,t}&=S^{\omega'}_{d,t}.
+\end{aligned}
+\label{eq:q2-nonanticipativity}
+\end{equation}
+式\eqref{eq:q2-nonanticipativity}保证电池在当时只能根据已经发生的事情作决策，而不能提前知道
+场景的未来部分。该扩展属于多阶段随机规划，难度明显高于主模型，可作为提高模型真实性的进阶方案。
+
+\section{两问的模型验收清单}
+
+在进行任何数值求解之前，应先逐项检查：
+\begin{enumerate}[label=(\arabic*)]
+    \item 所有负荷和光伏功率都乘了$1/6$，购电量和充放电量均以kWh计；
+    \item 每天恰好有144个时段，且附件与模板按同一口径对齐；
+    \item 每个时段的能量平衡式左右两边单位相同；
+    \item 储能量共有145个状态点，避免把144个时段误写成144个状态；
+    \item 充电增加储能时乘$\eta_c$，放电减少储能时除以$\eta_d$；
+    \item 问题1满足$S_1=S_{145}=6000$；问题2满足跨日衔接；
+    \item 问题2的场景只由日期$d$以前的数据产生；
+    \item 正常购电按$Q_{d,t}$收费，紧急购电按$5p_tE_{d,t}$收费；
+    \item 不存在负购电、负充放电、储能越界或同一时段同时充放电；
+    \item 问题2还应同时报告实际紧急购电量和计划富余量，防止只看总费用掩盖预测偏差。
+\end{enumerate}
+
+\end{document}

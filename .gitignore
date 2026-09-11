@@ -1,0 +1,35 @@
+# Local rendering and inspection intermediates
+tmp/
+
+# Common local environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.idea/
+.vscode/
+
+# Office lock files
+~$*.xlsx
+~$*.docx
+
+# LaTeX build intermediates (keep canonical authored PDFs)
+*.aux
+*.log
+*.out
+*.toc
+*.xdv
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+docs/model-q1-q2-revised.pdf
+
+# Local source materials and downloaded third-party references
+C题/
+literature/*.pdf
+
+# Credentials and local machine configuration
+.env
+.env.*
+*.pem
+*.key

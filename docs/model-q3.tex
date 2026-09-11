@@ -1,0 +1,734 @@
+\documentclass[UTF8,11pt]{ctexart}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,longtable,array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+\renewcommand{\arraystretch}{1.25}
+\setlist{itemsep=0.2em,topsep=0.3em}
+\newcommand{\pos}[1]{\left[#1\right]^+}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\newcommand{\CVaR}{\operatorname{CVaR}}
+\allowdisplaybreaks[2]
+\title{问题3的详细数学模型\\
+{\large 预测提前量可信度、联合场景与CVaR随机滚动调度}}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{文档性质。}
+本文是供团队推导与后续实现的建模说明，不是参赛论文正文，不含求解代码、
+附件计算结果或未经验证的节省率。延续问题1、2的中文排版及电量变量口径。
+按当前要求，不建立鲁棒优化、分布鲁棒优化或Tube MPC模型。
+主方案为\textbf{按提前量校准的概率预测与随机MPC}，
+CVaR是与风险中性版本比较的风险增强项。
+文献方法与本题提出的指数形式分别标明，不将组合方法直接宣称为学术首创。
+
+\section{任务、物理关系与建模主线}
+\subsection{第三问比第二问增加了什么}
+每天0:00制定当天的计划购电量；6:00、12:00、18:00取得新光伏预报后，
+在支付调整费用的条件下修改尚未执行的购电量，重新安排电池充放电；
+实际仍不足的部分以5倍电价紧急购买。
+目标是在满足负荷与储能安全约束的前提下，权衡正常购电、调整和紧急费用，
+并分析新增预报时刻的价值。
+
+\subsection{电从哪里来，到哪里去}
+外网是电能来源之一，负荷、光伏与电池连接在同一微网能量平衡节点。
+原计划$q$是0:00承诺，调整后购电量$r$替代该承诺用于对应时段运行。
+\textbf{$q$与$r$不是两股同时相加的供电量。}
+正常供给不够时才另加紧急购电$e$：
+\begin{equation}\label{eq:physical}
+ \underbrace{r+e+G+d}_{\text{供给电量}}
+ =\underbrace{L+c+u}_{\text{负荷、充电与富余处置}} .
+\end{equation}
+$G$为光伏电量，$L$为负荷电量，$c$为从交流母线送入电池的电量，
+$d$为电池向母线送出的电量，$u$为未利用的富余电量。
+储电量$s$是电池内部库存，不直接加入式\eqref{eq:physical}，
+只有取出的$d$进入供电端。上述量均为kWh。
+
+富余可来自光伏过多或已付费购电配额过多，因此不能统一限制$u\leq G$。
+若另定义纯弃光$w$，才有$0\leq w\leq G$。
+本模型合并记录弃光与未利用配额，不赋予售电收益。
+这是一种结算抽象，不意味着存在未给定的售电市场或实际耗散设备。
+若需区分付费配额和实际外网送电，可将$u$拆成未取用配额与弃光，账单仍按承诺结算。
+
+\subsection{主线及来源}
+\begin{longtable}{p{2.6cm}p{5.1cm}p{6.1cm}}
+\toprule 部件 & 作用 & 来源与本题改写\\ \midrule
+\endhead
+随机滚动调度 & 新信息到达后重算 & Lemos-Vinasco等\cite{lemos2022}；改为6小时更新、10分钟执行。\\
+提前量校准 & 区分不同远近的误差 & Schulz等\cite{schulz2021}按提前量与初始化时刻分别后处理。\\
+可信度指数 & 把误差尺度变成直观评分 & 本文提出指数尺度及归一化映射，不是已有通用定律。\\
+联合场景 & 保留连续短缺和变量相关性 & 借鉴概率轨迹思想\cite{lemos2022,gneiting2023}，采用成对历史日块。\\
+CVaR & 权衡高额紧急费用尾部 & Rockafellar与Uryasev\cite{rockafellar2000}的辅助阈值表示。\\
+决策导向选择 & 预测更准未必购电更省 & Elmachtoub与Grigas\cite{elmachtoub2022}；本题按历史调度费用选参数。\\
+\bottomrule
+\end{longtable}
+
+\section{时间轴、单位与可用信息}
+\subsection{144个流量值与145个库存值}
+用$i$表示日期，避免与放电量$d$混淆。定义
+\begin{equation}
+ \Delta t=\frac16\ {\rm h},\quad T=144,\quad
+ \mathcal T=\{1,\ldots,144\},\quad I_t=[(t-1)\Delta t,t\Delta t).
+\end{equation}
+$s_{i,t}$为第$t$时段\textbf{开始时}储电量，
+$s_{i,1}$对应0:00，$s_{i,145}$对应24:00，
+跨日关系为$s_{i+1,1}=s_{i,145}$。
+
+\paragraph{时间标签歧义。}
+附件1、2标签从00:10到0:00+1，而模板的时段文字整体向后10分钟。
+本文按题面0:00至24:00日界，
+\textbf{暂将附件标签解释为前一10分钟时段的终点}，
+功率暂作该时段平均功率。00:10对应$[0{:}00,0{:}10)$，
+0:00+1对应$[23{:}50,24{:}00)$。
+这是需团队确认的假设，不是仅凭标签可证明的事实。
+模板按行对应属于输出映射，不能据此移动真实执行日。
+另一种起点解释保留核验，作图只能辅助发现错位，不能证明时间戳语义。
+如有澄清，负荷、光伏、电价、预报和状态必须一起修正。
+
+\subsection{优化时域与实际执行时域}
+更新时刻$k\in\mathcal K=\{0,6,12,18\}$，单位小时。定义
+\begin{equation}
+ m(k)=6k+1,\quad \mathcal T_k=\{m(k),\ldots,144\},\quad
+ \mathcal E_k=\{6k+1,\ldots,6(k+6)\}.
+\end{equation}
+每次优化当天剩余$\mathcal T_k$，只执行下一次更新前的$\mathcal E_k$。
+例如6:00已执行$t=1,\ldots,36$，优化$t=37,\ldots,144$，
+只执行$t=37,\ldots,72$，12:00重算。
+这是\textbf{日内缩短预测时域}加终端价值，不声称每次优化完整24小时。
+跨日预报可归档，目标实际值出现后再用于校准。
+\begin{center}
+\begin{tabular}{ccc}
+\toprule 更新时刻 & 本次优化范围 & 本次执行范围\\ \midrule
+0:00 & 0:00至24:00 & 0:00至6:00\\
+6:00 & 6:00至24:00 & 6:00至12:00\\
+12:00 & 12:00至24:00 & 12:00至18:00\\
+18:00 & 18:00至24:00 & 18:00至24:00\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{提前量不是预报年龄}
+以绝对时间记录发布时刻$a$、当前决策时刻$\tau$、目标时段终点$v$，
+差值均换算为小时：
+\begin{equation}\label{eq:lead}
+ h=v-a,\quad A=\tau-a,\quad H=v-\tau,\quad h=A+H .
+\end{equation}
+$h$为预测提前量，$A$为预报年龄，$H$为距离目标还有多久。
+0:00发布、针对18:00的预报，在12:00再查看，提前量仍为18小时，
+不能因为距目标剩6小时就把它视为6小时提前量。
+仅使用最新发布预报$a=\tau$时，才有$h=H$。
+10分钟预测统一按时段终点算提前量；用中点也是备选，但校准与评价须一致。
+
+\subsection{信息集}
+$\mathcal I_{i,k}$包括当前真实库存、已结束时段的实际负荷与光伏、
+此前已发布预报、已知的重复日电价、原始计划和历史参数。
+不包括未来实际值及稍后才发布的预报。
+附件虽有全年数据，回放仍须按时间揭示。
+主校准只用当前日期以前的完整历史日；利用当天已实现误差在线修正属于后续增强，
+必须另写因果更新公式。
+
+\section{小时预报到10分钟电量}
+$\widehat P^G_{i,k,j}$是$(i,k)$发布的第$j$个未来整点光伏功率，
+$j=1,\ldots,24$，有效时刻为发布后$j$小时，单位kW。
+$j=0$锚点用当前已获得测量；若只有10分钟记录，用刚结束时段平均值近似，
+不能用即将开始时段实际值。测量不可得时用最近可见预报或历史估计。
+相对时间$x\in[j,j+1]$内定义
+\begin{equation}
+ \widehat f_{i,k}(x)=(j+1-x)\widehat P^G_{i,k,j}
+                  +(x-j)\widehat P^G_{i,k,j+1},\quad j=0,\ldots,23.
+\end{equation}
+对$t\in\mathcal T_k$，
+\begin{align}
+ x^-_{t,k}&=(t-1)\Delta t-k,\quad x^+_{t,k}=t\Delta t-k,\\
+ \widehat P^G_{i,t|k}
+ &=\frac1{\Delta t}\int_{x^-_{t,k}}^{x^+_{t,k}}\widehat f_{i,k}(x)\,{\rm d}x
+ =\frac{\widehat f_{i,k}(x^-_{t,k})+\widehat f_{i,k}(x^+_{t,k})}{2}.
+\end{align}
+梯形平均成立是因10分钟网格与小时节点对齐。
+若原始值表示小时平均，则改为小时内常值，作为备选解释。
+插值不创造真实10分钟天气信息；历史误差须在同样重采样后与实际值比较。
+
+第三问同样不能提前知道真实负荷。
+$\mu^L_{i,t|k}$是用$\mathcal I_{i,k}$形成的负荷功率预测，
+沿用问题2的历史平均、SARIMA或树模型。
+光伏校准中心记作$\mu^G_{i,t|k}$。
+功率场景转为电量：
+\begin{equation}\label{eq:conversion}
+ L^\omega_{i,t|k}=P^{L,\omega}_{i,t|k}\Delta t,\qquad
+ G^\omega_{i,t|k}=P^{G,\omega}_{i,t|k}\Delta t .
+\end{equation}
+例如3000 kW持续10分钟为500 kWh。
+费用为元/kWh乘kWh，不再乘$\Delta t$。
+
+\section{预测提前量可信度指数}
+\subsection{文献支持什么，本文新增什么}
+Schulz等的《Post-processing numerical weather prediction ensembles for probabilistic
+solar irradiance forecasting》\cite{schulz2021}第3.3节按提前量和初始化时刻分别
+估计后处理模型，用此前若干日滚动训练。
+它支持区分提前量误差，但其输入是天气集合，附件3只有单条功率预报，
+不能照搬集合成员回归式。
+Gneiting等的《Probabilistic solar forecasting: Benchmarks, post-processing,
+verification》\cite{gneiting2023}强调校准、集中程度与适当评分，
+本题借鉴这些原则而不采用其中神经网络。
+
+“真实性”应分为：相似条件下误差范围多大，以及概率区间是否达到声称覆盖水平。
+$R$描述前者，样本外概率评价检验后者。
+日出、午间、夜间机制不同，不能预先断言所有情况下越近越准。
+
+\subsection{先校正偏差}
+历史样本$n$保留发布和目标时刻，原始误差
+\begin{equation}
+ \epsilon_n=P^{G,\rm real}_n-\widehat P^G_n\quad(\mathrm{kW}).
+\end{equation}
+用$g$表示少量条件组，如目标日内时刻粗分组，$\ell$表示提前量分箱。
+发布时刻、目标时刻与提前量有确定关系，不视为三个独立因素随意叠加。
+只有1月资料时不同时切分大量月份、小时和天气类别。
+建议先共享提前量斜率，仅设少量组的偏差与尺度。
+利用当前日期以前数据估计
+\begin{equation}
+ \widehat b_{g,\ell}
+ =\frac{n_{g,\ell}\bar\epsilon_{g,\ell}+\nu_b\bar\epsilon_{\rm pool}}
+        {n_{g,\ell}+\nu_b},\qquad \nu_b>0,
+\end{equation}
+\begin{equation}\label{eq:bias}
+ \mu^G_{i,t|k}=\max\{0,\widehat P^G_{i,t|k}+\widehat b_{g,\ell}\}.
+\end{equation}
+$n_{g,\ell}$是不同历史日数，均值先在每天内平均，再按日等权平均；
+$b,\epsilon$为kW，$n,\nu_b$无量纲。样本少则向合并组收缩，
+无组样本退回合并组，无任何历史则采用冷启动。
+
+尺度拟合使用历史滚动预测档案：
+\begin{equation}\label{eq:residual}
+ e_n^{\rm cal}=P^{G,\rm real}_n-\mu_n^{G,(-)}.
+\end{equation}
+$(-)$表示预测该历史样本时仅用更早数据。
+不能把同批拟合后的训练残差当作样本外误差。
+
+\subsection{收缩尺度估计}
+$v_{g,\ell}$为校准误差方差，$v_{\rm pool}$为合并组方差，
+按日等权汇总，单位$\mathrm{kW}^2$：
+\begin{equation}\label{eq:shrink}
+ \widetilde\sigma_{g,\ell}=
+ \sqrt{\max\left\{\varepsilon_\sigma^2,
+ \frac{n_{g,\ell}v_{g,\ell}+\nu_\sigma v_{\rm pool}}
+      {n_{g,\ell}+\nu_\sigma}\right\}},\quad \nu_\sigma>0.
+\end{equation}
+$\varepsilon_\sigma>0$是数值下限，单位kW，不是物理最低误差。
+残差仍有明显偏差时应先校正中心，不仅扩大方差。
+确定夜间可单独设零值组；缺少位置与日历时用当时历史粗分组，
+保留日出日落不确定性，不从全年测试资料倒推边界。
+
+\subsection{本题提出的指数尺度候选}
+在0至24小时内检验
+\begin{equation}\label{eq:exp}
+ \sigma_g(h)=\sigma_{g,0}\exp(\beta h),\quad
+ \sigma_{g,0}>0,\quad\beta\geq0 .
+\end{equation}
+$\sigma,\sigma_{g,0}$单位kW，$h$小时，$\beta$为$\mathrm h^{-1}$，
+所以$\beta h$无量纲。初期共享$\beta$，数据充足后比较分组斜率。
+不向任意长期外推。
+固定$s_{\rm ref}>0$为参照功率尺度，例如评价开始前历史基线白天RMSE，
+用过去数据估计
+\begin{equation}\label{eq:fit}
+ \min_{\{a_g\},\beta\geq0}\sum_{g,\ell}n_{g,\ell}
+ \left[\log\left(\frac{\widetilde\sigma_{g,\ell}}{s_{\rm ref}}\right)
+       -a_g-\beta h_\ell\right]^2,\quad
+ \sigma_{g,0}=s_{\rm ref}\exp(a_g).
+\end{equation}
+$h_\ell$为分箱代表小时数，取对数的是无量纲比值。
+分箱、训练窗口与收缩强度均在过去验证期选择。
+必须比较常尺度与直接分箱尺度：
+若控制日内条件后仍非单调，或指数形式样本外评分差，则弃用指数形式。
+\textbf{指数式是本题的可检验假设，不是文献证明的普适衰减定律。}
+
+\subsection{归一化可信度指数及数学性质}
+定义
+\begin{equation}\label{eq:R}
+ \boxed{R_g(h)=\frac1{1+\{\sigma_g(h)/s_{\rm ref}\}^2}
+ =\frac1{1+(\sigma_{g,0}/s_{\rm ref})^2\exp(2\beta h)}},
+ \quad 0<R_g(h)\leq1 .
+\end{equation}
+$R$无量纲，尺度越小评分越高；$R=1/2$仅表示$\sigma=s_{\rm ref}$。
+同组内
+\begin{equation}
+ \frac{{\rm d}R_g(h)}{{\rm d}h}=-2\beta R_g(h)\{1-R_g(h)\}\leq0.
+\end{equation}
+跨组仍受$\sigma_{g,0}$影响，不能只按提前量排序。
+也可展示相对衰减$\sigma_g(0)/\sigma_g(h)=\exp(-\beta h)$，
+但它不含初始误差，不替代$R$作跨组比较。
+
+\textbf{$R=0.8$不是80\%概率预测正确，$R=0.5$不是光伏只能发出预测的一半。}
+它是人为归一化尺度评分，须同时报告$s_{\rm ref}$和独立历史日数。
+参照尺度在比较期固定，高评分且样本少不代表充分证据。
+
+\subsection{指数如何进入调度}
+反解尺度
+\begin{equation}\label{eq:Rscale}
+ \sigma^G_{i,t|k}=s_{\rm ref}\sqrt{R_{i,t|k}^{-1}-1}.
+\end{equation}
+用尺度调节场景分散程度，不以$R\mu^G$替换预测中心。
+否则会将无偏但波动大的预报系统性低估，还可能与CVaR重复保守。
+$R$也不是场景概率，不能因不利场景可信度低就降低权重。
+完整关系是
+\begin{equation}
+ \text{提前量与历史误差}\ \longrightarrow\ (\mu,\sigma)
+ \ \longleftrightarrow\ R
+ \ \longrightarrow\ \text{联合场景}
+ \ \longrightarrow\ \text{购电和储能}.
+\end{equation}
+效果来自条件尺度校准，$R$是可解释表达，
+不能将未参与决策的展示评分包装成优化贡献。
+
+\section{由尺度产生负荷与光伏联合场景}
+电池有记忆，连续一小时短缺与分散的六个10分钟误差效果不同，
+因此不能独立抽144个点，也不能打乱负荷与光伏的配对。
+借鉴文献\cite{lemos2022,gneiting2023}的概率轨迹思想，
+使用历史日联合块，不声称完整实现其经验Copula方法。
+
+对历史日$j$在同一发布时刻$k$的剩余路径，保存当时的预测与尺度：
+\begin{equation}
+ Z^X_{j,t|k}=
+ \frac{P^{X,\rm real}_{j,t}-\mu^{X,(-)}_{j,t|k}}{\sigma^{X,(-)}_{j,t|k}},
+ \quad X\in\{L,G\},\quad t\in\mathcal T_k .
+\end{equation}
+$Z$无量纲，分母正。负荷尺度可用粗分组残差，不必同样采用指数。
+仅取目标已全部实现且发布时间、目标时间对齐的完整路径；
+缺失、异常和近零尺度按预先规则处理。
+有放回抽$M$个日块$j(\omega)$，每次同时取该日负荷与光伏：
+\begin{align}
+ P^{L,\omega}_{i,t|k}
+ &=\max\{0,\mu^L_{i,t|k}+\sigma^L_{i,t|k}Z^L_{j(\omega),t|k}\},\\
+ P^{G,\omega}_{i,t|k}
+ &=\max\{0,\mu^G_{i,t|k}+\sigma^G_{i,t|k}Z^G_{j(\omega),t|k}\},\\
+ \Omega&=\{1,\ldots,M\},\quad \pi_\omega=1/M,\quad\sum_\omega\pi_\omega=1.
+\end{align}
+然后按式\eqref{eq:conversion}转为kWh。
+条件缩放与非负截断会改变最终均值、方差和相关性，须在生成场景上复核；
+$\mu$称校准中心，不称截断后精确期望。
+二次校准也只能用过去验证资料。
+重复抽少数日期不能创造极端天气，需报告独立日数而非仅报告$M$。
+不假定正态误差，不承诺覆盖所有可能天气。
+
+\section{参数、变量与调整结算}
+固定日期$i$及更新时刻$k$，以下省略日期下标。
+$t|k$表示在$k$时刻为$t$制定的值，不表示除法。
+\subsection{已知参数}
+\begin{longtable}{p{3.2cm}p{7.0cm}p{3.6cm}}
+\toprule 参数 & 定义 & 单位或范围\\ \midrule
+\endhead
+$p_t$ & 附件1统一时间口径下的日电价 & 元/kWh，$p_t>0$\\
+$L^\omega_{t|k},G^\omega_{t|k}$ & 场景负荷与光伏电量 & kWh，非负\\
+$\pi_\omega$ & 当前条件场景概率 & 非负，总和1\\
+$\underline S,\overline S$ & 安全储能上下界 & 1200、10800 kWh\\
+$\overline B$ & 单时段母线侧充放电上界 & $5000/6$ kWh\\
+$\eta_c,\eta_d$ & 充电与放电效率 & 主口径均0.9\\
+$s^{\rm obs}_{m(k)}$ & 当前真实储电量 & kWh\\
+$S^{\rm tar}$ & 日末软目标，不是每日重置 & 候选6000 kWh\\
+$\gamma_k$ & 日末库存缺额单位价值 & 元/kWh，非负\\
+$\alpha,\lambda$ & CVaR水平与风险权重 & $0<\alpha<1,\lambda\geq0$\\
+$q_t$，当$k>0$ & 0:00已承诺原始计划 & kWh，非负固定\\
+\bottomrule
+\end{longtable}
+效率主口径均0.9，往返0.81；若90\%解释为总往返效率，两侧取$\sqrt{0.9}$比较。
+不加入未给定的外网购电上限、售电价、固定调整费和退化费。
+
+\subsection{决策变量与范围}
+\begin{longtable}{p{3.1cm}p{7.0cm}p{3.7cm}}
+\toprule 变量 & 含义 & 范围、单位\\ \midrule
+\endhead
+$q_t$，仅$k=0$ & 原始计划，求解后当天固定 & $\R_+$，kWh\\
+$r_{t|k}$ & 当前版本非紧急购电量；$k=0$时等于$q_t$ & $\R_+$，kWh\\
+$a^+_{t|k},a^-_{t|k}$ & 相对原始$q$的上调、下调，仅$k>0$使用 & $\R_+$，kWh\\
+$c_{t|k},d_{t|k}$ & 母线侧充电与放电量 & $[0,\overline B]$，kWh\\
+$s_{t|k}$ & 时段开始库存，含日末状态 & $[\underline S,\overline S]$，kWh\\
+$z_{t|k}$ & 1允许充电，0允许放电 & $\{0,1\}$\\
+$e^\omega_{t|k}$ & 场景紧急购电量 & $\R_+$，kWh\\
+$u^\omega_{t|k}$ & 场景富余未利用电量 & $\R_+$，kWh\\
+$b_k^{\rm end}$ & 日末低于软目标的库存缺额 & $\R_+$，kWh\\
+$\zeta_k$ & CVaR辅助费用阈值 & $\R$，元\\
+$v_\omega$ & 场景费用超阈值正偏差 & $\R_+$，元\\
+\bottomrule
+\end{longtable}
+$\R_+=[0,\infty)$。
+$q,r,a^+,a^-,c,d,s,z,b^{\rm end},\zeta$是当前场景共享决策；
+$e^\omega,u^\omega,v_\omega$随场景变化。
+除$s$外的调度电量均是10分钟流量。
+
+\subsection{主结算与备选}
+记$\pos{x}=\max(x,0)$，主结算
+\begin{align}
+ g_t(q,r)&=p_tq+1.5p_t\pos{r-q}-0.5p_t\pos{q-r}\label{eq:g}\\
+ &=p_tr+0.5p_t|r-q|.
+\end{align}
+即最终正常购电量付费，偏离原承诺部分另付50\%；
+下调1 kWh相对原计划净退回$0.5p_t$元。
+计划10 kWh下调至8 kWh时结算$9p_t$元，上调至12 kWh时$13p_t$元，
+仅为公式算例，不是附件结果。
+若解释为原计划全付、下调另罚，则
+\begin{equation}\label{eq:alt}
+ g_t^{\rm alt}(q,r)=p_tq+1.5p_t\pos{r-q}+0.5p_t\pos{q-r}.
+\end{equation}
+主用式\eqref{eq:g}，保留式\eqref{eq:alt}核对。
+多次调整按最终执行版本相对0:00计划一次结算；
+若每次相对上一版增量结算，须另改费用记录。
+这是题面解释，不能由文献替题面决定。
+
+线性化为
+\begin{equation}\label{eq:adjust}
+ r_{t|k}=q_t+a^+_{t|k}-a^-_{t|k},\quad a^+_{t|k},a^-_{t|k}\geq0,
+\end{equation}
+\begin{equation}
+ g_t=p_tq_t+1.5p_ta^+_{t|k}-0.5p_ta^-_{t|k}.
+\end{equation}
+若$a^+,a^-$同时正，可同时减少二者保持$r$不变、降低费用，
+所以$p_t>0$时最优解不同时正，无需调整方向二进制变量。
+
+\section{CVaR解释与线性化}
+\subsection{风险损失对象}
+定义剩余时域紧急费用
+\begin{equation}\label{eq:loss}
+ C_k^\omega=\sum_{t\in\mathcal T_k}5p_te^\omega_{t|k}\quad(\text{元}).
+\end{equation}
+紧急购电补足供需，不是未供电量。
+当前正常结算不随场景改变，故对$C_k$控制尾部；
+它不是未来多次重优化后整天实际账单CVaR的精确表达。
+
+\subsection{直观与严格定义}
+VaR关注分位点，CVaR还关注尾部有多严重。
+$\alpha=0.95$可理解为最贵约5\%情形平均损失，
+不是最坏单个场景，也不保证95\%时段不紧急购电。
+离散分布在分位点有概率质量时，需取其中适当比例，
+不能总写成$\E[C\mid C\geq\mathrm{VaR}_\alpha]$。
+采用Rockafellar与Uryasev表示\cite{rockafellar2000}：
+\begin{equation}\label{eq:cvar}
+ \CVaR_\alpha(C_k)=\min_{\zeta\in\R}
+ \left\{\zeta+\frac1{1-\alpha}\sum_\omega\pi_\omega\pos{C_k^\omega-\zeta}\right\}.
+\end{equation}
+引入
+\begin{equation}\label{eq:cvarlin}
+ v_\omega\geq C_k^\omega-\zeta_k,\quad v_\omega\geq0,\quad\zeta_k\in\R.
+\end{equation}
+目标加入$\lambda\{\zeta_k+(1-\alpha)^{-1}\sum_\omega\pi_\omega v_\omega\}$。
+$\lambda=0$时删除$\zeta,v$及约束，不将未被优化的辅助值误报为风险。
+损失非负时可找到非负最优阈值，这里保留一般域$\R$。
+
+\subsection{风险偏好}
+$\alpha$先比较0.90和0.95，$\lambda$选含0的少量候选，
+它们不是题面参数或已验证最优值。
+$C,\zeta,v$单位元，$\lambda$无量纲。
+历史验证中展示实际均值与尾部权衡，降低尾部可能提高平均费。
+少量历史日不能稳定识别很高分位，重复抽样不能补足信息。
+
+\section{完整随机滚动优化模型}
+\subsection{共同物理约束}
+对$t\in\mathcal T_k$、$\omega\in\Omega$，
+\begin{align}
+ r_{t|k}+e^\omega_{t|k}+G^\omega_{t|k}+d_{t|k}
+ &=L^\omega_{t|k}+c_{t|k}+u^\omega_{t|k},\label{eq:balance}\\
+ s_{t+1|k}&=s_{t|k}+\eta_c c_{t|k}-d_{t|k}/\eta_d,\label{eq:soc}\\
+ s_{m(k)|k}&=s^{\rm obs}_{m(k)},\label{eq:init}\\
+ 0\leq c_{t|k}&\leq\overline B z_{t|k},\label{eq:charge}\\
+ 0\leq d_{t|k}&\leq\overline B(1-z_{t|k}),\label{eq:discharge}\\
+ z_{t|k}&\in\{0,1\},\quad r_{t|k},e^\omega_{t|k},u^\omega_{t|k}\geq0 .
+\end{align}
+包括末时刻的库存边界
+\begin{equation}\label{eq:bounds}
+ \underline S\leq s_{t|k}\leq\overline S,\qquad t=m(k),\ldots,145.
+\end{equation}
+母线取走$c$，内部只增加$\eta_cc$；输出$d$，内部减少$d/\eta_d$，
+不在母线平衡重复扣效率。
+互斥允许$c=d=0$，停机时$z$不唯一不影响物理。
+无紧急购电上界且允许富余时，偏差可由$e,u$补救。
+
+\subsection{日末价值与跨日库存}
+仅问题1要求日首尾相同，第三问不强制每天回到6000 kWh。
+为抑制缩短时域在午夜前耗尽库存，设
+\begin{equation}\label{eq:terminal}
+ b_k^{\rm end}\geq S^{\rm tar}-s_{145|k},\quad
+ b_k^{\rm end}\geq0,\quad \Phi_k=\gamma_k b_k^{\rm end}.
+\end{equation}
+这是下一天库存价值近似，不是真实收费或精确动态规划价值。
+$S^{\rm tar}=6000$ kWh为候选，$\gamma_k$仅用过去资料验证。
+比较无终端项、正软目标和硬目标；$\gamma_k=0$时可删除$b$。
+年末可另设$s_{\text{12月31日},145}=6000$ kWh作公平比较条件，
+但须登记为假设而非题面强制条件。
+
+\subsection{0:00原始计划模型}
+令$r_{t|0}=q_t\geq0$，无自我调整费用：
+\begin{equation}\label{eq:obj0}
+ \begin{aligned}
+ \min\quad&\sum_{t=1}^{144}p_tq_t+\sum_\omega\pi_\omega C_0^\omega\\
+ &+\lambda\left(\zeta_0+\frac1{1-\alpha}\sum_\omega\pi_\omega v_\omega\right)
+ +\gamma_0b_0^{\rm end}.
+ \end{aligned}
+\end{equation}
+约束为$r_{t|0}=q_t\geq0$、式\eqref{eq:balance}至\eqref{eq:terminal}、
+式\eqref{eq:loss}和\eqref{eq:cvarlin}。
+保存$q^*$为原始承诺，只执行0:00至6:00。
+当前两阶段近似未完整优化未来新预报与调整的期权价值，
+不能称为精确全天多阶段最优策略。
+
+\subsection{日内调整模型}
+给定$q$及当前真实库存，只对$t\in\mathcal T_k$优化：
+\begin{equation}\label{eq:objk}
+ \begin{aligned}
+ \min\quad&
+ \sum_{t\in\mathcal T_k}(p_tq_t+1.5p_ta^+_{t|k}-0.5p_ta^-_{t|k})
+ +\sum_\omega\pi_\omega C_k^\omega\\
+ &+\lambda\left(\zeta_k+\frac1{1-\alpha}\sum_\omega\pi_\omega v_\omega\right)
+ +\gamma_kb_k^{\rm end}.
+ \end{aligned}
+\end{equation}
+约束为式\eqref{eq:adjust}、式\eqref{eq:balance}至\eqref{eq:terminal}、
+式\eqref{eq:loss}和\eqref{eq:cvarlin}。
+已执行时段不再作决策，不能追溯修改。
+$\sum p_tq_t$为常数，可为求解省略，但账单解释须保留。
+$q$始终是0:00版本，不改成上一版。
+
+\subsection{模型类别与两阶段关系}
+给定场景后，关系线性或已线性化；保留$z$是场景确定性等价MILP，
+删除互斥、保留$0\leq c,d\leq\overline B$为LP松弛。
+CVaR不使模型变成非线性规划或鲁棒优化。
+LP能否替代MILP需查同时充放电和费用差。
+每次第一阶段为公共$r,c,d,s,z$，第二阶段为$e^\omega,u^\omega$。
+不让电池随整条未来场景任意变化，以免提前知道未来。
+\textbf{整体为序贯决策，用重复两阶段近似实现随机MPC。}
+334个输出日每天4次，共$334\times4=1336$次外层求解，
+不含热身和校准；每次有$M$个补救块，不是独立求$1336M$个完整计划。
+两次更新之间电池执行已选10分钟计划，紧急购电与富余每10分钟响应。
+电池若也每10分钟自适应，必须另写因果反馈或多阶段非预见性约束。
+
+\section{执行、跨日衔接与账单}
+\subsection{只执行下一段}
+对$t\in\mathcal E_k$执行$r^*,c^*,d^*$，实际值揭示后
+\begin{align}
+ e^{\rm real}_{i,t}
+ &=\pos{L^{\rm real}_{i,t}+c^{\rm exe}_{i,t}
+       -G^{\rm real}_{i,t}-d^{\rm exe}_{i,t}-r^{\rm exe}_{i,t}},\\
+ u^{\rm real}_{i,t}
+ &=\pos{r^{\rm exe}_{i,t}+G^{\rm real}_{i,t}+d^{\rm exe}_{i,t}
+       -L^{\rm real}_{i,t}-c^{\rm exe}_{i,t}},\\
+ s^{\rm real}_{i,t+1}
+ &=s^{\rm real}_{i,t}+\eta_cc^{\rm exe}_{i,t}-d^{\rm exe}_{i,t}/\eta_d .
+\end{align}
+$e,u$不同时正且供需平衡；这是10分钟模型响应假设，不另建秒级控制。
+下一更新以真实库存初始化。
+
+\subsection{1月热身不能遗漏}
+题面给1月1日6000 kWh，不是2月1日必为6000 kWh。
+推荐从1月1日连续运行可执行热身，1月末状态传入2月。
+初始无历史时使用官方预报与登记的简单负荷基线；
+极端冷启动可行例为暂不充放电、正常购电0、由紧急购电补短缺。
+这只是可行性说明而非最优建议。获得历史后建立基线与校准，
+不能用1月后半月反推1月初决策。
+无法产生样本外标准化残差的早期日不进入残差档案。
+若不模拟1月，则2月1日6000 kWh仅为另加比较假设。
+各方案相同初值后独立连续运行，不能每天重置为同一条外部库存轨迹。
+
+\subsection{每段只结算最后有效版本}
+令$\kappa(t)$为$t$前最后采用更新时间，全采用时
+\begin{equation}
+ \kappa(t)=6\left\lfloor\frac{t-1}{36}\right\rfloor,\quad
+ r^{\rm exe}_{i,t}=r^*_{i,t|\kappa(t)}.
+\end{equation}
+定义$a^{+,\rm exe}_{i,t}=\pos{r^{\rm exe}_{i,t}-q_{i,t}}$、
+$a^{-,\rm exe}_{i,t}=\pos{q_{i,t}-r^{\rm exe}_{i,t}}$，
+真实日账单
+\begin{equation}\label{eq:bill}
+ F_i^{\rm real}=\sum_{t=1}^{144}
+ [p_tq_{i,t}+1.5p_ta^{+,\rm exe}_{i,t}
+ -0.5p_ta^{-,\rm exe}_{i,t}+5p_te^{\rm real}_{i,t}].
+\end{equation}
+不含CVaR惩罚与日末价值，不把四个重叠优化目标相加。
+原始、各次调整、最终执行版本分别归档。
+日紧急量、充放电量按10分钟电量求和，不再乘$\Delta t$。
+指定区间按真实时间归属汇总；连续紧急段可合并，但不跨过中间0值。
+本次仅给汇总规则，不填写附件5。
+
+\section{可信度不等于调整价值}
+\subsection{简化无储能推导}
+单时段忽略电池，净需求$N\geq0$分布$F$连续、相关分位数唯一，
+$p>0$，主结算，$\lambda=0$：
+\begin{equation}
+ \min_{r\geq0}J(r)=pq+1.5p\pos{r-q}-0.5p\pos{q-r}
+                  +5p\E[\pos{N-r}].
+\end{equation}
+\begin{equation}
+ J'(r)=\begin{cases}
+ 0.5p-5p\{1-F(r)\},&r<q,\\
+ 1.5p-5p\{1-F(r)\},&r>q.
+ \end{cases}
+\end{equation}
+令$a=F^{-1}(0.7)$、$b=F^{-1}(0.9)$，
+$F^{-1}(\tau)=\inf\{x:F(x)\geq\tau\}$，
+\begin{equation}\label{eq:band}
+ r^*=\begin{cases}a,&q<a,\\q,&a\leq q\leq b,\\b,&q>b.\end{cases}
+\end{equation}
+原计划在区间内不值得付费调整。离散分布用次梯度、分位数集合，解可不唯一。
+这是按本题倍率及报童型短缺自行推导，不是论文提供的70\%与90\%常数。
+电池、CVaR或不同结算会改变边界，不能逐时套入完整模型。
+
+\subsection{误差尺度为何影响调整}
+未截断位置尺度近似$N=\mu_N+\sigma_NZ$下，
+\begin{equation}
+ F_N^{-1}(\tau)=\mu_N+\sigma_NF_Z^{-1}(\tau).
+\end{equation}
+中心与尺度都改变调整区间，无需任意规定“$R$低于阈值就加购”。
+净需求尺度含负荷、光伏协方差，不能仅以光伏尺度替代；
+也不主张上述式在截断后原样成立。
+
+\section{信息价值与对照实验}
+\subsection{已有预报时刻}
+固定0:00，对额外$\{6,12,18\}$全部8个子集$B$比较。
+单独识别信息价值时，各方案在同样四个时刻重算，
+仅屏蔽不在$B$的新官方预报，沿用旧预报并保留其原始提前量。
+此时校准及历史日块也按旧预报的发布时刻匹配，再截取当前剩余时段，
+不能误用当前发布时刻的新预报残差。
+观测权限、控制机会与风险参数一致。
+若连重算也取消，测量的是信息与控制更新的联合价值，应另命名。
+设$J(B)=\sum_iF_i^{\rm real}(B)$，
+\begin{equation}
+ \Delta V(k\mid B)=J(B)-J(B\cup\{k\})\quad(\text{元}).
+\end{equation}
+按日配对比较，不挑有利日期。全年事后最佳子集仅是回顾性对照，
+可执行选择须过去决定、未来验证。
+免费信息可被忽略，在正确模型、同一分布、嵌套策略集、精确求解下，
+更多信息不会提高理论最优期望费。
+实际负收益可能来自校准误差、滚动近似或求解误差。
+不虚构固定调整费或预报购买费。
+
+\subsection{未提供的额外时刻}
+没有3:00、9:00等新官方预报，不能宣称其实证节省率。
+可在额外时刻校准旧预报再重算，但这是内部更新；
+也可按提前量模型构造假设性新预报，明确标注为合成实验。
+本次先完成已有四次发布的模型。
+经济价值还取决于电价、库存、功率与结算，并非$R$越高越值得调整。
+
+\subsection{一次增加一个机制}
+\begin{longtable}{p{1.9cm}p{6.0cm}p{5.9cm}}
+\toprule 方案 & 内容 & 验证问题\\ \midrule
+\endhead
+B0 & 仅0:00官方预报，日内屏蔽 & 日内官方信息价值。\\
+B1 & 官方点预报、确定性MPC & 基础可执行对照。\\
+B2 & 偏差校准、合并尺度、联合场景，$\lambda=0$ & 场景不确定性的作用。\\
+B3 & B2改为提前量条件尺度与$R$，$\lambda=0$ & 提前量校准的作用。\\
+B4 & B3增加CVaR & 尾部改善和平均费用代价。\\
+尺度对照 & 常尺度、指数尺度、分箱尺度 & 指数假设是否必要。\\
+选择对照 & 概率评分与历史调度费用选参 & 决策导向的增量价值。\\
+\bottomrule
+\end{longtable}
+B0须与同控制机会方案比较；另设纯日前不修订策略则明确同时减少控制机会。
+比较调度层固定预测场景，比较预测层固定调度能力。
+多个机制总改善不能全部归于指数。
+
+\section{验收标准与学习建议}
+\subsection{概率预测评价}
+点预测MAE、RMSE按提前量、发布时刻、昼夜分组。
+覆盖目标$1-\delta$的区间为
+$[\ell_n,u_n]=[F_n^{-1}(\delta/2),F_n^{-1}(1-\delta/2)]$：
+\begin{align}
+ {\rm PICP}&=\frac1N\sum_n\mathbf1\{\ell_n\leq y_n\leq u_n\},\\
+ {\rm MPIW}&=\frac1N\sum_n(u_n-\ell_n),\\
+ {\rm IS}_\delta(\ell,u;y)
+ &=(u-\ell)+\frac2\delta(\ell-y)\mathbf1\{y<\ell\}
+          +\frac2\delta(y-u)\mathbf1\{y>u\}.
+\end{align}
+$y$是实际功率，$\delta$不与CVaR的$\alpha$混用。
+PICP无量纲，宽度与评分为kW，不仅扩大区间换高覆盖。
+有限场景连续排序概率评分
+\begin{equation}
+ {\rm CRPS}_n=\sum_\omega\pi_\omega|P_n^\omega-y_n|
+ -\frac12\sum_{\omega,\omega'}\pi_\omega\pi_{\omega'}
+ |P_n^\omega-P_n^{\omega'}|
+\end{equation}
+为kW，越小越好。来源为Schulz等第3.4节\cite{schulz2021}、
+Gneiting等第4节\cite{gneiting2023}。
+PICP达标仍不足以证明完全校准，还应查两端分位数与条件组；
+夜间零值不掩盖白天误差。这些是诊断而非有限样本概率保证。
+
+\subsection{决策导向选参}
+借鉴Smart Predict, then Optimize\cite{elmachtoub2022}，
+用过去验证日$\mathcal V_i$选择少量校准参数$\theta$：
+\begin{equation}
+ \theta_i^*\in\arg\min_{\theta\in\Theta}
+ \sum_{j\in\mathcal V_i}F_j^{\rm real}(\theta),\qquad\max\mathcal V_i<i.
+\end{equation}
+验证日内部预测也只用更早资料，内层选择与外层测试分离。
+$\lambda$另展示均值与尾部权衡，不只按最低费便声称确定风险偏好。
+这里只借鉴选择准则，不移用SPO+损失；
+原文主要预测目标成本向量，本题不确定量进入约束右端，不能照搬其理论保证。
+
+\subsection{结果评价与团队验收}
+评价期2025年2月1日至12月31日共334天。
+后续报告全年、月度真实费，紧急购电kWh和费用，每日紧急费经验CVaR，
+调整量和次数，富余量、电池吞吐、求解时间及MILP间隙。
+每日经验CVaR对实际日紧急费重新算，不加总各次优化CVaR。
+按日配对并用保持日期相关性的块抽样评价变动，不把10分钟点当独立日期。
+本次未执行实验，不给优劣数值。
+\begin{enumerate}
+ \item 时间：144段145状态，6:00第37段，午夜不漏、不重复、不整体错位。
+ \item 单位：功率尺度kW，平衡电量kWh，$\beta$为$\mathrm h^{-1}$，费用元。
+ \item 因果：按发布时间揭示，校准目标已实现，旧预报年龄不冒充提前量。
+ \item 物理：守恒、效率、SOC、功率、互斥与跨日状态完整。
+ \item 结算：$q,r,e$不混淆，下调歧义登记，每段仅一次实际结算。
+ \item 指数：历史拟合与分箱对照，通过尺度进入场景，不作正确概率或均值折扣。
+ \item 风险：损失对象、阈值域和参数明确，有风险中性基准，不把风险目标当账单。
+ \item 证据：逐项消融、独立日数与重复场景数区分，完美信息只作同口径下界。
+ \item 来源：文献与本题设计区分，指数和分位点不虚称首创。
+\end{enumerate}
+
+\subsection{最低补学要求}
+依次学习提前量与滚动校准、位置尺度与收缩估计、联合残差块抽样、
+CVaR阈值线性化、随机MPC非预见性、概率评分与信息价值。
+检索词为\emph{forecast lead time calibration}、
+\emph{location scale model shrinkage}、
+\emph{joint residual block bootstrap}、
+\emph{CVaR scenario linear programming}、
+\emph{stochastic MPC nonanticipativity}、
+\emph{probabilistic solar forecast verification}。
+以现有LP、IP、随机规划知识补到能解释信息与约束关系即可，
+无需先学鲁棒优化、深度学习或强化学习。
+
+\begin{thebibliography}{99}
+\bibitem{lemos2022}
+Lemos-Vinasco J., Schledorn A., Pourmousavi S. A., Guericke D.
+Economic evaluation of stochastic home energy management systems in a realistic rolling horizon setting.
+2022, arXiv:2203.08639. \url{https://arxiv.org/abs/2203.08639}.
+本地04：概率预测、随机优化、真实滚动评价。
+\bibitem{schulz2021}
+Schulz B., El Ayari M., Lerch S., Baran S.
+Post-processing numerical weather prediction ensembles for probabilistic solar irradiance forecasting.
+Solar Energy, 2021, 220: 1016--1031.
+DOI: \href{https://doi.org/10.1016/j.solener.2021.03.023}{10.1016/j.solener.2021.03.023}.
+\url{https://arxiv.org/abs/2101.06717}.
+本地10：第3.3节提前量与发布时刻分组，第3.4节概率评分。
+\bibitem{gneiting2023}
+Gneiting T., Lerch S., Schulz B.
+Probabilistic solar forecasting: Benchmarks, post-processing, verification.
+Solar Energy, 2023, 252: 72--80.
+DOI: \href{https://doi.org/10.1016/j.solener.2022.12.054}{10.1016/j.solener.2022.12.054}.
+\url{https://publikationen.bibliothek.kit.edu/1000155949}.
+本地11：轨迹相关性，第4节概率评价，尤其第4.4节区间评分。
+\bibitem{rockafellar2000}
+Rockafellar R. T., Uryasev S.
+Optimization of Conditional Value-at-Risk.
+Journal of Risk, 2000, 2(3): 21--41.
+DOI: \href{https://doi.org/10.21314/jor.2000.038}{10.21314/jor.2000.038}.
+\url{https://sites.math.washington.edu/~rtr/papers/rtr179-CVaR1.pdf}.
+本地08：CVaR辅助阈值与场景表示。
+\bibitem{elmachtoub2022}
+Elmachtoub A. N., Grigas P.
+Smart Predict, then Optimize.
+Management Science, 2022, 68(1): 9--26.
+DOI: \href{https://doi.org/10.1287/mnsc.2020.3922}{10.1287/mnsc.2020.3922}.
+\url{https://arxiv.org/abs/1710.08005}.
+本地07：借鉴决策导向，不直接移用SPO+。
+\end{thebibliography}
+\end{document}
