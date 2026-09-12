@@ -1,0 +1,23 @@
+{
+  "tests_passed": 28,
+  "numeric_source_sha256_preserved": {
+    "run_v2.py": "6d35d35b0238fb4894e22dc738a6805bbdeefc069a4b73527b6387c1db823a62",
+    "forecasting_v2.py": "87e98683b675431fd05b0fc420eee80c78f76145728da50c38443093aa0e2d14",
+    "forecasting.py": "aa1bd892b8253b79ad8b2259b708b55da9b1d0929dffdb31c7f7f751a8dee99a",
+    "microgrid_core.py": "9b846a6d2d37a510452bc35ddf69dc58ffe1b5e2cb1301ad8b3fdcc6643a60e5",
+    "stochastic_dispatch.py": "1cb3c586c601ea90bc4a3d509173e31d96d8e58482fe0d3fdb2808db425c3f3c"
+  },
+  "processed_input_sha256_preserved": {
+    "actual_points.csv": "f0462e5eb0162797365ea1f389e61afbb0ea052397908ad3b84b656f22f4ff64",
+    "baseline_points.csv": "cf93a433185f61e408d871f844495eda7439e824b4ca596eca098e3b94009c89"
+  },
+  "official_result_files_byte_identical": 0,
+  "smoke_test": {
+    "audited_experiments": 25,
+    "audited_days": 203,
+    "maximum_numerical_residual": 4.656612873077393e-10,
+    "selection_from_january_only": true
+  },
+  "raw_input_setup": "four files copied from the existing repository and independently hash verified",
+  "notes": "No numerical model or official result changed. Smoke run covers warmup, selection, and three formal days; it is not a rerun of the full-year result."
+}

@@ -1,0 +1,25 @@
+{
+  "workbook_sheets_reviewed": [
+    "result1/计划购电量",
+    "result1/充放电量",
+    "result2/计划购电量",
+    "result2/充放电量",
+    "result2/紧急购电量"
+  ],
+  "extra_views": [
+    "first/last intervals",
+    "year-end totals",
+    "method/time notes"
+  ],
+  "scientific_pngs_reviewed": [
+    "01_预测方法与调度费用",
+    "02_逐月费用与紧急购电",
+    "03_指定日期调度与储能",
+    "04_参数与抽样稳定性"
+  ],
+  "result": "legible; no clipped content or overlapping legends; negative zero cleaned in Excel only",
+  "export_revision": "result2 Excel zeros below 1e-9 normalized, all exported values checked within 1e-6",
+  "performance_fix": "trajectory/forecast NPZ arrays loaded once during export/audit, no mathematical change",
+  "parallel_execution": "worker terminal_1_2 also finished separately after primary started; separate duplicate not used",
+  "main_solver_failures": 0
+}
