@@ -1,0 +1,16 @@
+{
+  "checked_evaluation_days": 334,
+  "checked_release_target_points": 120240,
+  "independent_formula_max_errors": {
+    "bias_kw": 2.842170943040401e-14,
+    "center_kw": 1.8189894035458565e-12,
+    "binned_sigma_kw": 2.2737367544323206e-13,
+    "pooled_sigma_kw": 1.9895196601282805e-13,
+    "beta_per_hour": 3.0531133177191805e-16,
+    "sigma0_kw": 9.094947017729282e-13,
+    "exponential_sigma_kw": 1.4779288903810084e-12
+  },
+  "passed": true,
+  "tolerance": 1e-06,
+  "variance_convention": "Equal complete-day weights, within-day population second moments."
+}

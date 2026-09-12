@@ -1,0 +1,432 @@
+[
+  {
+    "path": ".gitignore",
+    "bytes": 369,
+    "sha256": "0506B6CC582455EFE5777C5607142A3D01B046C788C675F061E55BFB48C8844D"
+  },
+  {
+    "path": "q3-00_readme.md",
+    "bytes": 1720,
+    "sha256": "01A7365F60945929AD6ABB509A71897A98D735EE753595A309D5344BA27AE89D"
+  },
+  {
+    "path": "q3-01_使用说明\\第三问复现与文件指南.md",
+    "bytes": 3029,
+    "sha256": "1B0A06233F41DC2184543B038F2651E0293597101F7BDED18451D8226DE664CF"
+  },
+  {
+    "path": "q3-01_使用说明\\架构图与变量口径.md",
+    "bytes": 4435,
+    "sha256": "7C53552683F7C07921476C2AE1592170ED15B6F63BBF11E30EEABCC4D8E5644F"
+  },
+  {
+    "path": "q3-01_使用说明\\科研绘图规范与参考.md",
+    "bytes": 5123,
+    "sha256": "ED601C98E8D56B8EEBF81104B3968CA17CEDE21519184352A5E62013271FD7A9"
+  },
+  {
+    "path": "q3-02_题目与模型\\微网概念架构图.png",
+    "bytes": 38166,
+    "sha256": "DE0ED02ADF353AA6274AF63E3F64D8E0586010D824F7821442269D50BB7A2018"
+  },
+  {
+    "path": "q3-02_题目与模型\\C题.pdf",
+    "bytes": 354389,
+    "sha256": "2C098F6AE9DD47AE965AEBDEC3B9FACF3DE6C173F999783C1012C08FC5FB9D2D"
+  },
+  {
+    "path": "q3-02_题目与模型\\model-q3.pdf",
+    "bytes": 299998,
+    "sha256": "99BC3198875DD821D556412D3E40F3A7B15DEBB23C630EBDBA511A7349836ED5"
+  },
+  {
+    "path": "q3-03_计算工程\\.gitignore",
+    "bytes": 33,
+    "sha256": "280C97002872BB3022E101F34F71B129F59290DA8E6F59C343316A6BE508AF8C"
+  },
+  {
+    "path": "q3-03_计算工程\\连接本机Excel依赖.ps1",
+    "bytes": 903,
+    "sha256": "82F1AEFBDCFBB7B0DDE5ABE9F53810CE127F3BB9981C670539AFEF43D31AEBB6"
+  },
+  {
+    "path": "q3-03_计算工程\\README.md",
+    "bytes": 928,
+    "sha256": "0D094EFDB5DC0E7209F82BB94E9758C2F65B73F5BE10F6C130067D90DCA76E7B"
+  },
+  {
+    "path": "q3-03_计算工程\\configs\\experiment_registry.json",
+    "bytes": 5685,
+    "sha256": "8E3446D307E698ED7225068FC959586C721318531ECC719EBD9F32A2CF97BB11"
+  },
+  {
+    "path": "q3-03_计算工程\\configs\\run_config.json",
+    "bytes": 4315,
+    "sha256": "6C6B286BFFE655AD4FE4C731A3495E1A798BA59DC3E71557C64A2C48C92E6050"
+  },
+  {
+    "path": "q3-03_计算工程\\configs\\selection.json",
+    "bytes": 30575,
+    "sha256": "F004F6247D240EFFDC33F933BEADB335C9547B2A8DF0B5AB52321B7072C57114"
+  },
+  {
+    "path": "q3-03_计算工程\\data\\processed\\actual_points.csv",
+    "bytes": 1917014,
+    "sha256": "F0462E5EB0162797365EA1F389E61AFBB0EA052397908AD3B84B656F22F4FF64"
+  },
+  {
+    "path": "q3-03_计算工程\\data\\processed\\baseline_points.csv",
+    "bytes": 4914,
+    "sha256": "CF93A433185F61E408D871F844495EDA7439E824B4CA596ECA098E3B94009C89"
+  },
+  {
+    "path": "q3-03_计算工程\\data\\processed\\pv_forecasts.csv",
+    "bytes": 1732798,
+    "sha256": "3AE9423D0B7AF16F7A847D531DC2EB0AD53754C926952A611651BD42F1883C19"
+  },
+  {
+    "path": "q3-03_计算工程\\data\\raw\\manifest.json",
+    "bytes": 665,
+    "sha256": "A4F30D34D71DB89A4FCE8185C4315D3811BEA4040F3581A4CCCCE948DC20DD67"
+  },
+  {
+    "path": "q3-03_计算工程\\data\\raw\\附件\\附件1.xlsx",
+    "bytes": 16003,
+    "sha256": "66B87134F5ECCCD68184D3539BB1293EF039F9E0FDD955A589B9BFA7F227C377"
+  },
+  {
+    "path": "q3-03_计算工程\\data\\raw\\附件\\附件2.xlsx",
+    "bytes": 907128,
+    "sha256": "2E95FD446BFAFA0D8C59577B5C2E2EA8B3F1DEF20DDE54A3062556F4DA9B4C72"
+  },
+  {
+    "path": "q3-03_计算工程\\data\\raw\\附件\\附件3.xlsx",
+    "bytes": 293526,
+    "sha256": "8A61B06C52BD0D639A1CC37C61A7D9F5B75EDCBCA718F64C1BD3498EC9F9D843"
+  },
+  {
+    "path": "q3-03_计算工程\\data\\raw\\附件\\附件5\\result3.xlsx",
+    "bytes": 265429,
+    "sha256": "C59DA470CABD0BE23F602C95C8AA9D11EC224A0CDAC216B3E1F218E65D006BDC"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\audit_q3_calibration.py",
+    "bytes": 3421,
+    "sha256": "71E8EF6B0DD902B9F3C01EDD9649FDF5090DC7D2F22027E7DA2B911CE2D19B30"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\audit_q3.py",
+    "bytes": 4777,
+    "sha256": "78E6F15EDFD9BD43B804CF57D98630F4E13F963B462F0A0E2E47D589DA6F61B8"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\export_q3.mjs",
+    "bytes": 6339,
+    "sha256": "C451ADC08E98A9E087261029C95B06D7EEA93D02BF2D3D39065D840ED531806E"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\finalize_q3_records.py",
+    "bytes": 3317,
+    "sha256": "6C43AC2CD1F6F12E38C065153AB63B117C49F28571CAA681CB0C62A5BF33A633"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\forecasting.py",
+    "bytes": 8023,
+    "sha256": "AA1BD892B8253B79AD8B2259B708B55DA9B1D0929DFFDB31C7F7F751A8DEE99A"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\microgrid_core.py",
+    "bytes": 11220,
+    "sha256": "9B846A6D2D37A510452BC35DDF69DC58FFE1B5E2CB1301AD8B3FDCC6643A60E5"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\prepare_q3.py",
+    "bytes": 5428,
+    "sha256": "0C809E11F517595ADD07B71348A5A553E52976104979C896F9487815635F9882"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\q3_diagnostics.py",
+    "bytes": 6381,
+    "sha256": "19058C9E45A137AC4AAFFDBA7B89A9FC02B3F86C8B2B815C19EFB4759BC6B467"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\q3_dispatch.py",
+    "bytes": 8250,
+    "sha256": "95ED7B3DD5510EF1732832F54A7D620054E48A0CA4F0B74A2CD1A2B5F989C859"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\q3_extra_figures.py",
+    "bytes": 4245,
+    "sha256": "CE16E27D8443BF04B9CEAAFEA52F71AEFA5E83B645690706CC73587F931896EE"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\q3_forecasting.py",
+    "bytes": 10898,
+    "sha256": "7C69B35863B35A488AE706AA728B30BDF535BC3719E2511A47020A2DE7E93B99"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\q3_report.py",
+    "bytes": 18981,
+    "sha256": "99C3D42FD409212766428FFCB76C8A57DA279E3D7B5C5EFF447E6C63CBD2AE83"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\q3_workflow.py",
+    "bytes": 10062,
+    "sha256": "566F6CF06E07E2E1431B6BB5AFBA22ABDB0F9C8C48F649E576BDC45C4010CE1E"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\reporting.py",
+    "bytes": 5228,
+    "sha256": "7FC9BEEA96465FF8A59D70010ECBF36F253082B276DA22E932DA50A7668D38AE"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\run_q3.py",
+    "bytes": 9216,
+    "sha256": "319B82944DEBD84F30EEC1DE547DB15B0EB8BE00E6CE85212D3B808ED3F13AD4"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\run_tests_q3.py",
+    "bytes": 815,
+    "sha256": "025017FB79B73A09E48089B573C2713D056DCAF52458DC9BAEA890A1D120F35F"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\scientific_style.py",
+    "bytes": 4858,
+    "sha256": "F89DADF3D377DD482048A9F9C959C3D6B87D360B969C55FC24314A5A241525B8"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\summarize_q3.py",
+    "bytes": 10875,
+    "sha256": "04FCAE64164A14DD55FCB0F56F927A4CF40CEFE3CC31A1C4D7AA86225FF90DED"
+  },
+  {
+    "path": "q3-03_计算工程\\src\\verify_q3_workbook.py",
+    "bytes": 1938,
+    "sha256": "089B5E47D88BFC4351F94E57C3B57391C1F0030C9B9923B9D5683D6B14AF041E"
+  },
+  {
+    "path": "q3-03_计算工程\\tests\\test_q3_alignment.py",
+    "bytes": 5139,
+    "sha256": "61915599AD4A0749E1770CBC0F3437994402FA295471AEB9CAC2438B22B24F54"
+  },
+  {
+    "path": "q3-03_计算工程\\tests\\test_q3.py",
+    "bytes": 5965,
+    "sha256": "7A5EB4E93A152EF2293263AC55CDCB84CFA89E2C78034B6F03A497844981B3BC"
+  },
+  {
+    "path": "q3-04_正式成果\\1月参数验证完整表.csv",
+    "bytes": 5598,
+    "sha256": "E1EFC2285DE96B04319D618DBB151B390761B76EC150C4075FB042F6B4A15EE1"
+  },
+  {
+    "path": "q3-04_正式成果\\1月风险参数验证.csv",
+    "bytes": 583,
+    "sha256": "08E281BDD242929A55FA1CA375369E57DE97B6E79F8C91E61E56F7B18F878229"
+  },
+  {
+    "path": "q3-04_正式成果\\第三问10分钟完整执行轨迹.csv",
+    "bytes": 7642286,
+    "sha256": "B0F65C0EB084B4205697914D9925A23C5D4B966E811F71A5E63E53F7FFC44DF1"
+  },
+  {
+    "path": "q3-04_正式成果\\第三问每日费用与电量.csv",
+    "bytes": 71113,
+    "sha256": "EC7184D6E74F55172677A98649E0DD0333135BAF7DA29B29626E4C7DC09B00CB"
+  },
+  {
+    "path": "q3-04_正式成果\\第三问模型核验与求解报告.md",
+    "bytes": 14833,
+    "sha256": "558CFC79A80E4E70A015FE4D897E37F7C2EEDE073E266686AE11A706ACF83374"
+  },
+  {
+    "path": "q3-04_正式成果\\第三问全部方案对比.csv",
+    "bytes": 6999,
+    "sha256": "55C3F51A97749D37B1FC7B82D9A70C53E3D0CB3AB9C017B64CAE204B55938FED"
+  },
+  {
+    "path": "q3-04_正式成果\\第三问月度费用与运行指标.csv",
+    "bytes": 1917,
+    "sha256": "0F1D2ADA0850921209CE040A341B192800DAC840611472124D6BCC30D9079460"
+  },
+  {
+    "path": "q3-04_正式成果\\联合场景诊断摘要.csv",
+    "bytes": 7846,
+    "sha256": "BC9149ACB0F180CB69EF4AC2CE1C6CDD9F77A74F427C50DFCEBBA8E4CCC645B6"
+  },
+  {
+    "path": "q3-04_正式成果\\提前量与发布时间分组误差.csv",
+    "bytes": 97938,
+    "sha256": "E03C00EDAFF2BDF46BBF91EE74026EC752B32CB66F38DFE1AD3B8D433E86A1BC"
+  },
+  {
+    "path": "q3-04_正式成果\\题目指定日期表格.md",
+    "bytes": 4273,
+    "sha256": "133C0FD5A65C7AFC586456A65D65EB9F00D5AF7F39F507DA66A2C7181C16E31C"
+  },
+  {
+    "path": "q3-04_正式成果\\预报时刻边际价值.csv",
+    "bytes": 1290,
+    "sha256": "0E08ECD158C8BB357CD4DADDA72E8E1CCF02B3D628CF71EDAB0B645699F167A4"
+  },
+  {
+    "path": "q3-04_正式成果\\预报时刻组合对比.csv",
+    "bytes": 485,
+    "sha256": "8E03C7D193C45D2A64CA535CD74A9B38B1283FF3B4DD076F8E8D90722CD04E6C"
+  },
+  {
+    "path": "q3-04_正式成果\\预测尺度与可信度R摘要.csv",
+    "bytes": 17862,
+    "sha256": "9F046BB284FAC7759666DD38F81F77C3F006AB0D72247794012B436B68FFFC17"
+  },
+  {
+    "path": "q3-04_正式成果\\PDF与代码逐项对应.md",
+    "bytes": 3527,
+    "sha256": "FB588463280FCF7B998FF96B3D5BE8AEEFA1659BCA2BA4B1E5C7146C21B386FE"
+  },
+  {
+    "path": "q3-04_正式成果\\result3.xlsx",
+    "bytes": 1213812,
+    "sha256": "FA28E56115B3CCA517365FC2B4EE157116DD9008FED516157057C0A7230D1E54"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\01_指定日期购电与储能.png",
+    "bytes": 867388,
+    "sha256": "05068F1B7F3FE654F8E382976C56473F9AEED057CD081D39481DD633EA9D231F"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\01_指定日期购电与储能.svg",
+    "bytes": 128062,
+    "sha256": "F541DDADA80643F568BED439762D76DF56871CDD21182A2DFB05F3306D340F34"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\02_月度费用与风险权衡.png",
+    "bytes": 270372,
+    "sha256": "A022086CFDACA9762DB408EEC4FDEC43506EFA126CB7429367B2B3668418D021"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\02_月度费用与风险权衡.svg",
+    "bytes": 27031,
+    "sha256": "81EBF2E646BE7A413D17BC2516F22928ABBF04C0E2C73CA01C0BEBB2BB41DCAB"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\03_预报信息增量价值.png",
+    "bytes": 296845,
+    "sha256": "EB60789ABAA79180786B778D229B13503F16B12489E98C4385814B32E2C55B87"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\03_预报信息增量价值.svg",
+    "bytes": 23619,
+    "sha256": "967FBCA23FCFC2D926367FCF9BA195F9FC9F50C62018C168962A3690D49A4902"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\04_概率预测样本外检验.png",
+    "bytes": 352068,
+    "sha256": "EB292128FB881BB50DC60C70E113B51E1FBD6535429FBD658322C575A20F43CD"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\04_概率预测样本外检验.svg",
+    "bytes": 23981,
+    "sha256": "E22E5EF196FF3750354C24F5C95698137807DFC963E9BD861137037040EAEB03"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\05_B0至B4模型对照.png",
+    "bytes": 259713,
+    "sha256": "368B4AEB92F7F12FC478DC2334E296441F326B202F8347CF1D33A2A711C3C9E8"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\05_B0至B4模型对照.svg",
+    "bytes": 19960,
+    "sha256": "C379A309CD4773C8A05F18D61BB8E1719252FFDBCA60C476DB9878E31BD9C29B"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\06_提前量尺度与可信度解释.png",
+    "bytes": 332301,
+    "sha256": "AB9328E695F11E6D1E4921396356D8874BD1E1504E748B1E972B670301DAAA89"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\06_提前量尺度与可信度解释.svg",
+    "bytes": 39664,
+    "sha256": "9F590FDE982FD63B2A471077912A859C7DB12333A72C651624DF16B03467BA2C"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\07_终端条件与风险参数.png",
+    "bytes": 328534,
+    "sha256": "D4FE6463E3041FD8A260746FF6DE6C96A26784A345B777292649533D73571CDA"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\07_终端条件与风险参数.svg",
+    "bytes": 19814,
+    "sha256": "4F9AB8952F2E25447E3520C770CB44BCDDBE94445C5D70672C793B3FCEA0BCED"
+  },
+  {
+    "path": "q3-04_正式成果\\科研图表\\第三问科研图表.pdf",
+    "bytes": 182315,
+    "sha256": "B8B09A036F933DE109AF8FBA46A9BF92396BCC620EEDD0279517C0B1ACA628AA"
+  },
+  {
+    "path": "q3-05_复核记录\\交付精简记录.json",
+    "bytes": 1531,
+    "sha256": "3F286079D118B0797033AB2DA81A757087D28C0DB864C9F8015DE33B99C3A418"
+  },
+  {
+    "path": "q3-05_复核记录\\主方案汇总.json",
+    "bytes": 1191,
+    "sha256": "38A110E27728857A730EFBEB5143DA5AF769BCFA0C1985F8162891301DD82E93"
+  },
+  {
+    "path": "q3-05_复核记录\\completion_record.json",
+    "bytes": 2929,
+    "sha256": "1E121355F33EE021C2581B2E834C57DAB18830D2ED95AD5A091BB5B1758E3D35"
+  },
+  {
+    "path": "q3-05_复核记录\\Excel逐值核验.json",
+    "bytes": 429,
+    "sha256": "6FB21908AF1A8BCA6EE16F64B2B83912B8C42C73AE2D48575D471E45ED1C5FFF"
+  },
+  {
+    "path": "q3-05_复核记录\\figure_qa.json",
+    "bytes": 4166,
+    "sha256": "BF25E8F1454A2A36D2E865837750875A984DC9221CC7538B8ABD20C7FA902A35"
+  },
+  {
+    "path": "q3-05_复核记录\\independent_audit.json",
+    "bytes": 22892,
+    "sha256": "473CF0A42D6A7D1BB7A4640721450F6FCEDD3773A30DD046BC12BAFB5F918F04"
+  },
+  {
+    "path": "q3-05_复核记录\\independent_calibration_audit.json",
+    "bytes": 580,
+    "sha256": "2C446DF47158D908EA2A530C749D81B2D9CC7BB21B7550599C5A999E387418B3"
+  },
+  {
+    "path": "q3-05_复核记录\\probability_diagnostics_audit.json",
+    "bytes": 625,
+    "sha256": "A397B084B226F1D706A1A77C523672723C92E3BFCF992AFD2C5AFDC19B7D1C79"
+  },
+  {
+    "path": "q3-05_复核记录\\README.md",
+    "bytes": 328,
+    "sha256": "C8A34B3514DFF4C06AB669888AB349BB7E1852C4D46C41B4CFC92ED3CE3938B0"
+  },
+  {
+    "path": "q3-05_复核记录\\runtime_versions.json",
+    "bytes": 69,
+    "sha256": "194F559B69BA39BF5842C6229FAFD2E6C049208F926014ED6B475D5435A3676C"
+  },
+  {
+    "path": "q3-05_复核记录\\test_results.json",
+    "bytes": 148,
+    "sha256": "C335B2092CFFDC4D3105C5E5BD5DE12BB8775185D8D578B08FA8DCC6DC528FD4"
+  },
+  {
+    "path": "q3-05_复核记录\\unit_tests.log",
+    "bytes": 2645,
+    "sha256": "1277F4714562D58FD42C3EC43C04C6EDD4B273A688B3A97EFDD99A2DD1988FD0"
+  },
+  {
+    "path": "q3-05_复核记录\\visual_review.json",
+    "bytes": 140,
+    "sha256": "D3065CFAC64F520B37B63DB47524537693C2149B26D34FE7BB6925C4D9E29F6C"
+  }
+]

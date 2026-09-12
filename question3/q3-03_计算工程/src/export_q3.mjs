@@ -1,0 +1,65 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {FileBlob,SpreadsheetFile} from '@oai/artifact-tool';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const run=path.resolve(process.argv[2]);
+const payload=JSON.parse(await fs.readFile(path.join(run,'q3_workbook_payload.json'),'utf8'));
+const wb=await SpreadsheetFile.importXlsx(await FileBlob.load(path.join(root,'data/raw/附件/附件5/result3.xlsx')));
+const qa=path.join(run,'workbook_qa');await fs.mkdir(qa,{recursive:true});
+const dates=rows=>rows.map(r=>[r[0]===null?null:new Date(r[0]+'T00:00:00Z'),...r.slice(1)]);
+const previews=[];
+for(const [name,key] of [['计划购电量','plan'],['调整购电量','adjusted']]) {
+ const s=wb.worksheets.getItem(name);s.getRange('A1:EQ1').values=[payload.headers];
+ s.getRange('A1').values=[['日期\\时间\n电量：kWh']];
+ s.getRange('EP1').values=[[key==='plan'?'全天计划购电量\n（kWh）':'全天调整后购电量\n（kWh）']];
+ s.getRange('EQ1').values=[[key==='plan'?'原计划购电费\n（元）':'全天实际总购电费\n含紧急购电（元）']];
+ s.getRange('A2:EQ335').values=dates(payload[key]);
+ s.getRange('A2:A335').setNumberFormat('yyyy-mm-dd');s.getRange('B2:EQ335').setNumberFormat('#,##0.00');
+ s.getRange('EP2').formulas=[['=SUM(B2:EO2)']];s.getRange('EP2:EP335').fillDown();
+ s.getRange('A1:EQ335').format.font={name:'宋体',size:10};
+ s.getRange('A1:EQ1').format.rowHeight=46;s.getRange('A1:EQ1').format.wrapText=true;
+ s.getRange('A1:EQ1').format.fill='#EAF0F5';s.getRange('A1:EQ1').format.font.bold=true;
+ s.getRange('A1:A335').format.columnWidth=16;s.getRange('B1:EO335').format.columnWidth=15;
+ s.getRange('EP1:EQ335').format.columnWidth=24;s.getRange('A2:EQ335').format.rowHeight=16;
+ s.getRange('A1:EQ1').format.horizontalAlignment='center';s.getRange('A2:A335').format.horizontalAlignment='center';
+ s.freezePanes.freezeRows(1);s.freezePanes.freezeColumns(1);
+ s.mergeCells('A337:H337');s.getRange('A337').values=[['来源：C题题面、附件1电价、附件2实测、附件3预报、model-q3.pdf；1月校准，2—12月回测。']];
+ s.mergeCells('A338:H338');s.getRange('A338').values=[[key==='plan'?'Q为当天0点原计划；本页费用仅为原计划承诺费。最终总费用见“调整购电量”EQ列。':'R为最终执行的正常购电量，替代Q；总费用 = pQ + 1.5p(R-Q)正部 - 0.5p(Q-R)正部 + 5pE。']];
+ s.mergeCells('A339:H339');s.getRange('A339').values=[['源时间标签按前一10分钟区间终点解释；纠正模板时段文字，数值顺序不移动。费用由已审计的调度程序计算。']];
+ s.getRange('A337:H339').format.font={name:'宋体',size:10};s.getRange('A337:H339').format.rowHeight=22;
+ const sums=s.getRange('EP2:EP335').values.flat();
+ if(sums.some((v,i)=>typeof v!=='number'||Math.abs(v-payload[key][i][145])>1e-5))throw Error(name+' totals');
+ previews.push([name,'A1:E6'],[name,'EN330:EQ335']);
+}
+const b=wb.worksheets.getItem('充放电量');
+for(let i=1;i<334;i++)b.getRangeByIndexes(1+i*6,0,6,6).copyFrom(b.getRange('A2:F7'),'all');
+b.getRange('A2:F2005').values=dates(payload.battery);b.getRange('A2:A2005').setNumberFormat('yyyy-mm-dd');
+b.getRange('C2:D2005').setNumberFormat('#,##0.00');b.getRange('F2:F2005').setNumberFormat('#,##0.00');
+b.getRange('A1:F2005').format.font={name:'宋体',size:10};b.getRange('A1:F2005').format.columnWidth=18;
+b.getRange('A2:F2005').format.rowHeight=16;b.getRange('A1:F1').format.rowHeight=30;
+b.getRange('A1:F2005').format.horizontalAlignment='center';b.getRange('C2:D2005').format.horizontalAlignment='right';
+b.getRange('F2:F2005').format.horizontalAlignment='right';
+b.getRange('A2:F2005').format.borders={preset:'none'};
+b.getRange('A2:F2005').format.borders={left:{style:'thin',color:'#333333'},right:{style:'thin',color:'#333333'},insideVertical:{style:'thin',color:'#333333'}};
+for(let i=0;i<334;i++)b.getRangeByIndexes(6+i*6,0,1,6).format.borders={bottom:{style:'thin',color:'#333333'}};
+b.mergeCells('A2007:F2007');b.getRange('A2007').values=[['C、D为交流母线侧电量，S为电池内部储量；均为kWh。跨日状态连续，12月31日末统一为6000。']];
+const e=wb.worksheets.getItem('紧急购电量');e.getRange('A2:C11').clear({applyTo:'contents'});
+const end=payload.emergency.length+1;
+e.getRange(`A2:C${end}`).values=dates(payload.emergency);
+e.getRange(`A2:A${end}`).setNumberFormat('yyyy-mm-dd');e.getRange(`C2:C${end}`).setNumberFormat('#,##0.00');
+e.getRange(`A1:C${end}`).format.font={name:'宋体',size:10};e.getRange(`A1:C${end}`).format.columnWidth=20;
+e.getRange(`A2:C${end}`).format.rowHeight=16;e.getRange('A1:C1').format.rowHeight=30;
+e.getRange(`A1:C${end}`).format.horizontalAlignment='center';e.getRange(`C2:C${end}`).format.horizontalAlignment='right';
+e.getRange(`A2:C${end}`).format.borders={preset:'none'};
+e.getRange(`A2:C${end}`).format.borders={left:{style:'thin',color:'#333333'},right:{style:'thin',color:'#333333'},insideVertical:{style:'thin',color:'#333333'}};
+for(let i=0;i<payload.emergency.length;i++)if(i===payload.emergency.length-1||payload.emergency[i+1][0]!==null)
+ e.getRangeByIndexes(i+1,0,1,3).format.borders={bottom:{style:'thin',color:'#333333'}};
+for(const sheet of [b,e]){sheet.getRangeByIndexes(0,0,1,sheet===b?6:3).format.fill='#EAF0F5';sheet.freezePanes.freezeRows(1);}
+previews.push(['充放电量','A1:F13'],['充放电量','A2000:F2005'],['紧急购电量','A1:C12'],['紧急购电量',`A${end-5}:C${end}`]);
+for(const [sheetName,range] of previews){const png=await wb.render({sheetName,range,scale:1.5,format:'png'});await fs.writeFile(path.join(qa,sheetName+'_'+range.replace(':','_')+'.png'),new Uint8Array(await png.arrayBuffer()));}
+const scan=await wb.inspect({kind:'match',searchTerm:'#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!|#NULL!|#SPILL!|#CALC!',options:{useRegex:true,maxResults:30},maxChars:2000});
+const check=await wb.inspect({kind:'table',range:'调整购电量!EP330:EQ335',include:'values,formulas',tableMaxRows:6,tableMaxCols:2,maxChars:1500});
+await fs.writeFile(path.join(qa,'artifact_checks.json'),JSON.stringify({errors:scan.ndjson,totals:check.ndjson},null,2));
+await(await SpreadsheetFile.exportXlsx(wb)).save(path.join(run,'deliverables/result3.xlsx'));
+console.log('Exported result3.xlsx');

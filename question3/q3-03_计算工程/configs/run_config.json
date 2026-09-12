@@ -1,0 +1,117 @@
+{
+  "input_sha256": {
+    "data\\processed\\actual_points.csv": "f0462e5eb0162797365ea1f389e61afbb0ea052397908ad3b84b656f22f4ff64",
+    "data\\processed\\baseline_points.csv": "cf93a433185f61e408d871f844495eda7439e824b4ca596eca098e3b94009c89",
+    "data\\processed\\price_points.csv": "13120e2a260027b636264312937ef9ac56dc2fa2634574a73e372580d3bfa349",
+    "data\\processed\\pv_forecasts.csv": "3ae9423d0b7af16f7a847d531dc2eb0ad53754c926952a611651bd42f1883c19",
+    "data\\raw\\附件\\附件1.xlsx": "66b87134f5ecccd68184d3539bb1293ef039f9e0fdd955a589b9bfa7f227c377",
+    "data\\raw\\附件\\附件2.xlsx": "2e95fd446bfafa0d8c59577b5c2e2ea8b3f1def20dde54a3062556f4da9b4c72",
+    "data\\raw\\附件\\附件3.xlsx": "8a61b06c52bd0d639a1cc37c61a7d9f5b75edcbca718f64c1bd3498ec9f9d843",
+    "data\\raw\\附件\\附件4.xlsx": "20e9c93aeab5e8e21ae4dd15587f9e190f7408692504c1319598461cd654fe71",
+    "data\\raw\\附件\\附件5\\result1.xlsx": "28360e0974e7d6065394a8aba4e14a86773ae0036cc7d3ea1b211b515b03d688",
+    "data\\raw\\附件\\附件5\\result2.xlsx": "1c26494cfc6d754e0bd9bff7e13e1126a73d2d2da6c5336eb251d89b9a1a1a47",
+    "data\\raw\\附件\\附件5\\result3.xlsx": "c59da470cabd0be23f602c95c8aa9d11ec224a0cdac216b3e1f218e65d006bdc",
+    "data\\raw\\附件\\附件5\\result4-2.xlsx": "1c26494cfc6d754e0bd9bff7e13e1126a73d2d2da6c5336eb251d89b9a1a1a47",
+    "data\\raw\\附件\\附件5\\result4-3.xlsx": "c59da470cabd0be23f602c95c8aa9d11ec224a0cdac216b3e1f218e65d006bdc"
+  },
+  "numerical_code_sha256": {
+    "q3_dispatch.py": "95ed7b3dd5510ef1732832f54a7d620054e48a0ca4f0b74a2cd1a2b5f989c859",
+    "q3_forecasting.py": "7c69b35863b35a488ae706aa728b30bdf535bc3719e2511a47020a2de7e93b99",
+    "run_q3.py": "319b82944debd84f30eec1de547db15b0eb8be00e6ce85212d3b808ed3f13ad4",
+    "q3_workflow.py": "566f6cf06e07e2e1431b6bb5afba22abdb0f9c8c48f649e576bdc45c4010ce1e",
+    "forecasting.py": "aa1bd892b8253b79ad8b2259b708b55da9b1d0929dffdb31c7f7f751a8dee99a",
+    "microgrid_core.py": "9b846a6d2d37a510452bc35ddf69dc58ffe1b5e2cb1301ad8b3fdcc6643a60e5"
+  },
+  "calibration_grid": [
+    {
+      "window": 14,
+      "shrink": 3.0,
+      "bin_hours": 3,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    {
+      "window": 14,
+      "shrink": 3.0,
+      "bin_hours": 6,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    {
+      "window": 14,
+      "shrink": 7.0,
+      "bin_hours": 3,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    {
+      "window": 14,
+      "shrink": 7.0,
+      "bin_hours": 6,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    {
+      "window": 28,
+      "shrink": 3.0,
+      "bin_hours": 3,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    {
+      "window": 28,
+      "shrink": 3.0,
+      "bin_hours": 6,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    {
+      "window": 28,
+      "shrink": 7.0,
+      "bin_hours": 3,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    {
+      "window": 28,
+      "shrink": 7.0,
+      "bin_hours": 6,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    }
+  ],
+  "gamma_candidates": [
+    0.0,
+    0.41255555555555556,
+    0.8251111111111111
+  ],
+  "validation_dates": [
+    "2025-01-21",
+    "2025-01-31"
+  ],
+  "evaluation_dates": [
+    "2025-02-01",
+    "2025-12-31"
+  ],
+  "draws": 64,
+  "seed": 20260912,
+  "sigma_floor_kw": 25.0,
+  "battery_eta_charge": 0.9,
+  "battery_eta_discharge": 0.9,
+  "primary_model": "B3 conditional lead scale, risk neutral; B4 only adds CVaR to exactly this B3",
+  "selection_rule": "Reject exponential per configuration if its January daylight CRPS exceeds pooled or binned; select conditional model by January cash. Also report unrestricted cash selection and conditional CRPS selection.",
+  "risk_grid": {
+    "alpha": [
+      0.9,
+      0.95
+    ],
+    "lambda": [
+      0.0,
+      0.05,
+      0.1
+    ]
+  },
+  "warmup_policy": "Jan1 idle battery and zero Q; Jan2-31 predeclared binned window28 shrink7 bin6 gamma=min_price/eta, causal continuous state.",
+  "evaluation_terminal_kwh": 6000,
+  "settlement": "p*q+1.5*p*positive(r-q)-0.5*p*positive(q-r)"
+}
