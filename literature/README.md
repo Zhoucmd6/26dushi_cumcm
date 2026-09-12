@@ -1,6 +1,6 @@
 # 参考文献索引
 
-本地已下载11篇公开全文。编号不代表重要性排名。第三问当前核心阅读为04、07、08、10、11；01、03、09中的鲁棒相关方法不进入本次模型。
+本地已下载13篇公开全文。编号不代表重要性排名。第三问核心阅读为04、07、08、10、11；第四问新增12、13。01、03、09的鲁棒方法不进入当前模型。
 
 Git协作版仅提供索引、公开来源和用途说明，不重新分发尚未逐篇核实再分发许可的PDF。已下载文件保留本地，团队成员可通过各条公开来源获取；本地文件链接在未下载时不会存在。
 
@@ -110,7 +110,29 @@ Git协作版仅提供索引、公开来源和用途说明，不重新分发尚�
 - 阅读重点：第4节尤其4.4节（期刊第78页）；覆盖率并不能单独证明区间完全校准。
 - 适配限制：本题不采用其中神经网络；历史联合块借鉴相关结构思想，不声称完整实现其经验Copula方法。R评分不等于文献定义的概率可靠性。
 
-## 在线补充资料
+## 第四问新增公开全文
+
+第四问新增全文如下，均从作者公开预印本获取，只在本地保留PDF：
+
+### 12 Forecasting day-ahead electricity prices: A review of state-of-the-art algorithms, best practices and an open-access benchmark
+
+- 作者：Jesus Lago、Grzegorz Marcjasz、Bart De Schutter、Rafał Weron。
+- 年份：2021，Applied Energy 293, 116983；下载为arXiv修订公开稿，26页。
+- DOI：[10.1016/j.apenergy.2021.116983](https://doi.org/10.1016/j.apenergy.2021.116983)；[公开来源](https://arxiv.org/abs/2008.08004)。
+- 本地：[12_Lago_2021_Electricity_Price_Forecasting_Benchmark.pdf](./12_Lago_2021_Electricity_Price_Forecasting_Benchmark.pdf)。已下载、解析，核对元数据及第4.2、5、7节相关内容。
+- 用途：Q4的简单基线、LEAR正则化线性思想、预测回测规范。先看第4.2节和第7节清单。
+- 适配限制：市场尺度、多年数据和247个特征不能直接照搬至本题一个月初始历史、10分钟粒度；不引用其模型收益为本题性能。
+
+### 13 Probabilistic Forecasting for Day-ahead Electricity Prices, Battery Trading Strategies and the Economic Evaluation of Predictive Accuracy
+
+- 作者：Simon Hirsch、Florian Ziel。
+- 年份：2026年4月21日预印本，arXiv:2604.19580；当前下载PDF共36页，未核实期刊正式发表状态。
+- DOI：[10.48550/arXiv.2604.19580](https://doi.org/10.48550/arXiv.2604.19580)；[公开来源](https://arxiv.org/abs/2604.19580)。
+- 本地：[13_Hirsch_Ziel_2026_Probabilistic_Prices_Decision_Quality.pdf](./13_Hirsch_Ziel_2026_Probabilistic_Prices_Decision_Quality.pdf)。已下载、解析，阅读第3.2—3.4节及相应HTML正文。
+- 用途：Q4中优化实际使用哪些分布信息、MILP表达、风险中性/风险厌恶差别，以及经济回测不能单独证明完整概率分布正确。
+- 适配限制：原文售电套利、限价单和市场特征不进入本题；本文H函数、价格加权净负荷分位数及LP净化是针对本题结算与物理条件的推导，不说成原文公式或学术首创。
+
+## 其他在线补充资料
 
 以下资料未下载，逐项记录原因和阅读范围。此前NREL域名存在DNS解析失败，相关链接保留供浏览器直接访问。
 

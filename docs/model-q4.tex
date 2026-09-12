@@ -1,0 +1,745 @@
+\documentclass[UTF8,11pt]{ctexart}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,longtable,array}
+\usepackage{enumitem}
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+\renewcommand{\arraystretch}{1.25}
+\setlist{itemsep=0.2em,topsep=0.3em}
+\newcommand{\pos}[1]{\left[#1\right]^+}
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\newcommand{\CVaR}{\operatorname{CVaR}}
+\allowdisplaybreaks[2]
+\title{问题4的详细建模思路与数学模型\\
+{\large 信息边界、浮动结算与价格加权缺电风险}}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{文档性质。}
+本文是建模推导和团队协作说明，不是参赛论文正文；不包含求解代码、
+结果工作簿或未经计算的收益结论。延续问题1至3的中文排版和电量口径。
+先明确什么能知道、什么必须预测，再提出可由LP/MILP求解的模型。
+不建立鲁棒优化，不要求强化学习或深度学习。
+文献启发、本题自己的推导和题面未明确的假设分别标注。
+
+\section{先用一句话理解第四问}
+第四问是在第二问的日计划机制、第三问的日内调整机制上，
+把每天重复的固定电价表换成会波动的电价，并分别重新制定策略。
+电池和能量守恒没有改变；真正改变的是
+\textbf{做决定时对价格的了解，以及缺电发生时要付多少钱}。
+本文把两套策略分别称为Q4-2和Q4-3。
+
+\subsection{推荐主线}
+\begin{enumerate}
+ \item 用过去价格建立简单、可解释的预测；Q4-3可在原有更新时刻修正。
+ \item 预测误差包括负荷、光伏和价格；保留同一时段价格与净负荷的配对。
+ \item 共用储能物理约束，最小化正常、调整和紧急购电的期望费用。
+ \item 将期望紧急费用重写为价格加权的分段线性函数，解释策略并简化求解。
+ \item 在隔离未来真值的回放中比较预测质量、真实账单和可行性。
+\end{enumerate}
+创新重点是找到本题真正需要的分布信息，不是增加算法名称。
+价格加权费用曲线和后文阈值由本题结算式推导，不宣称学术首创。
+
+\section{信息边界：数据在文件里，不等于当时已经知道}
+\subsection{题面事实与不能自行补出的市场}
+原始依据为题面第2页问题4及附录2。附件4只给出每天不同时间的电价，
+未另给日前成交价、日内远期报价、市场出清机制或售电价格。
+不能把文件中的未来实际价当成当时已公布的报价，
+也不能把预测价解释成能锁定的合同价格。
+
+附件4的Sheet1含365个日期、每天144个10分钟价格值，
+标签从00:10至次日0:00。已检查52560个价格值均为正。
+该核查只用于辨认数据类型，\textbf{不允许使用全年极值、均值或未来日期
+来训练、截断预测或选择模型}。未来若出现负价，必须重新审查购电上界、
+费用和富余处置，不能无修改外推正价模型。
+
+\subsection{主信息口径与备选}
+\begin{longtable}{p{2.1cm}p{4.1cm}p{3.8cm}p{3.8cm}}
+\toprule 项目 & 决策时已知 & 必须预测 & 不允许的操作\\ \midrule
+\endhead
+Q4-2每日0:00 &
+此前负荷、光伏、价格；当前库存；日历 &
+当天负荷、光伏、价格 &
+读取当天未来实际值；日内修改计划\\
+Q4-3每日0:00 &
+上述历史信息及0:00光伏预报 &
+当天负荷、价格及光伏预报误差 &
+提前读取6:00以后发布的预报\\
+Q4-3日内更新 &
+已结束时段实际值；当前库存；当次光伏预报 &
+剩余时段负荷、光伏误差、价格 &
+把尚未结束时段的结算价当作过去观测\\
+运行与评价 &
+该时段实现的真实负荷、光伏和价格 &
+不为过去时段再预测 &
+用真值回头修改已执行计划\\
+\bottomrule
+\end{longtable}
+
+\paragraph{Q4-2是否增加官方光伏预报？}
+主版本严格继承问题2的信息能力，以便隔离价格变化的影响；
+附件3主要用于Q4-3。由于第四问同时提及附件3，
+另一种合理解释是Q4-2也使用\textbf{0:00发布的}光伏预报，但仍不能日内调整。
+将此记为Q4-2-PV备选。它相对原问题2同时改变预测信息与电价，
+不能把全部费用变化归因于价格。本条需团队确认。
+
+\paragraph{当期价格何时可见？}
+主口径只读取已经结束时段的价格。例如6:00更新使用截至
+$[5{:}50,6{:}00)$的观测，$[6{:}00,6{:}10)$价格仍未知。
+若官方说明价格在每段开始前公布，可以增加该信息，
+但不能据此推断全天价格均已知。
+
+\subsection{信息集}
+以$i$表示日期，$k\in\{0,6,12,18\}$表示更新小时，
+$\mathcal F_{i,k}$包含当时已公布或已实现的数据、已执行决策及当前库存。
+当前决策必须满足
+\begin{equation}
+ x_{i,k}=\mu_{i,k}(\mathcal F_{i,k}).
+\end{equation}
+$\mu_{i,k}$为决策规则；未来实际价、负荷和光伏不属于$\mathcal F_{i,k}$。
+后文的场景概率是该信息条件下的预测权重，不是事后发生频率。
+
+\section{先确定结算：预测价格不是支付价格}
+\subsection{主假设：交付时段浮动结算}
+沿用前文按目标时段电价计费的解释：第$t$段相关电量以该段实现的
+$p^{\rm real}_{i,t}$为基准，按正常、上调、下调和紧急倍率结算。
+0:00承诺的是数量，不是按预测价锁定未来电量。
+这是对“交易时刻电价”的\textbf{工作解释，不是题面明确给出的市场规则}。
+
+若“交易时刻”专指下单的0:00、6:00等时刻，则必须改用下单时现货价
+或相应交付时段报价，并明确跨时段结算。附件4不能证明自己是远期报价矩阵；
+尤其不可未经说明用6:00一个价格结算之后18小时的全部调整电量。
+
+Q4-2实际费用为
+\begin{equation}\label{eq:bill2}
+ F_i^{(2)}=\sum_{t=1}^{144}p^{\rm real}_{i,t}
+                  (q_{i,t}+5e^{\rm real}_{i,t}).
+\end{equation}
+正常配额$q$按计划计费，即使未完全使用，也不能只按实际取用量收费。
+Q4-3采用A7的下调退费主口径：
+\begin{align}
+ b(q,r)&=q+1.5\pos{r-q}-0.5\pos{q-r}
+              =r+0.5|r-q|,\label{eq:b}\\
+ F_i^{(3)}&=\sum_{t=1}^{144}p^{\rm real}_{i,t}
+   [b(q_{i,t},r^{\rm exec}_{i,t})+5e^{\rm real}_{i,t}].\label{eq:bill3}
+\end{align}
+$r^{\rm exec}$为该时段最终执行的正常配额。
+主口径相对于原0:00计划结算一次，不相加每次滚动目标值。
+下调项的负号表示退回50\%基准价，不是向外网售电。
+
+\subsection{保留结算敏感性}
+若“违约电价50\%”是计划全额付费之外的额外罚金，则改用
+\begin{equation}
+ b_{\rm pen}(q,r)=q+1.5\pos{r-q}+0.5\pos{q-r}.
+\end{equation}
+该解释不会退回已付费用，后文70\%至90\%区间不适用。
+若逐次增量结算，须逐版保存调整并另写账单，不能与式\eqref{eq:bill3}混用。
+
+若存在已知日前锁价$f_{0,t}$、日内报价$f_{k,t}$和实时价$p_t$，
+应写不同价格系数的多结算模型；目前缺少报价及发布时间，不虚构这些输入。
+预测$\widehat p$用于决策，不代替真实账单的$p^{\rm real}$。
+
+\section{时间、单位、变量与共同物理模型}
+\subsection{时段和时刻}
+基本步长$\Delta t=1/6\ {\rm h}$，每天$T=144$个时段：
+\begin{equation}
+ I_t=[(t-1)\Delta t,t\Delta t),\qquad t=1,\ldots,144.
+\end{equation}
+暂把附件标签视为前一时段终点，00:10对应$[0{:}00,0{:}10)$。
+模板的10分钟文字错位只作输出映射歧义处理，不移动真实日界。
+$s_{i,t}$是时段开始的库存，一天145个库存值；
+$s_{i,1}$对应0:00，$s_{i,145}$对应24:00。
+Q4-3在$k$点更新时定义
+\begin{equation}
+ \tau(k)=6k+1,\quad
+ \mathcal T_k=\{\tau(k),\ldots,144\},\quad
+ \mathcal B_k=\{\tau(k),\ldots,\min(\tau(k)+35,144)\}.
+\end{equation}
+每次优化到当天24:00，只执行$\mathcal B_k$内36段，下次更新重新规划。
+Q4-2则执行全日名义储能计划。这是主模型的控制限制，
+不代表现实设备只能6小时调一次。
+
+\subsection{变量表}
+在一个日期、一次更新内省略$i,k$。不带场景下标的变量
+在本次优化中对所有场景共同；$\omega\in\Omega$表示未来一种情形。
+\begin{longtable}{p{2.4cm}p{6.8cm}p{4.6cm}}
+\toprule 符号 & 含义 & 单位与取值域\\ \midrule
+\endhead
+$P^L_t,P^G_t$ & 负荷、光伏时段平均功率 & kW，非负输入\\
+$L_t,G_t$ & $P^L_t\Delta t,P^G_t\Delta t$ & kWh，非负输入\\
+$N_t=L_t-G_t$ & 净负荷，可为负 & kWh，实数输入\\
+$p_t^\omega$ & 场景交付时段价格 & 元/kWh，严格正\\
+$\pi_\omega$ & 条件场景概率 & 无量纲，正，和为1\\
+$q_t$ & 0:00原始正常购电配额 & kWh，非负\\
+$r_t$ & 调整后的正常购电配额 & kWh，非负\\
+$a_t^+,a_t^-$ & 相对$q_t$的上调、下调量 & kWh，非负\\
+$c_t$ & 从母线送入电池的充电量 & kWh，非负\\
+$d_t$ & 电池送至母线的放电量 & kWh，非负\\
+$s_t$ & 时段开始时电池内部库存 & kWh，$1200\leq s_t\leq10800$\\
+$z_t$ & 模式变量；1允许充电 & $\{0,1\}$\\
+$e_t^\omega$ & 场景紧急购电量 & kWh，非负\\
+$u_t^\omega$ & 未利用光伏或付费配额 & kWh，非负，无纯光伏上界\\
+$v$ & 终端储电不足量 & kWh，非负\\
+$\gamma$ & 单位终端不足惩罚 & 元/kWh，非负外设参数\\
+\bottomrule
+\end{longtable}
+$q$与$r$不是两股供电，Q4-3由$r$替代$q$进入平衡。
+$s$是库存，不是额外的当期发电；只有放出的$d$能供负荷。
+
+\subsection{平衡与逐时补救}
+以$g_t$统一表示正常配额，Q4-2取$g_t=q_t$，Q4-3取$g_t=r_t$：
+\begin{align}
+ g_t+e_t^\omega+G_t^\omega+d_t
+   &=L_t^\omega+c_t+u_t^\omega,\label{eq:balance}\\
+ e_t^\omega,u_t^\omega&\geq0.
+\end{align}
+富余可来自未用完的付费配额，所以不能限制$u_t^\omega\leq G_t^\omega$。
+不允许售电、不设售电收入。若需区分实际送电与配额，
+可把$u$拆成弃光和未取用配额；这是合并后的记账平衡，
+不表示现实中必须把多买的电全部耗散掉。
+
+正电价、紧急购电有正成本、富余免费且不限额时，最优补救满足
+\begin{equation}\label{eq:recourse}
+ e_t^\omega=\pos{N_t^\omega+c_t-d_t-g_t},\qquad
+ u_t^\omega=\pos{g_t+d_t-c_t-N_t^\omega}.
+\end{equation}
+只用该时段净负荷，不用未来路径。紧急购电无限额是假设中的应急保障；
+若另有限购条件，需补数据，否则不能保证任何情况下都能满足负荷。
+
+\subsection{库存、功率与互斥}
+\begin{align}
+ s_{t+1}&=s_t+\eta_c c_t-d_t/\eta_d,
+            &&t\in\mathcal T_k,\label{eq:stock}\\
+ 1200&\leq s_t\leq10800,
+            &&t=\tau(k),\ldots,145,\label{eq:capacity}\\
+ 0&\leq c_t\leq Mz_t,\quad
+ 0\leq d_t\leq M(1-z_t),\quad z_t\in\{0,1\},
+            &&t\in\mathcal T_k,\label{eq:mode}\\
+ M&=5000\Delta t=2500/3\ {\rm kWh},\qquad
+ \eta_c=\eta_d=0.9.
+\end{align}
+从母线充入$c$，库存增加$0.9c$；向母线放出$d$，库存减少$d/0.9$。
+总往返90\%的备选口径取两侧$\sqrt{0.9}$。
+不能把5000 kW作为10分钟电量上限。
+更新固定$s_{\tau(k)}=s^{\rm obs}_{\tau(k)}$，
+跨日传递$s_{i+1,1}=s_{i,145}$。
+
+\subsection{终端与冷启动}
+为减轻只看到24:00造成的耗尽倾向，日常可加
+\begin{equation}\label{eq:terminal}
+ v\geq S^{\rm ref}-s_{145},\quad v\geq0,\quad
+ \Phi(s_{145})=\gamma v,\quad S^{\rm ref}=6000\ {\rm kWh}.
+\end{equation}
+这不是规定每天回到6000，而是跨日价值近似；$\gamma$用过去验证选定，
+保留$\gamma=0$对照。12月31日另约束$s_{145}\geq6000$，
+所有对照统一。终端罚不列入真实电费。
+
+题面初值是1月1日6000 kWh，不能在2月1日直接重置。
+1月因果热身，2月至12月334天评价。
+1月1日没有更早样本，可用附件1给定典型曲线作为统一冷启动先验，
+随后逐日积累历史；Q4-3可用首次已发布官方预报。
+样本不足时用确定性基线或事先规定的少量误差情形，不倒灌1月未来数据。
+所有策略统一冷启动规则，分别维护自己的库存。
+
+\section{价格预测：先简单，再决定是否升级}
+\subsection{日前基础曲线}
+先比较历史同位置平均、昨日同位置、短窗口加权平均。
+只用日期$j<i$，例如
+\begin{equation}
+ \widehat p^{\,\rm av}_{i,t|0}
+  =\sum_{j\in\mathcal H_i}w_{i,j}p^{\rm real}_{j,t},\quad
+ w_{i,j}\geq0,\quad\sum_{j\in\mathcal H_i}w_{i,j}=1.
+\end{equation}
+窗口可在7、14、28天等少量候选中用过去验证选择；
+日历分组不足时回退到合并样本。不为144个时段分别拟合大量系数。
+一个月有很多10分钟点，不等于有很多独立历史日。
+
+Lago等\cite{lago2021}支持简单基线、规范回测和多指标比较。
+其LEAR是LASSO估计的ARX模型；可借鉴正则化线性回归，
+但不照搬多年市场数据、247个特征或小时结构。
+ARIMA/少量季节滞后线性模型作为第二候选，小型树模型作为第三候选；
+仅在样本外有改进时升级，不预设深度模型更合适。
+
+\subsection{日内基线加残差修正}
+价格为正，可选对数建模：
+\begin{equation}
+ y_{i,t}=\log\frac{p^{\rm real}_{i,t}}{p_{\rm ref}},\quad
+ p_{\rm ref}=1\ \text{元/kWh},\quad
+ m_{i,t}=\sum_{j\in\mathcal H_i}w_{i,j}y_{j,t}.
+\end{equation}
+比值、$y,m$无量纲。当前已经结束$m_k=6k$个时段，设
+\begin{equation}
+ \delta_{i,0}=0,\quad
+ \delta_{i,j}=(1-\alpha)\delta_{i,j-1}
+           +\alpha(y_{i,j}-m_{i,j}),\quad
+ j=1,\ldots,m_k,\quad 0\leq\alpha\leq1.
+\end{equation}
+每个残差在价格实现后才进入状态；基础曲线$m_{i,j}$在当天0:00冻结。
+更新预测为
+\begin{equation}\label{eq:correction}
+ \widehat y_{i,t|k}=m_{i,t}
+          +e^{-\kappa h_{t,k}}\delta_{i,m_k},\quad
+ h_{t,k}=t\Delta t-k>0,\quad\kappa\geq0.
+\end{equation}
+$h$按小时计，$\kappa$单位为每小时。
+已观察到的日内偏高/偏低，对近时段修正更多，对远时段更少。
+这是\textbf{本题候选残差修正规则}，不是文献中的价格衰减定律，
+也不代表“真实性概率”。不如历史基线时可取$\delta=0$回退。
+衰减的是偏差影响，不是价格本身。
+
+$p_{\rm ref}\exp(\widehat y)$是变换后的中心，
+一般不等于条件均价；优化所需均价由场景加权计算。
+Q4-2在0:00后不因新价格修改计划；Q4-3仅在原四个更新点采用修正，
+避免混合“价格预测改进”与“控制机会增加”的影响。
+
+\subsection{其他预测与误差档案}
+负荷沿用问题2经过去回测选择的预测器。
+Q4-3采用当次已发布光伏预报，按问题3从小时节点映射到10分钟，
+可继承提前量校准，不必再为价格叠加一个可信度指数。
+所有误差记录发布时间、目标时段和实现时间；
+不能用在全部历史上拟合的模型制造所谓“历史样本外残差”。
+1月初样本不足时，在满足最小历史窗口后才开始收集误差档案。
+
+\section{场景：保留对购电真正有用的不确定性}
+\subsection{价格与净负荷的成对残差}
+历史日期$j$同类发布时刻留下的样本外残差为
+\begin{equation}
+ \epsilon^N_{j,t|k}=N^{\rm real}_{j,t}-\widehat N_{j,t|k},
+ \qquad
+ \epsilon^y_{j,t|k}=y^{\rm real}_{j,t}-\widehat y_{j,t|k}.
+\end{equation}
+抽取同一历史日$j_\omega<i$的成对残差，构造
+\begin{align}
+ N_{i,t|k}^{\omega}
+    &=\widehat N_{i,t|k}+\epsilon^N_{j_\omega,t|k},\\
+ p_{i,t|k}^{\omega}
+    &=p_{\rm ref}\exp(\widehat y_{i,t|k}+\epsilon^y_{j_\omega,t|k}).
+\end{align}
+可从等权$\pi_\omega=1/|\Omega|$开始，重复抽样不增加独立历史日。
+按日历、季节或已观测日内偏差选相近日时，样本不足要合并。
+这是经验条件分布近似，不保证已完全校准。
+
+$N=L-G$允许为负，不能把负净负荷裁为零。
+如果需要分别保留场景负荷和光伏，可抽取同日
+$(\epsilon^L,\epsilon^G,\epsilon^y)$三元残差，
+处理两类功率非负性后再算$N$，并检查截断偏差。
+合并净负荷不能唯一还原$L,G$，仅适用于当前没有额外光伏消纳率要求的模型。
+
+\subsection{平均价乘平均缺电量为什么不对}
+设配额与电池共同提供的净电量为$A_t=g_t+d_t-c_t$，则
+\begin{align}
+ \E[p_te_t\mid\mathcal F]
+ &=\E[p_t(N_t-A_t)^+\mid\mathcal F]\\
+ &=\E[p_t\mid\mathcal F]\E[(N_t-A_t)^+\mid\mathcal F]
+   +\operatorname{Cov}(p_t,(N_t-A_t)^+\mid\mathcal F).
+\end{align}
+高价与大缺口同时发生时，协方差可能为正，忽略会低估应急成本；
+反向关系也可能导致高估。应检验历史关系，不能凭直觉
+就断言该小区净负荷决定外网价格。
+微网在本模型中是价格接受者，其购电不反过来改变$p$。
+
+\section{Q4-2：波动电价下的日计划两阶段模型}
+\subsection{阶段与分解形式}
+0:00第一阶段共同确定$x=(q,c,d,s,z,v)$；
+不能给每个未来场景一套电池轨迹。
+第二阶段仅产生$e^\omega,u^\omega$，按式\eqref{eq:recourse}逐时执行，
+不需要提前看到整日实际路径。
+
+令$\bar p_t=\sum_\omega\pi_\omega p_t^\omega$。
+$\mathcal X$由式\eqref{eq:stock}至\eqref{eq:terminal}、
+当前初值和$q_t\geq0$构成。分解形式为
+\begin{align}
+ \min_{x\in\mathcal X}\quad&
+       \sum_{t=1}^{144}\bar p_tq_t+\gamma v
+           +\sum_{\omega\in\Omega}\pi_\omega h(x,\omega),\label{eq:q42}\\
+ h(x,\omega)=\min_{e^\omega,u^\omega}\quad&
+             5\sum_{t=1}^{144}p_t^\omega e_t^\omega\\
+ \text{s.t.}\quad&
+ q_t+e_t^\omega+d_t-c_t-u_t^\omega=N_t^\omega,\quad t=1,\ldots,144,\\
+ &e_t^\omega,u_t^\omega\geq0,\quad t=1,\ldots,144.
+\end{align}
+正常购电的实际成本系数也是随机的，但$q$事先共同确定，
+所以其期望精确为$\bar p_tq_t$，并非假设价格已锁定。
+这是两阶段分解表示，不要求必须使用分解算法；
+规模适中时可直接求解场景展开的LP/MILP。
+
+\subsection{执行与统计}
+每天冻结$q,c,d$，实际将$g=q,N=N^{\rm real}$代入式\eqref{eq:recourse}，
+逐时补救并递推库存；账单按式\eqref{eq:bill2}。
+334个评价日对应334次日模型，不是334阶段规划。
+库存跨日连接，各日不能独立重置初值。
+
+\section{Q4-3：波动电价下的日内调整模型}
+\subsection{0:00先定原计划}
+在$\mathcal F_{i,0}$加入0:00光伏预报，
+用式\eqref{eq:q42}形成原始$q$和名义电池计划。
+基础版本不展开所有未来更新节点，是两阶段近似，
+不声称得到全年多阶段随机问题的全局最优策略。
+
+\subsection{日内更新}
+固定原始$q$及已执行时段。对$t\in\mathcal T_k$定义
+\begin{equation}\label{eq:adjust}
+ r_t=q_t+a_t^+-a_t^-,\qquad
+ r_t\geq0,\quad a_t^+\geq0,\quad a_t^-\geq0.
+\end{equation}
+目标为
+\begin{equation}\label{eq:q43}
+ \min\left\{
+ \sum_{t\in\mathcal T_k}\bar p_t(q_t+1.5a_t^+-0.5a_t^-)
+ +5\sum_\omega\pi_\omega\sum_{t\in\mathcal T_k}p_t^\omega e_t^\omega
+ +\gamma v\right\}.
+\end{equation}
+约束包括式\eqref{eq:balance}的$g=r$版本及$e_t^\omega,u_t^\omega\geq0$、
+式\eqref{eq:stock}至\eqref{eq:terminal}在剩余时域的版本、
+式\eqref{eq:adjust}及已观测初值$s_{\tau(k)}$；
+所有$r,c,d,s,z$对本次场景共同。
+因$\bar p_t>0$，若$a_t^+,a_t^-$同时为正，等量减少二者保持$r$不变，
+却降低费用。因此最优时自动对应正负部，无需另加调整方向二元变量。
+
+仅执行$\mathcal B_k$，下一更新用真实库存和新信息重算。
+紧急购电10分钟补救，不消耗电池库存。
+这是一串带两阶段近似的滚动决策，不是全天只有两次决定；
+四次更新时，334天有1336次外层规划，另有1月热身。
+不是每个10分钟另建一个日计划模型。
+
+Lemos-Vinasco等\cite{lemos2022}提供随机能源管理与真实滚动评价的参考，
+本文改为题目更新节奏和应急规则。本题没有售电、限价单成交和市场冲击，
+不照搬文献中的复杂交易机制。
+
+\section{核心结构：价格加权缺电费用曲线}
+\subsection{真正需要预测的对象}
+定义每个当前未来时段的函数
+\begin{equation}\label{eq:H}
+ H_t(A)=\sum_\omega\pi_\omega p_t^\omega\pos{N_t^\omega-A}.
+\end{equation}
+$A,N$单位kWh，$H_t$单位元；$5H_t$是期望紧急费用。
+$H_t$递减、凸、分段线性，折点对应净负荷场景值。
+风险中性目标可等价改写为
+\begin{align}
+ \min\quad&\sum_t[\bar p_tq_t+5H_t(q_t+d_t-c_t)]+\gamma v,\label{eq:reduce2}\\
+ \min\quad&\sum_{t\in\mathcal T_k}
+ [\bar p_tb(q_t,r_t)+5H_t(r_t+d_t-c_t)]+\gamma v.\label{eq:reduce3}
+\end{align}
+电池跨时段约束仍保留，不把储能拆成144个独立优化。
+优化需要$\bar p_t,H_t$，未必需要复杂的完整价格生成模型。
+
+\subsection{价格加权分布}
+\begin{equation}\label{eq:weights}
+ \widetilde\pi_{t,\omega}
+    =\frac{\pi_\omega p_t^\omega}{\bar p_t},\quad
+ \sum_\omega\widetilde\pi_{t,\omega}=1,\quad
+ H_t(A)=\bar p_t\sum_\omega\widetilde\pi_{t,\omega}(N_t^\omega-A)^+.
+\end{equation}
+高价场景在经济权重中更重要。这不是改变真实发生概率，
+不能用$\widetilde\pi_{t,\omega}$替换原$\pi_\omega$评价全日风险。
+这是期望乘积的代数重写，不是额外风险厌恶。
+相同净负荷节点可合并权重，精确保留费用曲线；
+将不同节点聚类则属于近似，需要检验误差。
+
+\subsection{什么相关性必须保留，什么暂时不必复杂化}
+本次规划的$q/r,c,d,s$对场景共同，补救逐时独立，
+目标只取费用之和的期望。所以保持各时段$(N_t,p_t)$联合边际分布不变，
+仅改变不同$t$之间的场景配对，不改变式\eqref{eq:reduce2}、
+\eqref{eq:reduce3}及可行域。这直接来自期望可加性。
+
+\textbf{电池跨时段连接，本身不足以推出本模型必须拟合高维联合路径。}
+同一时段价量配对重要；整日块是方便保留历史结构的采样方式，
+但跨时段相关性不是当前风险中性、共同电池轨迹近似的必需输入。
+过去时间序列仍影响下一次条件预测，不能据此否定时间序列模型。
+
+加入全日CVaR、累计应急约束、跨时段补救约束，
+或未来电池自适应策略后，需要相关路径或情景树，以上压缩不再完整。
+Hirsch和Ziel\cite{hirsch2026}提示先分析优化使用哪些分布信息；
+本节简化来自本题具体结构，不是其套利结论能直接覆盖随机缺电问题。
+
+\section{解释性推导：价格加权分位数}
+\subsection{单时段、无储能日计划}
+假设$N\geq0,p>0,\E[p]<\infty,\E[pN]<\infty$，无其他约束，
+\begin{equation}
+ J(q)=\E[p]q+5\E[p(N-q)^+],\qquad q\geq0.
+\end{equation}
+在加权分布连续的可微点，
+\begin{equation}
+ J'(q)=\E[p]-5\E[p\,\mathbf1_{\{N>q\}}].
+\end{equation}
+定义价格加权累积分布
+\begin{equation}
+ F^p(x)=\frac{\E[p\,\mathbf1_{\{N\leq x\}}]}{\E[p]}.
+\end{equation}
+导数为零得到
+\begin{equation}\label{eq:q80}
+ F^p(q^*)=0.8.
+\end{equation}
+应参考价格加权80\%净负荷分位数，不是净负荷均值，
+也不必是普通80\%分位数。离散场景用广义分位数及次梯度条件
+$F^p(q^*-)\leq0.8\leq F^p(q^*)$，平坦区可有多个最优解。
+
+若价格与净负荷条件独立，$F^p=F_N$，退化为普通80\%分位数。
+可见在此简化情形中，价格自身更波动未必改变购电分位水平；
+价量依赖及不同时间均价差异才可能改变策略。
+不能外推为完整储能模型不受价格波动影响。
+
+\subsection{单时段调整的不调整区间}
+给定$q$，仍无储能，
+\begin{equation}
+ J(r)=\E[p]b(q,r)+5\E[p(N-r)^+],\qquad r\geq0.
+\end{equation}
+$r>q$时边际正常成本为$1.5\E[p]$，候选点满足$F^p(r)=0.7$；
+$r<q$时边际为$0.5\E[p]$，候选点满足$F^p(r)=0.9$。
+连续且相应分位数唯一时，
+\begin{equation}\label{eq:band}
+ r^*=\begin{cases}
+ (F^p)^{-1}(0.7),&q<(F^p)^{-1}(0.7),\\
+ q,&(F^p)^{-1}(0.7)\leq q\leq(F^p)^{-1}(0.9),\\
+ (F^p)^{-1}(0.9),&q>(F^p)^{-1}(0.9).
+ \end{cases}
+\end{equation}
+这是问题3不调整区间的价格加权扩展，
+解释“更新预测也未必需要调电”。来自题目倍率，不是通用经验阈值。
+有储能、CVaR、限购或不同结算时，不能用此式逐时生成最终方案。
+文献\cite{hirsch2026}讨论的价格分位数限价交易，
+与这里净负荷加权分位数的最优化不同。
+
+\section{LP还是MILP：给出成立条件}
+\subsection{严格版本}
+保留$z$是MILP。场景价格是输入，
+$p_t^\omega e_t^\omega$不是两个决策变量的乘积。
+正部可由$e_t^\omega\geq N_t^\omega+c_t-d_t-g_t$、
+$e_t^\omega\geq0$线性化；也可保留完整平衡。
+模型规模随场景和时段数线性增长，每时段仅一个模式二元变量。
+
+\subsection{当前主模型下的LP净化证明}
+去掉$z$，改为$0\leq c_t,d_t\leq M$，得到LP。
+若$c_t,d_t>0$，令
+\begin{equation}
+ \varepsilon=\min(c_t,d_t/(\eta_c\eta_d)),\quad
+ c'_t=c_t-\varepsilon,\quad d'_t=d_t-\eta_c\eta_d\varepsilon .
+\end{equation}
+至少一个变为零，仍满足上限，并有
+\begin{align}
+ \eta_c c'_t-d'_t/\eta_d&=\eta_c c_t-d_t/\eta_d,\\
+ c'_t-d'_t&=c_t-d_t-(1-\eta_c\eta_d)\varepsilon\leq c_t-d_t.
+\end{align}
+库存与配额不变，紧急购电不增加，富余可免费处理，费用不增。
+逐时处理得到物理互斥方案。因LP是松弛，
+而其最优解又能转成费用不增的MILP可行解，两者最优值相同。
+
+适用条件为\textbf{正价、免费且不限额富余、无限额应急补救、
+无额外充放电收益或吞吐约束、终端仅依赖库存}。
+求解器返回的每个LP解未必天然互斥，必须净化并核验。
+建议后续用MILP作物理核验，LP净化作高效候选。
+若增加强制消纳、弃电费用、负价或状态依赖效率，需重新证明。
+本证明针对Q4合并富余的主模型，不自动覆盖问题1只有$w\leq G$的所有变体。
+
+\section{预测、调度与评价的实施原则}
+为使后续算法可执行、结果可复核，预测、调度和评价应分别管理，
+并保留简单基线与物理约束检查。以下原则用于落实前述信息边界，
+不作为额外模型，也不预设其能带来数值优势。
+\begin{longtable}{p{3.0cm}p{5.0cm}p{5.8cm}}
+\toprule 实施原则 & 本题中的处理 & 需要避免的问题\\ \midrule
+\endhead
+算法观测与评价真值隔离 &
+调度器只收过去值和已发布预测，评价器保管未来真值 &
+不把整年最优曲线或未来价送给调度器\\
+基线加残差 &
+式\eqref{eq:correction}修正预测，始终保留原始基线对照 &
+不必训练TD3，也不保证修正天然省钱\\
+动作边界与安全检查 &
+库存、功率、互斥和购电非负约束形成可行域 &
+安全投影不等于费用优于基线\\
+漂移监测与按需重算 &
+用已实现残差判断是否重新训练预测器 &
+不能虚构每次求解固定收费，只能检验计算量权衡\\
+时间配对 &
+发布时间、目标时段、实现值严格匹配 &
+不能把不同日的价量误差冒充成对样本\\
+\bottomrule
+\end{longtable}
+
+\subsection{为什么不直接用极值寻优或强化学习}
+本题能量守恒和费用公式在给定假设下已知，未来未知的是外生价格与供需。
+对价格接受者，多充一次电不能“探测出”尚未发生的价格；
+不需要为了学习价格主动制造充放电扰动。
+应被动更新预测，再在已知约束中优化。
+任何方法的费用优势都应由本题数据的因果回放验证，不能由算法名称推断。
+
+\subsection{可选约束投影}
+若以后尝试经验残差直接修改调度动作$\widetilde x$，可先求
+\begin{equation}
+ x^{\rm safe}\in\arg\min_{x\in\mathcal X_{\rm now}}
+                   \sum_j\nu_j|x_j-\widetilde x_j|.
+\end{equation}
+$\nu_j>0$为外设权重，$\mathcal X_{\rm now}$含真实库存、未来物理约束和允许调整范围。
+只投影电量分量时可取同单位权重，否则先无量纲化；固定模式为LP，
+含模式为MILP。本文已经直接在可行域优化，通常无需额外投影。
+投影只保证可行，不保证费用改善。
+
+\section{CVaR作为扩展，不挤占主模型}
+先做风险中性版本，再按尾部表现决定是否加CVaR。
+若控制的是\textbf{总费用}上尾，剩余时域损失应定义为
+\begin{equation}
+ Y_\omega=\sum_{t\in\mathcal T_k}p_t^\omega
+                [b(q_t,r_t)+5e_t^\omega].
+\end{equation}
+Q4-2将$b$换为$q$。价格随机使正常和调整费用也随机，
+只对紧急费用加CVaR，就只能声称控制紧急费尾部。
+按Rockafellar与Uryasev\cite{rockafellar2000}：
+\begin{align}
+ \min\quad&\sum_\omega\pi_\omega Y_\omega+\gamma v+
+  \lambda\left(\zeta+\frac{1}{1-\beta}\sum_\omega\pi_\omega\xi_\omega\right),\\
+ &\xi_\omega\geq Y_\omega-\zeta,\quad\xi_\omega\geq0,\quad
+ \zeta\in\R,\quad0<\beta<1,\quad\lambda\geq0.
+\end{align}
+$Y,\zeta,\xi$单位元，$\lambda,\beta$无量纲。
+此时需全路径配对，不能只用逐时$H_t$还原全日尾部。
+滚动时控制的是当前剩余计划的风险近似，不是未来所有重优化后的精确年度风险。
+风险偏好及新增参数均需证据；主版本取$\lambda=0$。
+
+\clearpage
+\section{对照实验与验收}
+\subsection{最小对照组}
+\begin{longtable}{p{2.1cm}p{6.2cm}p{5.5cm}}
+\toprule 组别 & 改变什么 & 回答什么\\ \midrule
+\endhead
+B0 & 简单价格点预测，供需用同一基线 & 最简单策略表现如何\\
+B1 & 保留供需场景，价格用条件均价 & 供需不确定性的作用\\
+B2 & 成对价量场景，风险中性 & 价量联合信息的作用\\
+B3 & 在B2加日内价格残差修正 & 价格更新是否有收益\\
+B4 & 选做：加总费CVaR & 平均费用与尾部风险如何交换\\
+预知价参照 & 只开放未来价，其余权限不变 & 信息增强参照，不自动是严格下界\\
+全信息参照 & 全未来实际值已知，同物理、结算、终端 & 正确优化后提供理想下界\\
+\bottomrule
+\end{longtable}
+Q4-2和Q4-3分别做适用比较；Q4-2-PV另列，不与价格改进混算。
+固定价对照保持供需预测、控制权限和初末条件一致。
+不同价格环境的绝对金额变化不能直接解释为策略好坏。
+
+只有完整信息放宽原模型的信息限制、且参照被正确优化时，
+才有严格最优值下界关系。只使用真实未来价的启发式策略，
+或仍有供需预测误差的滚动策略，其样本账单不保证低于所有可执行策略。
+样本外主模型也可能输给简单基线，不能预设所有结果位于基线与下界之间。
+若MILP尚未最优，要区分参照的可行解费用与求解器认证下界。
+
+\subsection{评价不能只看预测误差}
+报告价格MAE、RMSE及概率校准指标，同时报告真实费用、
+应急量和应急费、调整量、富余、电池吞吐。
+接近零的价格不宜只用MAPE。账单按式\eqref{eq:bill2}、
+\eqref{eq:bill3}独立重算，不比较不同模型自己的预测目标值来宣称谁更省钱。
+
+借鉴决策导向思想\cite{elmachtoub2022}，可用过去回放费用选少量参数；
+但经济费用不是完整分布的严格概率评分\cite{hirsch2026}，
+省钱不等于概率预测全面正确。
+训练、调参和测试向前滚动，每个测试日只用此前已完成的验证。
+不能跑完全年再反过来挑每一天的最优预测器。
+对同日期策略作成对费用比较，可按日块评估统计不确定性。
+不同策略须独立维护自身库存，不复制其他策略的真实库存。
+
+\subsection{后续验收清单}
+\begin{enumerate}
+ \item 信息：输入发布时间可追溯，未使用未来实际值或未发布预报。
+ \item 单位：功率乘$1/6$进平衡，价格乘电量是元，每天145个库存值。
+ \item 物理：逐时守恒、库存和功率可行，无负购电和未授权售电。
+ \item 非预见性：同次规划配额与电池不按场景自由变化，补救逐时因果。
+ \item 结算：预测价不入账，多次优化不重复收费，终端罚和风险项不算电费。
+ \item 退化：所有价格场景相同，退化为固定价随机供需模型；
+       全部场景相同，退化为确定性模型。
+ \item 结构：场景展开式与$H_t$式一致；保留每时段价量对、
+       仅重组跨时段路径时，风险中性目标不变。
+ \item LP净化：库存不变、紧急量不增，净化费用与MILP最优值在容差内相符。
+ \item 解释：单时段无储能算例满足加权80\%及其适用条件下的不调整区间。
+ \item 来源：假设、自己的推导和文献借鉴分开，没有引用未经本题验证的性能数字。
+\end{enumerate}
+以上是后续测试要求；本文只完成数学定义和文档核查，
+尚未求解，不能把计划做的实验描述为已经通过。
+
+\section{交给算法成员的最小接口}
+\begin{enumerate}
+ \item 输入：日期、更新时间、Q4-2/Q4-3模式、真实库存、冻结原计划、
+       可修改时段、当前场景与概率、结算口径、效率及终端规则。
+ \item 决策输出：未来$q$或$r$、$c,d,s,z$、预计费用分项、可行性状态；
+       MILP须记录最优间隙。
+ \item 执行：仅执行允许段，以真实净负荷算$e,u$，更新库存并记实际费用；
+       不把未来真值送给当前调度器。
+ \item 日志：预测发布与目标时刻、模型版本、生效区间、原计划和修订版、
+       真实价和实际执行电量。
+ \item 模板：Q4-2保留计划、充放电和紧急记录，Q4-3增加调整记录；
+       当前只定义字段，不填写附件5。
+\end{enumerate}
+目前不要求自行实现分支定界、L-shaped或Benders算法。
+先验证场景展开模型，再考虑压缩和热启动。
+
+\section{补学与来源阅读顺序}
+\begin{enumerate}
+ \item 条件期望与联合分布：理解$\E[pe]\neq\E[p]\E[e]$的条件。
+       检索“conditional expectation, joint price load scenarios”。
+ \item 报童模型、加权分位数：推导欠购和过购的不对称代价。
+       检索“newsvendor, weighted quantile”。
+ \item 分段线性凸函数及LP线性化：理解$H_t$的折点、斜率和辅助变量，
+       复用已有线性规划和整数规划知识。
+ \item 时间序列回测与残差自助法：滚动起点、样本外误差、日块抽样。
+       先读Lago等\cite{lago2021}第4、5、7节。
+ \item 选读Hirsch和Ziel\cite{hirsch2026}第3.2至3.4节：
+       优化使用哪些预测信息，经济评分有什么边界。
+\end{enumerate}
+前四项足以理解主模型；CVaR选做时再深入。
+暂不要求鲁棒优化、强化学习、完整市场博弈或交流潮流。
+
+\section{结论与待团队确认}
+推荐主线是\textbf{简单价格预测、成对价量残差、价格加权缺电函数、
+LP/MILP日计划与原节奏日内调整}。
+日内残差修正、CVaR逐项检验，不同时堆叠后再寻找理由。
+进入求解前必须统一：交易时刻按交付还是下单理解；
+下调50\%是退费还是额外罚金；Q4-2是否用0:00官方光伏预报。
+本文给出主口径与备选，不把假设伪装成题面事实。
+
+\begin{thebibliography}{99}
+\bibitem{lago2021}
+Lago J, Marcjasz G, De Schutter B, Weron R.
+Forecasting day-ahead electricity prices: A review of state-of-the-art algorithms,
+best practices and an open-access benchmark.
+Applied Energy, 2021, 293: 116983.
+\href{https://doi.org/10.1016/j.apenergy.2021.116983}{doi:10.1016/j.apenergy.2021.116983}.
+\url{https://arxiv.org/abs/2008.08004}。
+用途：简单基线、LEAR思想与回测；不复现其市场特征集。
+
+\bibitem{hirsch2026}
+Hirsch S, Ziel F.
+Probabilistic Forecasting for Day-ahead Electricity Prices, Battery Trading
+Strategies and the Economic Evaluation of Predictive Accuracy.
+2026年4月预印本，arXiv:2604.19580。
+\url{https://arxiv.org/abs/2604.19580}。
+用途：第3节的优化信息需求、MILP及评价边界；
+此处未核实期刊正式发表版本，其售电套利机制不进入本题。
+
+\bibitem{lemos2022}
+Lemos-Vinasco J, Schledorn A, Pourmousavi S A, Guericke D.
+Economic Evaluation of Stochastic Home Energy Management Systems in a
+Realistic Rolling Horizon Setting. 2022.
+\url{https://arxiv.org/abs/2203.08639}。
+用途：随机能源管理与因果滚动回放，不照搬其结算。
+
+\bibitem{elmachtoub2022}
+Elmachtoub A N, Grigas P.
+Smart Predict, then Optimize.
+Management Science, 2022, 68(1): 9--26.
+\href{https://doi.org/10.1287/mnsc.2020.3922}{doi:10.1287/mnsc.2020.3922}.
+\url{https://arxiv.org/abs/1710.08005}。
+用途：决策费用导向的模型选择；负荷还进入约束右端，
+不直接套用SPO+损失和理论保证。
+
+\bibitem{rockafellar2000}
+Rockafellar R T, Uryasev S.
+Optimization of Conditional Value-at-Risk.
+Journal of Risk, 2000, 2(3): 21--41.
+\href{https://doi.org/10.21314/jor.2000.038}{doi:10.21314/jor.2000.038}.
+\url{https://sites.math.washington.edu/~rtr/papers/rtr179-CVaR1.pdf}。
+用途：可选总费用CVaR的辅助变量表示。
+\end{thebibliography}
+\end{document}

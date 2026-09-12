@@ -33,6 +33,7 @@ docs/assumptions.md          歧义、主假设和备选口径
 docs/modeling-ideas.md       公共模型与四问建模思路
 docs/model-q1-q2.tex         问题1、2的详细中文 LaTeX 模型
 docs/model-q3.tex            问题3独立详细模型（提前量校准与CVaR）
+docs/model-q4.tex            问题4独立详细模型（信息边界与价格加权缺电）
 docs/collaboration-handoff.md 已有成果、待评审事项与协作分工
 README.md                   团队阅读入口与文件说明
 docs/learning-guide.md       补学顺序和检索关键词

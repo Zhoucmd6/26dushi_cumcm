@@ -120,3 +120,14 @@
 4. CVaR线性化：读08号文献，掌握阈值变量和正部辅助变量；检索 `Rockafellar Uryasev CVaR scenario linear programming`。检查均值费用与尾部风险之间的取舍。
 5. 信息价值与事件触发：比较8种可用更新时间组合，区分预报发布、重优化与调电；检索 `value of information energy scheduling event triggered MPC`。理解免费信息在同一正确优化模型下的价值非负，不虚构固定交易费用。
 6. 提前量条件尺度与概率评价：读10号第3.3—3.4节、11号第4节。掌握位置尺度、收缩、CRPS、覆盖率和区间宽度；检索 `lead time dependent forecast error scale`、`probabilistic forecast calibration CRPS interval score`。本题指数与R映射为候选假设，需要对照，不是真实概率。当前不学、不实施Tube MPC和DRO。
+
+## 第四问专项补学
+
+对应 `docs/model-q4.tex`，不需要先学强化学习：
+
+1. 条件期望与协方差：弄清E[价格×缺口]何时能拆开；检索 `conditional expectation joint electricity price net load`。
+2. 价格加权报童分位数：自己推导80%及不调整区间，明确不是有储能时的通用逐时规则；检索 `newsvendor weighted quantile asymmetric cost`。
+3. 分段线性期望损失：理解H函数的折点及场景辅助变量，复用LP知识；检索 `piecewise linear expected shortage cost`。
+4. 简单电价预测与滚动验证：读12号第4、5、7节，理解LEAR启发但不照搬大特征集；指数残差修正是候选假设。
+5. 优化需要哪些分布信息：读13号第3.2—3.4节。区分同一时段价量依赖、跨时段依赖、期望目标与全日CVaR；费用好不等于概率预测完全正确。
+6. LP净化证明：保持库存增量不变，减少同时充放电且不增加紧急量；先核对免费富余等条件，再与MILP比较。
