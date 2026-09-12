@@ -1,36 +1,29 @@
-# 26dushi_cumcm
+# 第三问计算工程
 
-微网与外网调控：建模准备与协作。
+当前按建模手 `model-q3.pdf` 的条件尺度随机滚动模型计算。主方案为B3分箱尺度；B4只在同一个B3上加入CVaR。入口为 `src/run_q3.py`，完整说明见上一级 `01_使用说明/第三问复现与文件指南.md`。
 
-当前只做建模思路、数学公式、文献和团队验收，不含求解程序、数值结果、结果工作簿或参赛论文正文。
+|目录|内容|
+|---|---|
+|src|校准、历史选参、MILP、诊断、独立复核、报表及绘图|
+|tests|20项专用测试，含9项PDF一致性反例|
+|configs|本次运行设置、实验注册表和实际选中参数|
+|data|原始附件快照与预处理数据，输入文件保持不变|
+|reports|数据检查与预处理依据|
+|outputs|用新运行名计算时产生的结果，不自动覆盖正式成果|
 
-## 从哪里开始
+已交付计算档案在 `../05_复核记录/pdf_aligned_20260912`，当前论文与提交结果在 `../04_正式成果`。`../05_复核记录/q3_20260912` 为旧版历史，不用于当前论文取数。
 
-1. [协作移交清单](docs/collaboration-handoff.md)：已有成果、待确认问题和建议分工。
-2. [题目简述](docs/problem-summary.md)：四问递进与数据结构。
-3. [假设登记](docs/assumptions.md)：时间标签、效率、信息权限和结算口径，写公式前先读。
-4. [问题1、2中文LaTeX](docs/model-q1-q2.tex)与[阅读版](docs/model-q1-q2.pdf)：LP/MILP、预测候选、两阶段分解。
-5. [问题3独立中文LaTeX](docs/model-q3.tex)与[阅读版](docs/model-q3.pdf)：提前量可信度、联合场景、CVaR与随机MPC。
-6. [四问总框架](docs/modeling-ideas.md)、[补学指南](docs/learning-guide.md)、[文献索引](literature/README.md)。
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+$env:PYTHONDONTWRITEBYTECODE='1'
+$env:OPENBLAS_NUM_THREADS='1'
+$env:OMP_NUM_THREADS='1'
+$env:MKL_NUM_THREADS='1'
+& 'D:\Anaconda\python.exe' src/run_q3.py --run outputs/q3_new_run --workers 3
+& 'D:\Anaconda\python.exe' src/run_tests_q3.py outputs/q3_new_run
+& 'D:\Anaconda\python.exe' src/q3_diagnostics.py outputs/q3_new_run
+& 'D:\Anaconda\python.exe' src/prepare_q3.py outputs/q3_new_run
+& 'D:\Anaconda\python.exe' src/summarize_q3.py outputs/q3_new_run
+```
 
-## 第三问当前选定范围
-
-官方小时预报重采样 → 过去误差偏差校正 → 提前量条件尺度与R评分 → 负荷/光伏联合场景 → 风险中性或CVaR随机MPC → 逐段执行与真实账单。
-
-- 10分钟为基本时间步长，功率kW先转为电量kWh；每天144个流量、145个库存状态。
-- 指数尺度和R映射是本题待检验假设，不是论文中的通用定律；R不代表准确概率，也不直接折扣光伏中心。
-- 当前不建立鲁棒优化、DRO或Tube MPC。
-- 这是采用两阶段近似的连续滚动决策，不把未来场景路径提前提供给电池。
-- 只完成数学定义，指数有效性、费用优势及风险权衡尚未通过数据求解验证。
-
-## 材料与编译
-
-原始赛题和附件在本地C题目录，保持只读。Git提交以原创建模资料和索引为主；原题附件、下载文献PDF及临时文件不纳入此次上传。请成员合法取得原附件，并根据文献索引的公开链接下载全文。勿将第三方材料默认为本项目可自由再分发的内容。
-
-两份LaTeX使用ctexart、A4、11pt、2.5厘米边距，可用XeLaTeX编译两遍，或用latexmk的XeLaTeX模式。正文无需BibTeX，参考文献已内嵌。PDF是阅读产物，修改以tex为准；提交前重新编译并检查交叉引用、缺字及公式越界。
-
-## 协作规则
-
-遵循[AGENTS.md](AGENTS.md)与[ROADMAP.md](ROADMAP.md)。从远端已有分支出发建立个人文档分支；修改假设或符号时同步相关文档，小范围提交，由另一名成员复核。不要强推、覆盖他人的未提交修改、修改原附件或将实际未来数据用于当前决策。
-
-当前待确认的关键内容见移交清单。仓库中的“完成”指建模准备文档完成，不表示数值实验验收完成。
+数值计算为Python；Excel模板导出调用本机共用 `@oai/artifact-tool`，见复现指南。Python工程不依赖前两问目录。
