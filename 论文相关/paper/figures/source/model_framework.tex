@@ -1,0 +1,17 @@
+\begin{tikzpicture}[
+  node distance=7mm and 7mm,
+  box/.style={draw=black!65,rounded corners=2pt,align=center,minimum height=10mm,text width=27mm,fill=black!3,font=\small},
+  hi/.style={box,fill=blue!7},
+  arr/.style={-{Latex[length=2mm]},thick,draw=black!70}
+]
+\node[hi,text width=38mm] (physics) {公共物理层\\母线平衡、SOC递推\\容量、功率与互斥};
+\node[box,right=of physics] (q1) {问题一\\确定性MILP\\固定日计划};
+\node[box,right=of q1] (q2) {问题二\\历史预测与联合场景\\两阶段随机规划};
+\node[box,right=of q2] (q3) {问题三\\四次预报更新\\随机MPC与CVaR};
+\node[box,below=of q3] (q4) {问题四\\价格--净负荷联合场景\\波动电价调度};
+\draw[arr] (physics) -- (q1);
+\draw[arr] (q1) -- (q2);
+\draw[arr] (q2) -- (q3);
+\draw[arr] (q3) -- (q4);
+\draw[arr] (physics.south) |- (q4.west);
+\end{tikzpicture}

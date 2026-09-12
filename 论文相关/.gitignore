@@ -1,0 +1,5 @@
+# Local LaTeX compilation and visual-inspection intermediates
+build/
+
+# Temporary format-conversion and inspection files
+tmp/
