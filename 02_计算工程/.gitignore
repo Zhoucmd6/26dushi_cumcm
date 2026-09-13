@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+node_modules/
+*.inspect.ndjson
+outputs/*/workbook_qa/
+outputs/template_qa/

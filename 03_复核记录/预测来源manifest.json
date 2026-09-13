@@ -1,0 +1,15 @@
+{
+  "inputs": {
+    "actual_points.csv": "f0462e5eb0162797365ea1f389e61afbb0ea052397908ad3b84b656f22f4ff64",
+    "baseline_points.csv": "cf93a433185f61e408d871f844495eda7439e824b4ca596eca098e3b94009c89",
+    "price_points.csv": "13120e2a260027b636264312937ef9ac56dc2fa2634574a73e372580d3bfa349",
+    "pv_forecasts.csv": "3ae9423d0b7af16f7a847d531dc2eb0ad53754c926952a611651bd42f1883c19"
+  },
+  "prediction_sources": {
+    "forecasting.py": "aa1bd892b8253b79ad8b2259b708b55da9b1d0929dffdb31c7f7f751a8dee99a",
+    "forecasting_v2.py": "87e98683b675431fd05b0fc420eee80c78f76145728da50c38443093aa0e2d14",
+    "q3_forecasting.py": "7c69b35863b35a488ae706aa728b30bdf535bc3719e2511a47020a2de7e93b99",
+    "q4_forecasting.py": "1aff2461f77b3012df113998fffcfacb41feedd4e2afe9157bd873753ca546f9"
+  },
+  "seed": 20260912
+}

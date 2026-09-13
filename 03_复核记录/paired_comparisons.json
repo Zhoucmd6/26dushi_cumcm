@@ -1,0 +1,62 @@
+[
+  {
+    "baseline": "q42_pair",
+    "candidate": "q42_selected",
+    "saving_yuan": 6433.059491636417,
+    "saving_pct": 0.04230183500750171,
+    "positive_saving_days": 227,
+    "negative_saving_days": 107,
+    "circular_block_days": 7,
+    "bootstrap_draws": 2000,
+    "seed": 20260913,
+    "descriptive_95_interval_yuan": [
+      -689.8188971033392,
+      13358.517323142514
+    ]
+  },
+  {
+    "baseline": "q43_common",
+    "candidate": "q43_lookahead_k2",
+    "saving_yuan": 2350.938138186433,
+    "saving_pct": 0.01567588104014879,
+    "positive_saving_days": 172,
+    "negative_saving_days": 162,
+    "circular_block_days": 7,
+    "bootstrap_draws": 2000,
+    "seed": 20260913,
+    "descriptive_95_interval_yuan": [
+      -2110.17080414102,
+      6774.513386911342
+    ]
+  },
+  {
+    "baseline": "q43_common",
+    "candidate": "q43_lookahead_k3",
+    "saving_yuan": 8205.116982756459,
+    "saving_pct": 0.05471111113175316,
+    "positive_saving_days": 155,
+    "negative_saving_days": 158,
+    "circular_block_days": 7,
+    "bootstrap_draws": 2000,
+    "seed": 20260913,
+    "descriptive_95_interval_yuan": [
+      168.62168401416602,
+      16792.179861584744
+    ]
+  },
+  {
+    "baseline": "q43_no_price_correction",
+    "candidate": "q43_common",
+    "saving_yuan": 1506.9959108360908,
+    "saving_pct": 0.010047527268419584,
+    "positive_saving_days": 151,
+    "negative_saving_days": 182,
+    "circular_block_days": 7,
+    "bootstrap_draws": 2000,
+    "seed": 20260913,
+    "descriptive_95_interval_yuan": [
+      -905.5881716971273,
+      3938.872236597555
+    ]
+  }
+]

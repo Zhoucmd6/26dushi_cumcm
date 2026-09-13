@@ -1,0 +1,29 @@
+[
+  {
+    "file": "result4-2.xlsx",
+    "sheets": [
+      "计划购电量",
+      "充放电量",
+      "紧急购电量"
+    ],
+    "numeric_cells_checked": 57410,
+    "maximum_cell_error": 8.731149137020111e-11,
+    "cash_cost_yuan": 15201085.693526033,
+    "cash_difference_yuan": 0.0,
+    "sha256": "c611267e64afb67b2d735d1cdd1ecd01d36daff6823f47ee03fd087678e8b3e1"
+  },
+  {
+    "file": "result4-3.xlsx",
+    "sheets": [
+      "计划购电量",
+      "调整购电量",
+      "充放电量",
+      "紧急购电量"
+    ],
+    "numeric_cells_checked": 106312,
+    "maximum_cell_error": 8.731149137020111e-11,
+    "cash_cost_yuan": 14997167.509534247,
+    "cash_difference_yuan": 0.0,
+    "sha256": "a3dbaae8429021efbf5a6c6a076797ffbf10e9ce22e5c768d08fb0deef97774e"
+  }
+]

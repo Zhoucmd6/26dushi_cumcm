@@ -1,0 +1,1579 @@
+{
+  "original": [
+    {
+      "path": "01_论文成果/q42_10分钟完整轨迹.csv",
+      "bytes": 8506929,
+      "sha256": "850e7a5def9486770cb66379a346867e374c2d90f6a16c1321baf8de80e08e5a"
+    },
+    {
+      "path": "01_论文成果/q42_每日账单.csv",
+      "bytes": 80799,
+      "sha256": "326e63b9ad6de9de6e3260f15264b9295cad184212c89602e34e50cd4dc22d39"
+    },
+    {
+      "path": "01_论文成果/q43_10分钟完整轨迹.csv",
+      "bytes": 8508887,
+      "sha256": "f573587dcf92f31ea437200d1f26770dc272ecee3f69b31a19213d25fbca3624"
+    },
+    {
+      "path": "01_论文成果/q43_每日账单.csv",
+      "bytes": 90945,
+      "sha256": "c2b202a3c71377e85fb6ef4c8cd089c220302517e8bacd7e9ac26922aef19991"
+    },
+    {
+      "path": "01_论文成果/result4-2.xlsx",
+      "bytes": 683123,
+      "sha256": "c611267e64afb67b2d735d1cdd1ecd01d36daff6823f47ee03fd087678e8b3e1"
+    },
+    {
+      "path": "01_论文成果/result4-3.xlsx",
+      "bytes": 1186826,
+      "sha256": "a3dbaae8429021efbf5a6c6a076797ffbf10e9ce22e5c768d08fb0deef97774e"
+    },
+    {
+      "path": "01_论文成果/全年方案汇总.csv",
+      "bytes": 3761,
+      "sha256": "f018d210fba7ef2293cd6d86d4874c6d01bb538a91c05ac91a509aeed6c93922"
+    },
+    {
+      "path": "01_论文成果/指定日期结果.json",
+      "bytes": 21544,
+      "sha256": "4e0cc1f5371131430c678359951a7031f02db9018bf0c5462162c4bd8a1a465a"
+    },
+    {
+      "path": "01_论文成果/模型与代码逐项对应.md",
+      "bytes": 3795,
+      "sha256": "80425e433f53da89d1f2d59c757e12360f6c2948c2575bf848e3a4b808ded89e"
+    },
+    {
+      "path": "01_论文成果/第四问结果与合理性复核.md",
+      "bytes": 11560,
+      "sha256": "8d32b3b77de42de375c8e0b948c56be51c2e3b00bc543d366250bfc640a88a04"
+    },
+    {
+      "path": "01_论文成果/论文用图/01_电价预测与信息更新.png",
+      "bytes": 434963,
+      "sha256": "c6fdaa00cce48a3b1c15820d2acb268c85ac03f1f4242920b363b5054ae4f1a7"
+    },
+    {
+      "path": "01_论文成果/论文用图/01_电价预测与信息更新.svg",
+      "bytes": 69685,
+      "sha256": "525ed3529bc6db346700044996d6839d326957d102732564f6501bf040529b46"
+    },
+    {
+      "path": "01_论文成果/论文用图/02_全年实际费用对照.png",
+      "bytes": 271756,
+      "sha256": "d290bbcb91c46a8a0c91e77b0eb7c6bf45eb0242c509053f54742d4379c7df2e"
+    },
+    {
+      "path": "01_论文成果/论文用图/02_全年实际费用对照.svg",
+      "bytes": 20725,
+      "sha256": "ec9bc70f393ba602bea2beece4697b9b3c8d225664edd5e90bdd45562d907432"
+    },
+    {
+      "path": "01_论文成果/论文用图/03_月度费用与紧急购电.png",
+      "bytes": 198137,
+      "sha256": "4e68c44b991d0ace099a24a0e0243ae4bd847725381cae72fa90a8818e03cd6b"
+    },
+    {
+      "path": "01_论文成果/论文用图/03_月度费用与紧急购电.svg",
+      "bytes": 27518,
+      "sha256": "e5780e89b2a09fc1ca20a258e2962a3726f59218cef983f1d58fcc15459b9092"
+    },
+    {
+      "path": "01_论文成果/论文用图/04_参数选择与样本外检验.png",
+      "bytes": 452388,
+      "sha256": "defa0ccf6b150555f50ae93dd5db887e5277caf962bb90d52a4aeef034d6d3c8"
+    },
+    {
+      "path": "01_论文成果/论文用图/04_参数选择与样本外检验.svg",
+      "bytes": 38895,
+      "sha256": "e0050e2fe314002cdff35613d96424c22c747e91af3eed1a415880da5dce6027"
+    },
+    {
+      "path": "01_论文成果/论文用图/05_分组信号与桥接库存.png",
+      "bytes": 395152,
+      "sha256": "1ab5a45663f4f362cea98d7a208c560b479fbec912a4f74792978c847fef7af8"
+    },
+    {
+      "path": "01_论文成果/论文用图/05_分组信号与桥接库存.svg",
+      "bytes": 35771,
+      "sha256": "f10048e24d982880ae3f1ae824fbd35b67100b84fb6240a36cf4e011d2aabdde"
+    },
+    {
+      "path": "01_论文成果/论文用图/06_Q42指定日期购电与储能.png",
+      "bytes": 713663,
+      "sha256": "266088f61665ccc18784df588a362ac99d60ec18e56d28c6dc98cef754025efd"
+    },
+    {
+      "path": "01_论文成果/论文用图/06_Q42指定日期购电与储能.svg",
+      "bytes": 170345,
+      "sha256": "0c3fefa01ad86eaa27781e032b8bc3046c6fc0905479d52086cab4115f3a6fc5"
+    },
+    {
+      "path": "01_论文成果/论文用图/07_Q43指定日期购电与储能.png",
+      "bytes": 758079,
+      "sha256": "07dd2c57f6309c2a3b9938a3a647a96e91141335ee61167b766400d666d2b9c6"
+    },
+    {
+      "path": "01_论文成果/论文用图/07_Q43指定日期购电与储能.svg",
+      "bytes": 193773,
+      "sha256": "7f315c878115a387031983dcb7ba8daad2078dfd8398d98600d4fa4c98d22b95"
+    },
+    {
+      "path": "01_论文成果/论文用图/前瞻示例图源数据.json",
+      "bytes": 25723,
+      "sha256": "a72a4f30a44fe8b28465f0bc775f5e66a8856e41452c5fbff847ce90a5ef2278"
+    },
+    {
+      "path": "01_论文成果/论文用图/图注与使用顺序.md",
+      "bytes": 1929,
+      "sha256": "554930909d834e90ae2a214b02dec24460bcdaf9cb12fe5ab05a9b3de1563699"
+    },
+    {
+      "path": "01_论文成果/论文用图/图表校验.json",
+      "bytes": 4203,
+      "sha256": "0aaa6ae0ff146eacda52e02468c51a64ff1820699d6cfb6f46e4b8b0a4e06e7e"
+    },
+    {
+      "path": "01_论文成果/论文用图/月度图源数据.csv",
+      "bytes": 1024,
+      "sha256": "087f6145a9091b2f0c89f7091957fab7fc1682522b9072e38e935dd9bf8cd890"
+    },
+    {
+      "path": "01_论文成果/论文用图/第四问图集.pdf",
+      "bytes": 223270,
+      "sha256": "349d32d2211a959a8ea502ca5ca9178203371a3f6c0744ea668804423f4af7a5"
+    },
+    {
+      "path": "01_论文成果/题目指定日期表格.md",
+      "bytes": 7935,
+      "sha256": "d98b280e2f7d0b4d0c166160c77eb77e81eb03024cb9aa3b56523ecd037bfd71"
+    },
+    {
+      "path": "02_计算工程/.gitignore",
+      "bytes": 94,
+      "sha256": "b43b3491013a1d77ca6cb61bacdc159407cd4c46e7695aef743f44e2b23f246d"
+    },
+    {
+      "path": "02_计算工程/data/processed/actual_points.csv",
+      "bytes": 1917014,
+      "sha256": "f0462e5eb0162797365ea1f389e61afbb0ea052397908ad3b84b656f22f4ff64"
+    },
+    {
+      "path": "02_计算工程/data/processed/baseline_points.csv",
+      "bytes": 4914,
+      "sha256": "cf93a433185f61e408d871f844495eda7439e824b4ca596eca098e3b94009c89"
+    },
+    {
+      "path": "02_计算工程/data/processed/price_points.csv",
+      "bytes": 1479248,
+      "sha256": "13120e2a260027b636264312937ef9ac56dc2fa2634574a73e372580d3bfa349"
+    },
+    {
+      "path": "02_计算工程/data/processed/pv_forecasts.csv",
+      "bytes": 1732798,
+      "sha256": "3ae9423d0b7af16f7a847d531dc2eb0ad53754c926952a611651bd42f1883c19"
+    },
+    {
+      "path": "02_计算工程/data/raw/附件/附件5/result4-2.xlsx",
+      "bytes": 18397,
+      "sha256": "1c26494cfc6d754e0bd9bff7e13e1126a73d2d2da6c5336eb251d89b9a1a1a47"
+    },
+    {
+      "path": "02_计算工程/data/raw/附件/附件5/result4-3.xlsx",
+      "bytes": 265429,
+      "sha256": "c59da470cabd0be23f602c95c8aa9d11ec224a0cdac216b3e1f218e65d006bdc"
+    },
+    {
+      "path": "02_计算工程/model/assumptions.md",
+      "bytes": 13352,
+      "sha256": "bac0a50a25cacfb6f7877b999918f34131e041c7cbdcc761ee54d025cb277870"
+    },
+    {
+      "path": "02_计算工程/model/collaboration-handoff.md",
+      "bytes": 5254,
+      "sha256": "ac387f12ad08f9c81853c464ec396a23a5c8047dbf201cde1340ec453454358d"
+    },
+    {
+      "path": "02_计算工程/model/learning-guide.md",
+      "bytes": 9252,
+      "sha256": "c306ff36dcc84c2533ef271358f8ef7b97cee173e2a5088bcd25ec4dc4859859"
+    },
+    {
+      "path": "02_计算工程/model/model-q4-revision-notes.md",
+      "bytes": 3763,
+      "sha256": "66b13e47324768ff4e903f6104fa5d880c3d24279bb146247504ddd61bea78ba"
+    },
+    {
+      "path": "02_计算工程/model/model-q4.pdf",
+      "bytes": 358309,
+      "sha256": "ea1b36f06a3f375b3b87e2c9275bf434cbb7b548ab6193e9449922e925054335"
+    },
+    {
+      "path": "02_计算工程/model/model-q4.tex",
+      "bytes": 57026,
+      "sha256": "b4b21af6ee264545997589cf6ac26933f60dda04727c722bb9a3a55ef1c0b155"
+    },
+    {
+      "path": "02_计算工程/model/modeling-ideas.md",
+      "bytes": 14412,
+      "sha256": "3934d6c9574d251ad5706316661847183a6486f27caeb6dcb14d09b38124cf04"
+    },
+    {
+      "path": "02_计算工程/model/README.md",
+      "bytes": 14708,
+      "sha256": "add84798f8b40fb73c6f6abca9c54deb52e021c450ebfab6282d1599c88db5d3"
+    },
+    {
+      "path": "02_计算工程/outputs/audit.log",
+      "bytes": 1188,
+      "sha256": "e369174a0d2659da1044afe3dfbe8ef73a405cd4c3a710866acf94be8304e4ad"
+    },
+    {
+      "path": "02_计算工程/outputs/figures.log",
+      "bytes": 19,
+      "sha256": "024fdd6db0c149ce656f28ad995e92f8ee5088f8b94a948a2666e67a50857994"
+    },
+    {
+      "path": "02_计算工程/outputs/full.log",
+      "bytes": 259,
+      "sha256": "d058b3bd86918f12f0e1b68c2d8186ee7a6d8725dd5df19da898bd745187256b"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/audit.json",
+      "bytes": 63373,
+      "sha256": "24b7b022401d2d08918b736ef2615422077d74341ef18484d11fa915586fd4c5"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/q42_10分钟完整轨迹.csv",
+      "bytes": 8506929,
+      "sha256": "850e7a5def9486770cb66379a346867e374c2d90f6a16c1321baf8de80e08e5a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/q42_每日账单.csv",
+      "bytes": 80799,
+      "sha256": "326e63b9ad6de9de6e3260f15264b9295cad184212c89602e34e50cd4dc22d39"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/q43_10分钟完整轨迹.csv",
+      "bytes": 8508887,
+      "sha256": "f573587dcf92f31ea437200d1f26770dc272ecee3f69b31a19213d25fbca3624"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/q43_每日账单.csv",
+      "bytes": 90945,
+      "sha256": "c2b202a3c71377e85fb6ef4c8cd089c220302517e8bacd7e9ac26922aef19991"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/result4-2.xlsx",
+      "bytes": 683123,
+      "sha256": "c611267e64afb67b2d735d1cdd1ecd01d36daff6823f47ee03fd087678e8b3e1"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/result4-3.xlsx",
+      "bytes": 1186826,
+      "sha256": "a3dbaae8429021efbf5a6c6a076797ffbf10e9ce22e5c768d08fb0deef97774e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/全年方案汇总.csv",
+      "bytes": 3761,
+      "sha256": "f018d210fba7ef2293cd6d86d4874c6d01bb538a91c05ac91a509aeed6c93922"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/指定日期结果.json",
+      "bytes": 21544,
+      "sha256": "4e0cc1f5371131430c678359951a7031f02db9018bf0c5462162c4bd8a1a465a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/模型与代码逐项对应.md",
+      "bytes": 3795,
+      "sha256": "80425e433f53da89d1f2d59c757e12360f6c2948c2575bf848e3a4b808ded89e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/第四问结果与合理性复核.md",
+      "bytes": 11560,
+      "sha256": "8d32b3b77de42de375c8e0b948c56be51c2e3b00bc543d366250bfc640a88a04"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/01_电价预测与信息更新.png",
+      "bytes": 434963,
+      "sha256": "c6fdaa00cce48a3b1c15820d2acb268c85ac03f1f4242920b363b5054ae4f1a7"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/01_电价预测与信息更新.svg",
+      "bytes": 69685,
+      "sha256": "525ed3529bc6db346700044996d6839d326957d102732564f6501bf040529b46"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/02_全年实际费用对照.png",
+      "bytes": 271756,
+      "sha256": "d290bbcb91c46a8a0c91e77b0eb7c6bf45eb0242c509053f54742d4379c7df2e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/02_全年实际费用对照.svg",
+      "bytes": 20725,
+      "sha256": "ec9bc70f393ba602bea2beece4697b9b3c8d225664edd5e90bdd45562d907432"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/03_月度费用与紧急购电.png",
+      "bytes": 198137,
+      "sha256": "4e68c44b991d0ace099a24a0e0243ae4bd847725381cae72fa90a8818e03cd6b"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/03_月度费用与紧急购电.svg",
+      "bytes": 27518,
+      "sha256": "e5780e89b2a09fc1ca20a258e2962a3726f59218cef983f1d58fcc15459b9092"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/04_参数选择与样本外检验.png",
+      "bytes": 452388,
+      "sha256": "defa0ccf6b150555f50ae93dd5db887e5277caf962bb90d52a4aeef034d6d3c8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/04_参数选择与样本外检验.svg",
+      "bytes": 38895,
+      "sha256": "e0050e2fe314002cdff35613d96424c22c747e91af3eed1a415880da5dce6027"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/05_分组信号与桥接库存.png",
+      "bytes": 395152,
+      "sha256": "1ab5a45663f4f362cea98d7a208c560b479fbec912a4f74792978c847fef7af8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/05_分组信号与桥接库存.svg",
+      "bytes": 35771,
+      "sha256": "f10048e24d982880ae3f1ae824fbd35b67100b84fb6240a36cf4e011d2aabdde"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/06_Q42指定日期购电与储能.png",
+      "bytes": 713663,
+      "sha256": "266088f61665ccc18784df588a362ac99d60ec18e56d28c6dc98cef754025efd"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/06_Q42指定日期购电与储能.svg",
+      "bytes": 170345,
+      "sha256": "0c3fefa01ad86eaa27781e032b8bc3046c6fc0905479d52086cab4115f3a6fc5"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/07_Q43指定日期购电与储能.png",
+      "bytes": 758079,
+      "sha256": "07dd2c57f6309c2a3b9938a3a647a96e91141335ee61167b766400d666d2b9c6"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/07_Q43指定日期购电与储能.svg",
+      "bytes": 193773,
+      "sha256": "7f315c878115a387031983dcb7ba8daad2078dfd8398d98600d4fa4c98d22b95"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/前瞻示例图源数据.json",
+      "bytes": 25723,
+      "sha256": "a72a4f30a44fe8b28465f0bc775f5e66a8856e41452c5fbff847ce90a5ef2278"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/图注与使用顺序.md",
+      "bytes": 1929,
+      "sha256": "554930909d834e90ae2a214b02dec24460bcdaf9cb12fe5ab05a9b3de1563699"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/图表校验.json",
+      "bytes": 4203,
+      "sha256": "0aaa6ae0ff146eacda52e02468c51a64ff1820699d6cfb6f46e4b8b0a4e06e7e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/月度图源数据.csv",
+      "bytes": 1024,
+      "sha256": "087f6145a9091b2f0c89f7091957fab7fc1682522b9072e38e935dd9bf8cd890"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/论文用图/第四问图集.pdf",
+      "bytes": 223270,
+      "sha256": "349d32d2211a959a8ea502ca5ca9178203371a3f6c0744ea668804423f4af7a5"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/deliverables/题目指定日期表格.md",
+      "bytes": 7935,
+      "sha256": "d98b280e2f7d0b4d0c166160c77eb77e81eb03024cb9aa3b56523ecd037bfd71"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/environment.json",
+      "bytes": 265,
+      "sha256": "04791dadd82e9dacb6c83147374c6f7298cd0e7a6d2f4f1932aaeaa48c549d1a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/manifest.json",
+      "bytes": 1307,
+      "sha256": "2796ae2058912a5130d700077db846314f097e6eedb8991f518434398461e8ca"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/paired_comparisons.json",
+      "bytes": 1645,
+      "sha256": "3f7cfabe3ad3a62b329812b06e95b77246f4b54ac9b1a9043003bd1422b79198"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_gamma0/config.json",
+      "bytes": 3526,
+      "sha256": "142973c342e7e4ab263ba5eae02e3752e303504aaac9b25317b998b1f3b52d5f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_gamma0/daily.csv",
+      "bytes": 81846,
+      "sha256": "d1047cf26131420ead7ef24620dc003efe3df6837c6ad354eeefb95a970e8ea3"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_gamma0/planning_log.json",
+      "bytes": 5012069,
+      "sha256": "eaff54847386688ecc395b061600edd0b7caaa926b76fc72e9111a21ec47cf2b"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_gamma0/summary.json",
+      "bytes": 1534,
+      "sha256": "d4e47a315d89c69693f4b05a7fdab7556a6eafce020d768d42a4d55f82e6c9d5"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_gamma0/trajectory.npz",
+      "bytes": 1497805,
+      "sha256": "87f9bfdfb4b5e21c00ada7dab48d321d4ea1e27541c80bc2d2b5c9d9a4f279cf"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_gamma0.log",
+      "bytes": 615,
+      "sha256": "cef79b63d569c6bb05cc7f900dc6f1c6c69f0711fb144171bf9212611c8d816b"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_independent/config.json",
+      "bytes": 3526,
+      "sha256": "f673b484f2edef4b949005907e5d876a5785e4bb3cadd8afa2fbaf279fa8c932"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_independent/daily.csv",
+      "bytes": 80801,
+      "sha256": "3c753e0d00784982366ce69b2ed1fcd6f13152732eb485b9eaccb6e8e177e687"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_independent/planning_log.json",
+      "bytes": 5004567,
+      "sha256": "1abb6b54f83cab5bcd0b0e34e6a793ddf95ef71b59abffffd020b8bb377cebfc"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_independent/summary.json",
+      "bytes": 1533,
+      "sha256": "03fa02e8fbb20c218f32adfc712d44ef671e943aa60d5af9cd52c8e7deda558e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_independent/trajectory.npz",
+      "bytes": 1498913,
+      "sha256": "609e5ef61b4e88a850cf4fe09ea1db58283ad0c2fa79855045c5c583421bdfa6"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_independent.log",
+      "bytes": 685,
+      "sha256": "f5701b931acf75a7501daa31bd7f6db83992c7be77f2baa621956d7235349e80"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_pair/config.json",
+      "bytes": 3526,
+      "sha256": "eab074beefd17a05efe303a7f69a8a8726f80bf6f4f1d5704670ab97a1fc871f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_pair/daily.csv",
+      "bytes": 80742,
+      "sha256": "5b701ff48c642a1b958aa1c7227fb6913a5707500c5af38c31df3bb7a5887dd8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_pair/planning_log.json",
+      "bytes": 5004611,
+      "sha256": "033e27c4263c98a07a488c3cd70ef1dd0e7b22f16684e93e758468fac59dc690"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_pair/summary.json",
+      "bytes": 1542,
+      "sha256": "4db0383fc0a1649b15960a635845cd0c4864a877cf74d3b6fe7d630e3dde15a1"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_pair/trajectory.npz",
+      "bytes": 1499146,
+      "sha256": "485f242a75fb4238facdec5caef070b70dba6e16ca9c4d36fb1d290319bd236d"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_pair.log",
+      "bytes": 587,
+      "sha256": "4a0ea9f48bb72132485c4f3979ef783f6c453a2d5370fdae4a80895affee0154"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_point/config.json",
+      "bytes": 3525,
+      "sha256": "cddf96625b915717ee5c1c12746644ce13d8f6cc4963e26bec8301a94a23c467"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_point/daily.csv",
+      "bytes": 81565,
+      "sha256": "bce9f85fbee8776dc28c0fad449b605b548b448b35740793b5030872769b043a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_point/planning_log.json",
+      "bytes": 4743436,
+      "sha256": "8aeebed4a952c5f52c0760bb657bb11909c0f55b0bee23922914b1529a0f36ca"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_point/summary.json",
+      "bytes": 1544,
+      "sha256": "4089e73a1031c1e6c8a4e0b13095a95d1af188ea63035497effca7ecdf468277"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_point/trajectory.npz",
+      "bytes": 1377598,
+      "sha256": "bc68e89d1c5ced538cd782e8c14feed9b9a854fea6f2ce7b937e1dfc96ffe941"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_point.log",
+      "bytes": 595,
+      "sha256": "9c820167b43c22857c6bfd6c310db31bedd8e7c0d0e2012b8ef9561a1a672dca"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_selected/config.json",
+      "bytes": 3526,
+      "sha256": "f673b484f2edef4b949005907e5d876a5785e4bb3cadd8afa2fbaf279fa8c932"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_selected/daily.csv",
+      "bytes": 80799,
+      "sha256": "326e63b9ad6de9de6e3260f15264b9295cad184212c89602e34e50cd4dc22d39"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_selected/planning_log.json",
+      "bytes": 5004565,
+      "sha256": "e01e0346a266842f7a4963f8c8cbadb9ab199365a74c44796fd31fdba13aa103"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_selected/summary.json",
+      "bytes": 1528,
+      "sha256": "c7fecd070575b9aaa1186c2d0b1b5347e1aa1b5e1a17891b836c5c9cb8d77d6f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_selected/trajectory.npz",
+      "bytes": 1498913,
+      "sha256": "609e5ef61b4e88a850cf4fe09ea1db58283ad0c2fa79855045c5c583421bdfa6"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_selected.log",
+      "bytes": 643,
+      "sha256": "4c299a7c37a97d8f06f52e98884569ba016f044889bddf7e2063771e5edcb1ec"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q42_workbook_payload.json",
+      "bytes": 2654483,
+      "sha256": "e51ae659bde77f7a346f1de8b4560d60a0dd5c461ae4ddf1d8de25685855c1ac"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_common/config.json",
+      "bytes": 3526,
+      "sha256": "86d8c6e911ae996da0647c9680f1946dca15a19cbe62dc7cc9ab5aef638b21a4"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_common/daily.csv",
+      "bytes": 90945,
+      "sha256": "c2b202a3c71377e85fb6ef4c8cd089c220302517e8bacd7e9ac26922aef19991"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_common/planning_log.json",
+      "bytes": 16407359,
+      "sha256": "5afc8f820148361e53eb482557e62e256120cd7dba5ece6aca05785e07327d19"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_common/summary.json",
+      "bytes": 1619,
+      "sha256": "002370584ab0c8c7b5022b2652e68e4d5641f7ec57898ea9e9e6ff45be80dcb7"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_common/trajectory.npz",
+      "bytes": 1560581,
+      "sha256": "7fe42b067d0adb909ad501d8572ff40e06c1969c9b10dec4fc8a5f6c5031e433"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_common.log",
+      "bytes": 618,
+      "sha256": "8c9936c7ba875f7e98ba4db91e052409a88be38ae2d3547fedec5f5c01e6725f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_gamma0/config.json",
+      "bytes": 3526,
+      "sha256": "50b9bb568486588756036042603c29b50330e0a86d4c297025fa0afd5078c049"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_gamma0/daily.csv",
+      "bytes": 90871,
+      "sha256": "e75163a50376904d97dc774800463c479b585afccfae059da279d7408d1d42d0"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_gamma0/planning_log.json",
+      "bytes": 16303405,
+      "sha256": "f971cb6a9f4de33892d1dcbf69dfedde082a6651dcf0f2f49ab55f07f0666f6a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_gamma0/summary.json",
+      "bytes": 1597,
+      "sha256": "727a1de0ebddc6176b2a50db8329f4262ff20756b6f8b5904cbdc11235be32ee"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_gamma0/trajectory.npz",
+      "bytes": 1557195,
+      "sha256": "1523dded188b0bc0ef1b4520ef26b9dba594b8a07a1c5f59b67addaacd7a533c"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_gamma0.log",
+      "bytes": 618,
+      "sha256": "983d3f050bd79ab952cabf61ac09b4c518bd56217280023e8b79bfaf78d390a1"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k2/config.json",
+      "bytes": 3525,
+      "sha256": "b802406213a392f66c1863e2d94d42a60e2854ba2615f28dd5f97d49f83f9342"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k2/daily.csv",
+      "bytes": 92415,
+      "sha256": "4732ea458d719ca0659d79255496e23b9a91b17816cfcd198a8470ea14de7ef7"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k2/planning_log.json",
+      "bytes": 24340695,
+      "sha256": "cf48e26990cb4e3b1757cfa8941dc451edb06e531a6422d2bc3914f27a677794"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k2/summary.json",
+      "bytes": 1633,
+      "sha256": "ada58263a47152b4bd38e7cf243d865a10eb95c9c30324608c8891986a8e8f9c"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k2/trajectory.npz",
+      "bytes": 1613223,
+      "sha256": "d3826fa8bdbeabd43ffed51b0a29b96cc926392ed3be76354c4ee0c3693f0e04"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k2.log",
+      "bytes": 703,
+      "sha256": "122f1843694312fe51f7703dc5ac64ec329ca0a13dce6256426c1c1e612475ba"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k3/config.json",
+      "bytes": 3525,
+      "sha256": "31e26560b1e02efd95d2456f6e2f4cb3c7ff1c08230daab2b5f5f2bf6c24f62a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k3/daily.csv",
+      "bytes": 92794,
+      "sha256": "b14012d32e73151bb65042b0c071e6c92a91a94397d51345d70bfd803f3e51d9"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k3/planning_log.json",
+      "bytes": 27975627,
+      "sha256": "c49b58911ddd1c656a3757f71cf014d02710cf00bd4099f103a229ecc04e9ba5"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k3/summary.json",
+      "bytes": 1643,
+      "sha256": "84b1d066abee02fc0c387c6fa7efa1f89e4d437f6920f5a91fab680bfd3f97a8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k3/trajectory.npz",
+      "bytes": 1625706,
+      "sha256": "3ba4215c2d4dfbfa0bc948cbb5bbee3d7065b8b822f9f957df55d260352f549a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_lookahead_k3.log",
+      "bytes": 703,
+      "sha256": "fefcd4b8823d7a86206e8b68318c287d956c07b0b5578ce34f92b02d3e624fbc"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_no_price_correction/config.json",
+      "bytes": 3527,
+      "sha256": "ffca876a6f6e8bf7507fe21ce6a002db1faf9ea8f5cd01af93e431fcb998af6d"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_no_price_correction/daily.csv",
+      "bytes": 91008,
+      "sha256": "8b526611c4dab31ee677bbae6e455fe29419cf39208372f2f3179befd336981f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_no_price_correction/planning_log.json",
+      "bytes": 16383692,
+      "sha256": "f091d20945035458e42753dee51d6c794fde3ac6c3ee5750514dca5f3cff0ee0"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_no_price_correction/summary.json",
+      "bytes": 1625,
+      "sha256": "509a169f2260513c674bb78b8a0c765ec5b29e3cfcfff51c6d04e073bd6aa266"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_no_price_correction/trajectory.npz",
+      "bytes": 1557684,
+      "sha256": "e6da17d008c1d217c6864cc8ad78b02d84cb1c971d11921a2db7a9af973424f8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_no_price_correction.log",
+      "bytes": 800,
+      "sha256": "f2a5afaa4192cfa6a8032f40570314b5e6a4a2d2d276d3a97bb243e35c4d640d"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_point/config.json",
+      "bytes": 3525,
+      "sha256": "3d70d5012616ffdcb752fa6b0a765b03435948a9e8878264cc16cbe543d44346"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_point/daily.csv",
+      "bytes": 93076,
+      "sha256": "ddf75b5d82388603986102d2db268d3df0df694ed83424bb068a459613c11f44"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_point/planning_log.json",
+      "bytes": 12676135,
+      "sha256": "ee2247cc8c3be974ec5dc33547a13ffdf646abb2044d8684d023bb7703558311"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_point/summary.json",
+      "bytes": 1611,
+      "sha256": "a88ccd3357df8000a949dfdff08636f7fdeb3dd7c83faf6f6d14aabdbfeb6edf"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_point/trajectory.npz",
+      "bytes": 1511724,
+      "sha256": "e7cf52af7a7916e7b2a0d1613fdcbb13633294715fc3b002cd3a54210cfd8745"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_point.log",
+      "bytes": 594,
+      "sha256": "c63433204e0d4cf49b341b19e3e5b8c83aae8c72e6f7ac185e84c9af8ddb9cf7"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/q43_workbook_payload.json",
+      "bytes": 2666279,
+      "sha256": "b160eee71f3adcb0fdbd80a14ba4b4e1b5e0346ff7fbdc7a51d9e07f4b03856a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/selection.json",
+      "bytes": 32986,
+      "sha256": "0019572273c185802ca0fc83b7301a705a51ead66abb133b082b7ee20850e2c4"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/structural_checks.json",
+      "bytes": 6658,
+      "sha256": "1dc964a2dc3c954ff23c4ff331ccd2e03bdb8586134768b4da7f8085e6469c09"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0/config.json",
+      "bytes": 354,
+      "sha256": "eb65ca2ed9820ffab1238d9590b9a4f9c13be5717c6b03fc1c5fd1938665f303"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0/daily.csv",
+      "bytes": 2905,
+      "sha256": "47e4212000939f49e1182b061f21b3ecb55537546ffb90fbac402584c73f83b8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0/planning_log.json",
+      "bytes": 160758,
+      "sha256": "19fad9ed7584a792cf5edb7847055667f4848989386d198ec8eff431d36a5756"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0/summary.json",
+      "bytes": 1533,
+      "sha256": "6b584257b680f900803da31af2bbe70c0ef41fce151aac963e1af1c44f7e178c"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0/trajectory.npz",
+      "bytes": 52126,
+      "sha256": "3d6bb4c5b96aed23992ea39f77feebe111dcef488d3fd7af98f7f566a649104c"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.25/config.json",
+      "bytes": 355,
+      "sha256": "7397b0c3d9c3dc66f2ab7c50651270aa4c7b287a67ea9911d36bf7cefdb2c835"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.25/daily.csv",
+      "bytes": 2903,
+      "sha256": "b71234c1f650e7ec95a4f3d05ef6d57fce36c6c458932c1d29d689a09923a27e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.25/planning_log.json",
+      "bytes": 160928,
+      "sha256": "a66969370eeabc9cfd892f25b55821122c6aa14a7f1dbf88998f9019e7a4d146"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.25/summary.json",
+      "bytes": 1539,
+      "sha256": "09ea02224b21cfa8b0c088440333df95a1a564e8acf3e21f200567fc15a46471"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.25/trajectory.npz",
+      "bytes": 52126,
+      "sha256": "3d6bb4c5b96aed23992ea39f77feebe111dcef488d3fd7af98f7f566a649104c"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.5/config.json",
+      "bytes": 354,
+      "sha256": "b2b4fce9fcb025e637339abbb95db1296d94b12449cb5165c645d423b713db0f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.5/daily.csv",
+      "bytes": 2889,
+      "sha256": "414cdcbf28f81dba68b712ad0e6c9d3ac1ca1d515dc5968349559310324c2feb"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.5/planning_log.json",
+      "bytes": 160674,
+      "sha256": "42b7975d801f0167e7db2a4de1191ab5eaf9e4405037ceaf2ea2879e38f336c4"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.5/summary.json",
+      "bytes": 1526,
+      "sha256": "9bd30687d1de503de5fe853db0f870509a9f7d23cdcf9aa8a7ea08368ca0bb4b"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_0.5/trajectory.npz",
+      "bytes": 52098,
+      "sha256": "8500a0adb5c349108840950cf44b9eab8b174edbc10d5993749ccdc7ea1ae445"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_1/config.json",
+      "bytes": 354,
+      "sha256": "b690069c14a60852fcae574253070180839b36b45ff8d5f2698cf5794cee81e8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_1/daily.csv",
+      "bytes": 2893,
+      "sha256": "e9ba50db826bb58ecc2b3e25a0bbae3ffbb6f6466575abae7fedc775e034cc53"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_1/planning_log.json",
+      "bytes": 160678,
+      "sha256": "b400a2fda950a6b5bdf43faed2f8cb4f623c05c7da475782668610fd21c70558"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_1/summary.json",
+      "bytes": 1522,
+      "sha256": "3aa31fc8979bc7dc33aa715a6f97cb11bacaa8ec41e0e586a4c6d9619f725c0d"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_gamma_1/trajectory.npz",
+      "bytes": 52098,
+      "sha256": "8500a0adb5c349108840950cf44b9eab8b174edbc10d5993749ccdc7ea1ae445"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0/config.json",
+      "bytes": 354,
+      "sha256": "6ff32348b60c2cefaa201ab260789d37e6ddb7ae9b926b97baa59633bbcc689f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0/daily.csv",
+      "bytes": 2885,
+      "sha256": "8846ad9e1ce4411b08fdde6a442d7d48f2f2cd06d70eddfa137fa5892b31b489"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0/planning_log.json",
+      "bytes": 160587,
+      "sha256": "c6b2d94b6e542453210f203745960254f271bf116ca8cc24048c208759ddf5f8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0/summary.json",
+      "bytes": 1546,
+      "sha256": "c5933c354a921237dd069572094455156b54e2c9baf9aa091ba33e6617ab9944"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0/trajectory.npz",
+      "bytes": 52006,
+      "sha256": "f9984149ab4137684087f9c2516dcf1df2a6207d77d48079a5fe19bda60b03a4"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.25/config.json",
+      "bytes": 355,
+      "sha256": "bb5ec58c62b40467cab941b9ee524db1890266b32ad78afe4cf4fd4e0b1608f8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.25/daily.csv",
+      "bytes": 2900,
+      "sha256": "9bd2a9607ff755d1169a5a98cd3aa7bcb7b2573d1343e41ba11ca2ed03b27fda"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.25/planning_log.json",
+      "bytes": 160444,
+      "sha256": "d1f3f4ea46482f8ab6fdcbea63bf61f7c27cdbcf7a9f4fc4ad4bfa16737cc77f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.25/summary.json",
+      "bytes": 1550,
+      "sha256": "14c861efc20e82496ab5a3bbbb45dd13e9d20b28d75cd0d9567734bb422f0f52"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.25/trajectory.npz",
+      "bytes": 52123,
+      "sha256": "53b61209eda3c7ed914e042efe9a1101baa44aac23398b239a6a2a2bb912a982"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.5/config.json",
+      "bytes": 354,
+      "sha256": "88575e3b854607939de20bb0e589509f4d91c94ca0bc8f2f39bd2d91a90606a7"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.5/daily.csv",
+      "bytes": 2840,
+      "sha256": "fc1332c80752a0b4902ebe5c70b474be1ecf095ae3a029eb04cdc706e4aed0bd"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.5/planning_log.json",
+      "bytes": 160251,
+      "sha256": "f45a7eb6c361ca185a9199c333d68a1cafd9857bcc4ac8f44c317592e23ccc12"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.5/summary.json",
+      "bytes": 1548,
+      "sha256": "d711d017be0e799e722e20780efd33a48eb3e97d16a310b3185bc3d2be9d7571"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.5/trajectory.npz",
+      "bytes": 52123,
+      "sha256": "e085fff1913d01e66d838b3df9cd4c76f42e256d3d7ebb8270d1df8590e8da20"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.75/config.json",
+      "bytes": 355,
+      "sha256": "a6c99105f120338cc685ee15080e256cfd569d1dda2b11df52978a60259a4678"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.75/daily.csv",
+      "bytes": 2856,
+      "sha256": "8f7b7e7a137dabedb35ce64159cfed064adde2e7f204abcd01dedf5de0a7ae0e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.75/planning_log.json",
+      "bytes": 160354,
+      "sha256": "842d8960ee4377ed28f86b17d3a74b048c127561c1f2348edaa770bee0053f38"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.75/summary.json",
+      "bytes": 1550,
+      "sha256": "fd3bdbb20b6d121a11ac89495f05efa343e0079b2f7ef69f4a7d539f9430f0e2"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_0.75/trajectory.npz",
+      "bytes": 52115,
+      "sha256": "203bd691b432b67e882f78bdf2888df3c2a25ef597e906b5dd6cb5dcbe90cfdb"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_1/config.json",
+      "bytes": 354,
+      "sha256": "b2b4fce9fcb025e637339abbb95db1296d94b12449cb5165c645d423b713db0f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_1/daily.csv",
+      "bytes": 2895,
+      "sha256": "56315fdd8ad65f34d989119c29707c3c5e5c108e65215a168d1f89a25c75658d"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_1/planning_log.json",
+      "bytes": 160680,
+      "sha256": "76c3fd93b4f626d9369a38fbfcf88135495fb3dbcedca0d49c1722e2ee31df86"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_1/summary.json",
+      "bytes": 1520,
+      "sha256": "6a0be26bab9918a39d8afc60874892c31c2ac8b5981c7883b87eca5e10800d23"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q42_rho_1/trajectory.npz",
+      "bytes": 52098,
+      "sha256": "8500a0adb5c349108840950cf44b9eab8b174edbc10d5993749ccdc7ea1ae445"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0/config.json",
+      "bytes": 355,
+      "sha256": "96515fb228d465ea05fcdb2aaeb201d3d8d4e25364de392d38ac2ee8af17f479"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0/daily.csv",
+      "bytes": 3228,
+      "sha256": "0c25edd8a2bbe90c00aa77fc2051df991eddf71f916b65cf53497557557e97a8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0/planning_log.json",
+      "bytes": 498516,
+      "sha256": "a64a959afa6e7c28027b89f77985d0df451310601e83e82f4b90824b99c3a88a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0/summary.json",
+      "bytes": 1657,
+      "sha256": "7ab6e1650ea6b785122cd7f7247c92bfa20c0329391b5b9f36ca9fbb5f6f8dc5"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0/trajectory.npz",
+      "bytes": 55728,
+      "sha256": "fe0d7dd8b5dc5a910adb1c55f78a26533f51fbe5cfc027af4a8305fe1cbb0d4e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.25/config.json",
+      "bytes": 356,
+      "sha256": "a39299952728f3d4f52416102e1c646716df729b7444bc53bd88f2a6a35f61d1"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.25/daily.csv",
+      "bytes": 3228,
+      "sha256": "c5ccb87995b0951c6834e083c75e99255105e7f86bb05fc3ba9aa4092c15ce01"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.25/planning_log.json",
+      "bytes": 498933,
+      "sha256": "8f606122c0dad0c7460014c1b6d6fe2543a97b619e00a1173288249041bbdeac"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.25/summary.json",
+      "bytes": 1659,
+      "sha256": "c094fd23e0a9cc92ca1e6d8e2624598cd61d6ae6edb09858d4d978bb388dc7a6"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.25/trajectory.npz",
+      "bytes": 55730,
+      "sha256": "ba3a299391859936a3e75365a3a5562e406b6aa282a8157a278f27aa568f669d"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.5/config.json",
+      "bytes": 355,
+      "sha256": "73322b7d964fa23e39f08f98d94a413e251da5dea1578cd621b63b1c63b3db63"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.5/daily.csv",
+      "bytes": 3230,
+      "sha256": "81a029d4f686bb05a3c1faf73a30ca01dd426e0ea6ba5bef29fa3fb99d9f1e8c"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.5/planning_log.json",
+      "bytes": 501621,
+      "sha256": "02a7b0b14c2323c04c701f522b93f1e2bb146b381aaa4b6c513e6c333177a4d7"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.5/summary.json",
+      "bytes": 1659,
+      "sha256": "b94f300a62b8d4566f9f5bb99d7673cb3d91c56e4d28037e4b48b17a2ff11064"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_0.5/trajectory.npz",
+      "bytes": 55816,
+      "sha256": "b637cfa402e56acdfe96bb7d38c5774b0ccf33c59f0b922cf2fea5bbf5242092"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_1/config.json",
+      "bytes": 355,
+      "sha256": "192872ce2beb9f7f73500507e84ee6e48153571fa66a8171fcd76ffedad4129b"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_1/daily.csv",
+      "bytes": 3231,
+      "sha256": "7cc33caac9e5b9e38f18ea5f6f6dd2bc79784b8335dfee1a86faa2c688835b05"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_1/planning_log.json",
+      "bytes": 501621,
+      "sha256": "f0bf2802b6e99843da7d26eeba8320953c8f707f3da3b14c230eab3c8345f7f7"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_1/summary.json",
+      "bytes": 1657,
+      "sha256": "658f4a073b9f2e9cdc0224b06f9662d725a82970996b96426f11053b0c7f6cbb"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_gamma_1/trajectory.npz",
+      "bytes": 55816,
+      "sha256": "b637cfa402e56acdfe96bb7d38c5774b0ccf33c59f0b922cf2fea5bbf5242092"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_1/config.json",
+      "bytes": 354,
+      "sha256": "adab9bf976152870f68234116d028a9865c9de18ea0c918e87dd763662aff9ed"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_1/daily.csv",
+      "bytes": 3232,
+      "sha256": "faa2d49d77b455494bc92c612d1e9ff68291ed472f04757b0826d86ac0a6274f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_1/planning_log.json",
+      "bytes": 518659,
+      "sha256": "4bbd4434e79c32136f3d5cc85a9c774a9cc4ffe3dd97f5ee4becfd5277bc119d"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_1/summary.json",
+      "bytes": 1651,
+      "sha256": "9178224d76105b5e5b534b07262cc8946ae08bcca69cda53ed60c4961be320a3"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_1/trajectory.npz",
+      "bytes": 55811,
+      "sha256": "e48bfac4e23923651a7886ed3783877c5d3133d984e8d0a1544ac55052e23edc"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_2/config.json",
+      "bytes": 354,
+      "sha256": "8be5e7dbbd38fdc528d34ccd1d85d17d9082d62437380533dfefaf7ad97299b5"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_2/daily.csv",
+      "bytes": 3284,
+      "sha256": "f1ed75a9be0a5801a76cee64a82eb8b05f0fcdaa81374dba50ed767efb16b5c1"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_2/planning_log.json",
+      "bytes": 687065,
+      "sha256": "3b8f4ced14ab6fcf69f2ce5f34d6768e15053f41c76eaa32b303909ccf390dfd"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_2/summary.json",
+      "bytes": 1642,
+      "sha256": "8b2f578b3076fa8eaa9c59ce0947f0508b30939fe26f036e624bb823315dadd2"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_2/trajectory.npz",
+      "bytes": 57163,
+      "sha256": "d483cd51e9033cdede57424cdeb7e7802fa296f65b5179245130b8576e57dcca"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_3/config.json",
+      "bytes": 354,
+      "sha256": "b21f75a90d63cb77dc3f617050650830beff706f00eadf31e7296eac833e0675"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_3/daily.csv",
+      "bytes": 3264,
+      "sha256": "1a528d8e4b7fb314578988d5ca5e0ccfa1b5171f02bc743f08bfe1d6c1aff61a"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_3/planning_log.json",
+      "bytes": 667597,
+      "sha256": "c3bd0bcf5ff90e5b5a696d2b139b309dcc78d8b884dadf04d93d9f8f5a0f974c"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_3/summary.json",
+      "bytes": 1614,
+      "sha256": "cbbd7b30dce216b7cebfa79d229a303e62fc29077da7a67c7d7f053dde35d9a2"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/validate_q43_k_3/trajectory.npz",
+      "bytes": 57137,
+      "sha256": "7ef9e7dcc9df27d0bce510cd0aa895cfa0b57b9f596c264598c745170e9ba3bd"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q42/config.json",
+      "bytes": 514,
+      "sha256": "8f37e7b9a69b7c68aa8ff44f62e538218c39dd554d02dd3f49097027589c8084"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q42/daily.csv",
+      "bytes": 7521,
+      "sha256": "baf85ca0d2a57c8c805c4d9aa3dc108f301bbe11fe34ca6121ff44a58e640261"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q42/planning_log.json",
+      "bytes": 443047,
+      "sha256": "3054d3abf5ce7d60257b94120fb766a02f2204f0a79695f65b7512106f1aed5f"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q42/summary.json",
+      "bytes": 1504,
+      "sha256": "d63c7b4faf63db7d2fd313e7018547b1417cac43e94bb6092dc0f7d79de7cb62"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q42/trajectory.npz",
+      "bytes": 142173,
+      "sha256": "41d7d0051bf5b1fd08f05c2c3232dd082f23bf56bebd44e380fe04adf7ac597d"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q43/config.json",
+      "bytes": 514,
+      "sha256": "f1bdaa441c840e9ec080904045f57cecb9fa982383ac174226743348a7640926"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q43/daily.csv",
+      "bytes": 8625,
+      "sha256": "04ca4e8ee887420f0436361df34fe4a5709cf9c4b031f1cbd6025b1872788151"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q43/planning_log.json",
+      "bytes": 1303012,
+      "sha256": "04e4e0fb08b3534ca0d12942600e66ba553c9258a15b750397855819a74e0f0e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q43/summary.json",
+      "bytes": 1602,
+      "sha256": "4e3e2e5dd14999c29c409aeddf2acb24d453a2c1704fbc5dc4ef0487a1f4ac16"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/warmup_q43/trajectory.npz",
+      "bytes": 150628,
+      "sha256": "26ca94c365eba865e3f860d19fae36de2924429c246c627bb578ab0acb59e9ed"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-2/artifact_checks.json",
+      "bytes": 445,
+      "sha256": "8dd895b63293d134e1ebd678fb3161c10a0ee6a915f1a282f0bed578dc2e4f0e"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-2/充放电量_A1_F13.png",
+      "bytes": 43548,
+      "sha256": "6cf4ca22ae90451bde56bcde323bb6cb69e8bf7a103687ee92837f43fce941fa"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-2/充放电量_A2000_F2005.png",
+      "bytes": 22447,
+      "sha256": "55816d2b3029a45cd2578a7c36f0034ba984d449f5fc9c5f8268b67b04a78a57"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-2/紧急购电量_A1_C12.png",
+      "bytes": 29144,
+      "sha256": "91ab2977357e0e993613079beb4518b847d1c6131637665f0bf4ad07792b39e6"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-2/紧急购电量_A3966_C3971.png",
+      "bytes": 19627,
+      "sha256": "29013cd2db136eef400535646e9d16a540abb5591abc7f0167c5784cc0d12943"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-2/计划购电量_A1_E6.png",
+      "bytes": 24608,
+      "sha256": "c080eefcd6079581443bfdecc79f6f259a09e980aa0a3c4175349b4e973d2bb1"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-2/计划购电量_EN330_EQ335.png",
+      "bytes": 22746,
+      "sha256": "5593e2c8fda7b22247c8d6818d55d153708b14f092105e4cedd89fac101cb7e8"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/artifact_checks.json",
+      "bytes": 442,
+      "sha256": "1371c68b60deb3a28e4cb7c46bba1a8c19c721a3036205d54cb6d182f9ee30fe"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/充放电量_A1_F13.png",
+      "bytes": 45548,
+      "sha256": "23f05880fbff4f13d7da22de0e269dcd6e4c6ba75e0fe054aa4fae2b10f26201"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/充放电量_A2000_F2005.png",
+      "bytes": 23303,
+      "sha256": "552c55ae90e73f6906517799cc3ce9e8db9d1c750bf8082a4b99d2581d311dfb"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/紧急购电量_A1_C12.png",
+      "bytes": 30136,
+      "sha256": "db7ec1dee6380be23283859e2bc0fa72c6b21f02fbe6b71148b45b4767d89cca"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/紧急购电量_A4104_C4109.png",
+      "bytes": 18207,
+      "sha256": "3d94d47d19f6c90ec5c8ff19e242ccce6c7b77aaa96d34541f7244bbc6d4b455"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/计划购电量_A1_E6.png",
+      "bytes": 24753,
+      "sha256": "ed72fcb03b5fff467343eebba93bc5bc21b783bf94905253a5692fafc7358256"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/计划购电量_EN330_EQ335.png",
+      "bytes": 23046,
+      "sha256": "5a1efb20235914ae6bdb3e00dea2b314cc96ef6529bf6d2507123da52f879137"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/调整购电量_A1_E6.png",
+      "bytes": 24753,
+      "sha256": "ed72fcb03b5fff467343eebba93bc5bc21b783bf94905253a5692fafc7358256"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_qa/result4-3/调整购电量_EN330_EQ335.png",
+      "bytes": 23071,
+      "sha256": "31cc6facc57aa5ea8515dd7e7f402218db1da69d5490f7ea1e34aee1a3ab13bb"
+    },
+    {
+      "path": "02_计算工程/outputs/full_q4_20260913/workbook_verification.json",
+      "bytes": 806,
+      "sha256": "2896faa3b4cebbb7398e651610819a7b3137e0a542e157764771fbcd87621654"
+    },
+    {
+      "path": "02_计算工程/outputs/package.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "02_计算工程/outputs/prepare.log",
+      "bytes": 2278,
+      "sha256": "6cc6a9febf3724dcfe7e0f0db1da9ef1990a8fb1f604209dd217a3502622206a"
+    },
+    {
+      "path": "02_计算工程/outputs/prepared/formal.npz",
+      "bytes": 4718168,
+      "sha256": "5f3856bb43a4cdd6fb0f69e92d6a57955b5ffccb6fb0de27bb9880f92194bbbe"
+    },
+    {
+      "path": "02_计算工程/outputs/prepared/manifest.json",
+      "bytes": 825,
+      "sha256": "d04660b6867508af021b65b20acbf92951abf98156984cff9b8cebd10256ef66"
+    },
+    {
+      "path": "02_计算工程/outputs/prepared/price_selection.json",
+      "bytes": 2097,
+      "sha256": "c4372671de7922f7b7e0cf78d02b3c23d3a47cbdb054d451fd2eadbb465e2edc"
+    },
+    {
+      "path": "02_计算工程/outputs/prepared/supply.npz",
+      "bytes": 1781593,
+      "sha256": "bfb10f5fadd0913650b1d9cb0762d788ff26d83438499dcb442990b96025f5c8"
+    },
+    {
+      "path": "02_计算工程/outputs/prepared/warmup.npz",
+      "bytes": 4125681,
+      "sha256": "467c57817796f11e035bcaf4920846a95e945ae25e1c02127bff00ca490ca9c6"
+    },
+    {
+      "path": "02_计算工程/outputs/selection.log",
+      "bytes": 1840,
+      "sha256": "d65602ad31316f8f0a0c962a3710b9769e460b510bc9f9067544a895bd021772"
+    },
+    {
+      "path": "02_计算工程/outputs/structural.log",
+      "bytes": 466,
+      "sha256": "4a3f30fe605128867ff99822fb89de067e44d7c527f4ef09920531dece574879"
+    },
+    {
+      "path": "02_计算工程/outputs/template_inspect.log",
+      "bytes": 1790,
+      "sha256": "e70eb64a9e0d7f98e113ade831f71885b03e9e207c138190081b5c0448d55773"
+    },
+    {
+      "path": "02_计算工程/outputs/template_qa/result4-2_充放电量.png",
+      "bytes": 20970,
+      "sha256": "b46768549c7514157f98f2d2281332b0fae803b8e3d99fed75d8bf4be1340f54"
+    },
+    {
+      "path": "02_计算工程/outputs/template_qa/result4-2_紧急购电量.png",
+      "bytes": 10367,
+      "sha256": "b50dcb86093942277bfa491d794bdd8667a33fe948f0022479f9604b277a0d94"
+    },
+    {
+      "path": "02_计算工程/outputs/template_qa/result4-2_计划购电量.png",
+      "bytes": 11757,
+      "sha256": "a8d852571799c515545b3e537f81d0812e3d13d3eb871edc2d4996825dcfa696"
+    },
+    {
+      "path": "02_计算工程/outputs/template_qa/result4-3_充放电量.png",
+      "bytes": 20970,
+      "sha256": "b46768549c7514157f98f2d2281332b0fae803b8e3d99fed75d8bf4be1340f54"
+    },
+    {
+      "path": "02_计算工程/outputs/template_qa/result4-3_紧急购电量.png",
+      "bytes": 10334,
+      "sha256": "b58d6fa111b77bc3c0c55e62b6b9d7f200655a29aa6b2233fd03e42ab8d68822"
+    },
+    {
+      "path": "02_计算工程/outputs/template_qa/result4-3_计划购电量.png",
+      "bytes": 11757,
+      "sha256": "a8d852571799c515545b3e537f81d0812e3d13d3eb871edc2d4996825dcfa696"
+    },
+    {
+      "path": "02_计算工程/outputs/template_qa/result4-3_调整购电量.png",
+      "bytes": 11757,
+      "sha256": "a8d852571799c515545b3e537f81d0812e3d13d3eb871edc2d4996825dcfa696"
+    },
+    {
+      "path": "02_计算工程/outputs/unit_tests.log",
+      "bytes": 5163,
+      "sha256": "6f2d431f6210f37ae43cd95b8a035bc23134f8d746e11bf4f83e1b8eaebd9c7e"
+    },
+    {
+      "path": "02_计算工程/outputs/workbook_verification.log",
+      "bytes": 127,
+      "sha256": "1eae2ba771d8e5c6640e5253cfa6d73581d67e0dcda921710e4d6b9c4cbd48d2"
+    },
+    {
+      "path": "02_计算工程/outputs/workbooks.log",
+      "bytes": 370,
+      "sha256": "120e7b63b5050ae70323b8d2ead84da09504a42d3879441960dc9f2f5719f1aa"
+    },
+    {
+      "path": "02_计算工程/README.md",
+      "bytes": 3994,
+      "sha256": "0df08bdf8486611dffa44aadc9645065e8520726d2fb2cd1e0d73b2dbdada509"
+    },
+    {
+      "path": "02_计算工程/requirements.txt",
+      "bytes": 102,
+      "sha256": "bbe94bddea86040a78b968a08b335fa89e7ba837992492ee50d4e0d47bae048c"
+    },
+    {
+      "path": "02_计算工程/src/audit_q4.py",
+      "bytes": 7762,
+      "sha256": "45681348d5e4ae2db6ff73a82b9367b70d50d553e49a44703fcd58c45bb1298f"
+    },
+    {
+      "path": "02_计算工程/src/export_workbooks.mjs",
+      "bytes": 5312,
+      "sha256": "0e076b3312857d9ed9286696d0be9e13ef54c9b4cde19b1d49493fe9467b4379"
+    },
+    {
+      "path": "02_计算工程/src/forecasting.py",
+      "bytes": 8023,
+      "sha256": "aa1bd892b8253b79ad8b2259b708b55da9b1d0929dffdb31c7f7f751a8dee99a"
+    },
+    {
+      "path": "02_计算工程/src/forecasting_v2.py",
+      "bytes": 7840,
+      "sha256": "87e98683b675431fd05b0fc420eee80c78f76145728da50c38443093aa0e2d14"
+    },
+    {
+      "path": "02_计算工程/src/inspect_templates.mjs",
+      "bytes": 1081,
+      "sha256": "a2cfe8c5ff7e69d057ab6edd7e0b09d03eb852428547c902297e356b87624f9a"
+    },
+    {
+      "path": "02_计算工程/src/package_q4.py",
+      "bytes": 5295,
+      "sha256": "5ece5cc9d7eca52fbaa8ed58b868a23636edf91f2f71e264a3e9bf1b8c032224"
+    },
+    {
+      "path": "02_计算工程/src/plot_q4.py",
+      "bytes": 15213,
+      "sha256": "b1a10468d3b87000895e60665e598994f535a2eb1f397aa698897f27efe0792e"
+    },
+    {
+      "path": "02_计算工程/src/prepare_deliverables.py",
+      "bytes": 5285,
+      "sha256": "5bb79d3f58157a6c23c617de99ccec1a922d231a2496a6acbda1283817dd95da"
+    },
+    {
+      "path": "02_计算工程/src/prepare_q4.py",
+      "bytes": 1695,
+      "sha256": "10e45e12288a47a47654e0cdac205b29adbf55f5bfd68bea3f8f4b4db9a6cfd0"
+    },
+    {
+      "path": "02_计算工程/src/q3_forecasting.py",
+      "bytes": 10898,
+      "sha256": "7c69b35863b35a488ae706aa728b30bdf535bc3719e2511a47020a2de7e93b99"
+    },
+    {
+      "path": "02_计算工程/src/q4_dispatch.py",
+      "bytes": 11230,
+      "sha256": "17f5479c91e65d6bf5835c501a74bfbdcb878ce99bca653d50f5909a62ff8c50"
+    },
+    {
+      "path": "02_计算工程/src/q4_forecasting.py",
+      "bytes": 9700,
+      "sha256": "1aff2461f77b3012df113998fffcfacb41feedd4e2afe9157bd873753ca546f9"
+    },
+    {
+      "path": "02_计算工程/src/report_q4.py",
+      "bytes": 20261,
+      "sha256": "0a8056ab6e387a39c318f23f24d32dd89903a3d3a0414a0e68372f311f73893e"
+    },
+    {
+      "path": "02_计算工程/src/run_all_q4.py",
+      "bytes": 1379,
+      "sha256": "c6ff9320dca8739a568fc4e60aa255a0a2703292f3a44298a684d96ec54efe8a"
+    },
+    {
+      "path": "02_计算工程/src/run_q4.py",
+      "bytes": 13466,
+      "sha256": "d4615cc63f988bd95edcf28cd83094785085770d0b0bb5a3c2da8416705fa77e"
+    },
+    {
+      "path": "02_计算工程/src/scientific_style.py",
+      "bytes": 4858,
+      "sha256": "f89dadf3d377dd482048a9f9c959c3d6b87d360b969c55fc24314a5a241525b8"
+    },
+    {
+      "path": "02_计算工程/src/structural_checks.py",
+      "bytes": 3164,
+      "sha256": "d8aa1188d9005d62d73079eb55d8dda788ed0ccdccf6f989f8865c1fdb5764a9"
+    },
+    {
+      "path": "02_计算工程/src/verify_workbooks.py",
+      "bytes": 2722,
+      "sha256": "3df3bc9fd07040a2810cfbf7e43617a7697266ed90860cd1e881442d682658d6"
+    },
+    {
+      "path": "02_计算工程/tests/test_q4_dispatch.py",
+      "bytes": 5369,
+      "sha256": "6674f3d61541cc97ad28cc85d10a165fb6fb678d1282f6d8d58d1abe5b1cceef"
+    },
+    {
+      "path": "02_计算工程/tests/test_q4_forecasting.py",
+      "bytes": 3469,
+      "sha256": "54f531aa5e2ebcb9a95c7a37409f80bfd3abcd867240c1cccc3125c9d0c37af9"
+    },
+    {
+      "path": "03_复核记录/audit.json",
+      "bytes": 63373,
+      "sha256": "24b7b022401d2d08918b736ef2615422077d74341ef18484d11fa915586fd4c5"
+    },
+    {
+      "path": "03_复核记录/environment.json",
+      "bytes": 265,
+      "sha256": "04791dadd82e9dacb6c83147374c6f7298cd0e7a6d2f4f1932aaeaa48c549d1a"
+    },
+    {
+      "path": "03_复核记录/manifest.json",
+      "bytes": 1307,
+      "sha256": "2796ae2058912a5130d700077db846314f097e6eedb8991f518434398461e8ca"
+    },
+    {
+      "path": "03_复核记录/paired_comparisons.json",
+      "bytes": 1645,
+      "sha256": "3f7cfabe3ad3a62b329812b06e95b77246f4b54ac9b1a9043003bd1422b79198"
+    },
+    {
+      "path": "03_复核记录/price_selection.json",
+      "bytes": 2097,
+      "sha256": "c4372671de7922f7b7e0cf78d02b3c23d3a47cbdb054d451fd2eadbb465e2edc"
+    },
+    {
+      "path": "03_复核记录/selection.json",
+      "bytes": 32986,
+      "sha256": "0019572273c185802ca0fc83b7301a705a51ead66abb133b082b7ee20850e2c4"
+    },
+    {
+      "path": "03_复核记录/structural_checks.json",
+      "bytes": 6658,
+      "sha256": "1dc964a2dc3c954ff23c4ff331ccd2e03bdb8586134768b4da7f8085e6469c09"
+    },
+    {
+      "path": "03_复核记录/unit_tests.log",
+      "bytes": 5163,
+      "sha256": "6f2d431f6210f37ae43cd95b8a035bc23134f8d746e11bf4f83e1b8eaebd9c7e"
+    },
+    {
+      "path": "03_复核记录/workbook_verification.json",
+      "bytes": 806,
+      "sha256": "2896faa3b4cebbb7398e651610819a7b3137e0a542e157764771fbcd87621654"
+    },
+    {
+      "path": "03_复核记录/图表校验.json",
+      "bytes": 4203,
+      "sha256": "0aaa6ae0ff146eacda52e02468c51a64ff1820699d6cfb6f46e4b8b0a4e06e7e"
+    },
+    {
+      "path": "交付校验清单.json",
+      "bytes": 64816,
+      "sha256": "8f1352c7c88677c3cbe2868086ee7b7c7a3cc3875b7cb8a7e1b89817252bb4a6"
+    },
+    {
+      "path": "先读我.md",
+      "bytes": 1186,
+      "sha256": "06b50a2429f87dcf2d1cdce4678ecf47e0e4726f9ddf757bae946617a1c004a7"
+    }
+  ],
+  "parent_original": {
+    "assumptions.md": "bac0a50a25cacfb6f7877b999918f34131e041c7cbdcc761ee54d025cb277870",
+    "collaboration-handoff.md": "ac387f12ad08f9c81853c464ec396a23a5c8047dbf201cde1340ec453454358d",
+    "learning-guide.md": "c306ff36dcc84c2533ef271358f8ef7b97cee173e2a5088bcd25ec4dc4859859",
+    "model-q4-revision-notes.md": "66b13e47324768ff4e903f6104fa5d880c3d24279bb146247504ddd61bea78ba",
+    "model-q4.pdf": "ea1b36f06a3f375b3b87e2c9275bf434cbb7b548ab6193e9449922e925054335",
+    "model-q4.tex": "b4b21af6ee264545997589cf6ac26933f60dda04727c722bb9a3a55ef1c0b155",
+    "modeling-ideas.md": "3934d6c9574d251ad5706316661847183a6486f27caeb6dcb14d09b38124cf04",
+    "README.md": "add84798f8b40fb73c6f6abca9c54deb52e021c450ebfab6282d1599c88db5d3"
+  }
+}

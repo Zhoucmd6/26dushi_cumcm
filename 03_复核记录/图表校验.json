@@ -1,0 +1,149 @@
+[
+  {
+    "name": "01_电价预测与信息更新",
+    "width_mm": 205.7,
+    "height_mm": 96.5,
+    "png_dpi": 450,
+    "axes": 2,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "01_电价预测与信息更新.png",
+        "bytes": 434963,
+        "sha256": "c6fdaa00cce48a3b1c15820d2acb268c85ac03f1f4242920b363b5054ae4f1a7"
+      },
+      {
+        "file": "01_电价预测与信息更新.svg",
+        "bytes": 69685,
+        "sha256": "525ed3529bc6db346700044996d6839d326957d102732564f6501bf040529b46"
+      }
+    ]
+  },
+  {
+    "name": "02_全年实际费用对照",
+    "width_mm": 228.6,
+    "height_mm": 111.8,
+    "png_dpi": 450,
+    "axes": 2,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "02_全年实际费用对照.png",
+        "bytes": 271756,
+        "sha256": "d290bbcb91c46a8a0c91e77b0eb7c6bf45eb0242c509053f54742d4379c7df2e"
+      },
+      {
+        "file": "02_全年实际费用对照.svg",
+        "bytes": 20725,
+        "sha256": "ec9bc70f393ba602bea2beece4697b9b3c8d225664edd5e90bdd45562d907432"
+      }
+    ]
+  },
+  {
+    "name": "03_月度费用与紧急购电",
+    "width_mm": 190.5,
+    "height_mm": 142.2,
+    "png_dpi": 450,
+    "axes": 2,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "03_月度费用与紧急购电.png",
+        "bytes": 198137,
+        "sha256": "4e68c44b991d0ace099a24a0e0243ae4bd847725381cae72fa90a8818e03cd6b"
+      },
+      {
+        "file": "03_月度费用与紧急购电.svg",
+        "bytes": 27518,
+        "sha256": "e5780e89b2a09fc1ca20a258e2962a3726f59218cef983f1d58fcc15459b9092"
+      }
+    ]
+  },
+  {
+    "name": "04_参数选择与样本外检验",
+    "width_mm": 198.1,
+    "height_mm": 154.9,
+    "png_dpi": 450,
+    "axes": 4,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "04_参数选择与样本外检验.png",
+        "bytes": 452388,
+        "sha256": "defa0ccf6b150555f50ae93dd5db887e5277caf962bb90d52a4aeef034d6d3c8"
+      },
+      {
+        "file": "04_参数选择与样本外检验.svg",
+        "bytes": 38895,
+        "sha256": "e0050e2fe314002cdff35613d96424c22c747e91af3eed1a415880da5dce6027"
+      }
+    ]
+  },
+  {
+    "name": "05_分组信号与桥接库存",
+    "width_mm": 203.2,
+    "height_mm": 104.1,
+    "png_dpi": 450,
+    "axes": 2,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "05_分组信号与桥接库存.png",
+        "bytes": 395152,
+        "sha256": "1ab5a45663f4f362cea98d7a208c560b479fbec912a4f74792978c847fef7af8"
+      },
+      {
+        "file": "05_分组信号与桥接库存.svg",
+        "bytes": 35771,
+        "sha256": "f10048e24d982880ae3f1ae824fbd35b67100b84fb6240a36cf4e011d2aabdde"
+      }
+    ]
+  },
+  {
+    "name": "06_Q42指定日期购电与储能",
+    "width_mm": 198.1,
+    "height_mm": 241.3,
+    "png_dpi": 450,
+    "axes": 8,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "06_Q42指定日期购电与储能.png",
+        "bytes": 713663,
+        "sha256": "266088f61665ccc18784df588a362ac99d60ec18e56d28c6dc98cef754025efd"
+      },
+      {
+        "file": "06_Q42指定日期购电与储能.svg",
+        "bytes": 170345,
+        "sha256": "0c3fefa01ad86eaa27781e032b8bc3046c6fc0905479d52086cab4115f3a6fc5"
+      }
+    ]
+  },
+  {
+    "name": "07_Q43指定日期购电与储能",
+    "width_mm": 198.1,
+    "height_mm": 241.3,
+    "png_dpi": 450,
+    "axes": 8,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "07_Q43指定日期购电与储能.png",
+        "bytes": 758079,
+        "sha256": "07dd2c57f6309c2a3b9938a3a647a96e91141335ee61167b766400d666d2b9c6"
+      },
+      {
+        "file": "07_Q43指定日期购电与储能.svg",
+        "bytes": 193773,
+        "sha256": "7f315c878115a387031983dcb7ba8daad2078dfd8398d98600d4fa4c98d22b95"
+      }
+    ]
+  }
+]

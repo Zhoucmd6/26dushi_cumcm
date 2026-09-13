@@ -1,0 +1,45 @@
+{
+  "inputs": {
+    "actual_points.csv": "f0462e5eb0162797365ea1f389e61afbb0ea052397908ad3b84b656f22f4ff64",
+    "baseline_points.csv": "cf93a433185f61e408d871f844495eda7439e824b4ca596eca098e3b94009c89",
+    "price_points.csv": "13120e2a260027b636264312937ef9ac56dc2fa2634574a73e372580d3bfa349",
+    "pv_forecasts.csv": "3ae9423d0b7af16f7a847d531dc2eb0ad53754c926952a611651bd42f1883c19"
+  },
+  "model": "b4b21af6ee264545997589cf6ac26933f60dda04727c722bb9a3a55ef1c0b155",
+  "numeric_code": {
+    "q4_dispatch.py": "17f5479c91e65d6bf5835c501a74bfbdcb878ce99bca653d50f5909a62ff8c50",
+    "q4_forecasting.py": "1aff2461f77b3012df113998fffcfacb41feedd4e2afe9157bd873753ca546f9",
+    "run_q4.py": "d4615cc63f988bd95edcf28cd83094785085770d0b0bb5a3c2da8416705fa77e"
+  },
+  "pilot": false,
+  "risk_weight": 0,
+  "settlement": "delivery_real_price_original_commitment_once",
+  "battery": {
+    "eta_c": 0.9,
+    "eta_d": 0.9,
+    "minimum": 1200.0,
+    "maximum": 10800.0,
+    "limit": 833.3333333333334,
+    "reference": 6000.0
+  },
+  "residual_window": 28,
+  "residual_first_day_index": 7,
+  "gamma_candidates": [
+    0,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "rho_candidates": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "K_candidates": [
+    1,
+    2,
+    3
+  ]
+}

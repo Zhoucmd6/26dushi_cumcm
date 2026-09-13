@@ -1,0 +1,12 @@
+{
+  "python": "3.13.5",
+  "numpy": "2.4.6",
+  "scipy": "1.15.3",
+  "sklearn": "1.6.1",
+  "statsmodels": "0.14.4",
+  "matplotlib": "3.10.0",
+  "openpyxl": "3.1.5",
+  "numerical_threads": 1,
+  "random_forest_seed": 20260912,
+  "grouping_seed": 20260913
+}

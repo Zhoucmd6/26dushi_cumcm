@@ -1,0 +1,23 @@
+test_adjustment_seventy_ninety_band (test_q4_dispatch.DispatchTests.test_adjustment_seventy_ninety_band) ... ok
+test_invalid_price_or_mixed_q43_shrink_rejected (test_q4_dispatch.DispatchTests.test_invalid_price_or_mixed_q43_shrink_rejected) ... ok
+test_lookahead_includes_common_policy_and_shared_bridge (test_q4_dispatch.DispatchTests.test_lookahead_includes_common_policy_and_shared_bridge) ... ok
+test_lp_purification_equals_milp (test_q4_dispatch.DispatchTests.test_lp_purification_equals_milp) ... ok
+test_one_group_equals_old_midnight (test_q4_dispatch.DispatchTests.test_one_group_equals_old_midnight) ... ok
+test_one_group_equals_old_update (test_q4_dispatch.DispatchTests.test_one_group_equals_old_update) ... ok
+test_path_repairing_preserves_common_objective (test_q4_dispatch.DispatchTests.test_path_repairing_preserves_common_objective) ... ok
+test_purification_preserves_stock_and_reduces_deficit (test_q4_dispatch.DispatchTests.test_purification_preserves_stock_and_reduces_deficit) ... ok
+test_real_bill_uses_actual_price_and_original_commitment (test_q4_dispatch.DispatchTests.test_real_bill_uses_actual_price_and_original_commitment) ... ok
+test_shrink_matches_independent_cartesian_mixture (test_q4_dispatch.DispatchTests.test_shrink_matches_independent_cartesian_mixture) ... ok
+test_shrink_rho_zero_matches_constant_price (test_q4_dispatch.DispatchTests.test_shrink_rho_zero_matches_constant_price) ... ok
+test_weighted_eighty_percent_quantile (test_q4_dispatch.DispatchTests.test_weighted_eighty_percent_quantile) ... ok
+test_current_and_future_prices_do_not_enter_prediction (test_q4_forecasting.ForecastTests.test_current_and_future_prices_do_not_enter_prediction) ... ok
+test_groups_require_five_distinct_days_and_mapping_is_executable (test_q4_forecasting.ForecastTests.test_groups_require_five_distinct_days_and_mapping_is_executable) ... ok
+test_negative_net_load_is_not_clipped (test_q4_forecasting.ForecastTests.test_negative_net_load_is_not_clipped) ... ok
+test_official_linear_interpolation_energy (test_q4_forecasting.ForecastTests.test_official_linear_interpolation_energy) ... ok
+test_price_net_residuals_keep_same_day_pairing (test_q4_forecasting.ForecastTests.test_price_net_residuals_keep_same_day_pairing) ... ok
+test_scenarios_ignore_future_observations_and_unreleased_official (test_q4_forecasting.ForecastTests.test_scenarios_ignore_future_observations_and_unreleased_official) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.200s
+
+OK
