@@ -1,0 +1,54 @@
+{
+  "config": {
+    "version": "version2_q1_q2_pdf",
+    "model_source": "model-q1-q2-revised.pdf",
+    "scope": "Q1 and Q2 fixed-midnight main model; Q3 remains in original project",
+    "time_interpretation": "source_label_is_interval_end",
+    "time_note": "Retain previously used 00:00-24:00 interval convention; PDF position-label ambiguity disclosed in report.",
+    "eta_charge": 0.9,
+    "eta_discharge": 0.9,
+    "candidates": [
+      "P1_weighted28",
+      "P2_fourier_arima",
+      "P3_random_forest"
+    ],
+    "january_policy": "common_predeclared_P1_continuous_dispatch_from_Jan1",
+    "january_first_day_forecast": "attachment1_prior_as_per_PDF_3.9.4",
+    "initial_january_kwh": 6000,
+    "year_end_kwh": 6000,
+    "selection_dates": [
+      "2025-01-21",
+      "2025-01-31"
+    ],
+    "selection_terminal_kwh": 6000,
+    "selection_primary_metric": "actual_cash_cost_yuan",
+    "terminal_multipliers": [
+      0.8,
+      1.0,
+      1.2
+    ],
+    "terminal_rule": "Phi(s)=-multiplier*min(price)/eta_charge*s",
+    "seed": 20260912,
+    "bootstrap_draws": 256,
+    "residual_days": 28,
+    "main_solver": "extensive",
+    "time_limit_s": 60,
+    "absolute_gap_yuan": 1e-05,
+    "relative_gap": 1e-08,
+    "emergency_reporting_threshold_kwh": 1e-06,
+    "output_start": "2025-02-01",
+    "output_end": "2025-12-31"
+  },
+  "pilot": false,
+  "inputs": {
+    "actual_points.csv": "f0462e5eb0162797365ea1f389e61afbb0ea052397908ad3b84b656f22f4ff64",
+    "baseline_points.csv": "cf93a433185f61e408d871f844495eda7439e824b4ca596eca098e3b94009c89"
+  },
+  "code": {
+    "run_v2.py": "6d35d35b0238fb4894e22dc738a6805bbdeefc069a4b73527b6387c1db823a62",
+    "forecasting_v2.py": "87e98683b675431fd05b0fc420eee80c78f76145728da50c38443093aa0e2d14",
+    "forecasting.py": "aa1bd892b8253b79ad8b2259b708b55da9b1d0929dffdb31c7f7f751a8dee99a",
+    "microgrid_core.py": "9b846a6d2d37a510452bc35ddf69dc58ffe1b5e2cb1301ad8b3fdcc6643a60e5",
+    "stochastic_dispatch.py": "1cb3c586c601ea90bc4a3d509173e31d96d8e58482fe0d3fdb2808db425c3f3c"
+  }
+}

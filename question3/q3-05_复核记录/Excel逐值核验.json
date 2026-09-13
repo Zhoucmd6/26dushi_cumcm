@@ -1,0 +1,21 @@
+{
+  "计划购电量": {
+    "dates": 334,
+    "ten_minute_values": 48096,
+    "date_and_value_checks": "passed"
+  },
+  "调整购电量": {
+    "dates": 334,
+    "ten_minute_values": 48096,
+    "date_and_value_checks": "passed"
+  },
+  "充放电量": {
+    "rows": 2004,
+    "values": "passed"
+  },
+  "紧急购电量": {
+    "rows": 3420,
+    "values": "passed"
+  },
+  "total_fee_yuan": 16627713.367881466
+}

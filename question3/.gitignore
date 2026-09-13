@@ -1,0 +1,21 @@
+# Dependencies and local runtime links
+**/node_modules/
+**/__pycache__/
+*.py[cod]
+**/.venv/
+**/venv/
+# Regenerable solver output and checkpoints
+**/outputs/
+**/caches/
+**/code_snapshot/
+**/final_code_snapshot/
+**/workbook_qa/
+**/pdf_qa/
+**/checkpoint.*
+*.npz
+*.inspect.ndjson
+# Local editor and operating-system files
+.DS_Store
+Thumbs.db
+~$*
+*.tmp

@@ -1,0 +1,38 @@
+{
+  "policy": {
+    "mode": "binned",
+    "gamma": 0.8251111111111111,
+    "calibration": {
+      "window": 28,
+      "shrink": 3.0,
+      "bin_hours": 6,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    "mask": 7
+  },
+  "start": "2025-02-01",
+  "end": "2025-12-31",
+  "days": 334,
+  "total_fee_yuan": 16627713.367881466,
+  "normal_fee_yuan": 15715201.13172384,
+  "emergency_fee_yuan": 912512.2361576268,
+  "emergency_kwh": 238472.03798243665,
+  "unused_kwh": 5671374.386703305,
+  "daily_emergency_cvar90_yuan": 12522.414063235496,
+  "daily_emergency_cvar95_yuan": 16718.03747569885,
+  "emergency_days": 255,
+  "initial_kwh": 1213.7962865188128,
+  "terminal_kwh": 6000.000000000003,
+  "runtime_s": 207.11330299999918,
+  "max_physical_residual": 4.689547949965345e-07,
+  "max_solver_gap_yuan": 9.152499842457473e-07,
+  "charge_kwh": 7372073.562067141,
+  "discharge_kwh": 5967072.001932251,
+  "throughput_kwh": 13339145.563999392,
+  "adjust_up_kwh": 215374.19018187333,
+  "adjust_down_kwh": 845363.3625919296,
+  "adjusted_intervals": 8084,
+  "solver_runtime_total_s": 204.13830969998162,
+  "solver_runtime_max_s": 0.6797996999994211
+}

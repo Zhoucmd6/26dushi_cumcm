@@ -1,0 +1,10 @@
+{
+  "status": "numerical_results_complete",
+  "formal_days": 334,
+  "experiments": 14,
+  "validation_experiments": 9,
+  "pilot": false,
+  "exports_verified": true,
+  "independent_audit_verified": true,
+  "figures_visually_reviewed": true
+}

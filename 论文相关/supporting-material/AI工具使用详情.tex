@@ -1,0 +1,58 @@
+\documentclass[UTF8,zihao=-4]{ctexart}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{booktabs,tabularx,array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\setlength{\parindent}{2em}
+\linespread{1.25}
+\renewcommand{\arraystretch}{1.2}
+\newcommand{\verify}{\textcolor{gray}{\textbf{【队员核验后填写】}}}
+\pagestyle{plain}
+
+\begin{document}
+\begin{center}
+{\zihao{2}\bfseries AI工具使用详情\par}
+\vspace{0.8em}
+{\zihao{-4}全国大学生数学建模竞赛支撑材料}
+\end{center}
+
+\section{使用的工具}
+
+本队使用OpenAI Codex（GPT-5系列模型）辅助整理本地项目中的题面、建模文档、程序结果和论文格式要求。最终提交前，应由参赛队根据任务界面记录核对并补充准确的产品版本、模型标识和使用日期。
+
+\section{使用目的和环节}
+
+{\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{1.7cm}p{6.0cm}p{5.2cm}}
+\toprule
+环节 & AI辅助内容 & 人工责任 \\
+\midrule
+论文结构 & 根据2026官方格式建立无目录的摘要、正文、声明、参考文献和附录结构 & 队员核对赛区要求和最终页数 \\
+语言与排版 & 将已有模型与结果整理为中文科技论文表述，生成LaTeX排版源文件 & 队员逐句确认含义、删改表述 \\
+模型审阅 & 检查功率/电量、信息时间线、跨日SOC和结算变量是否一致 & 建模手确认公式与最终实现相符 \\
+结果整理 & 从正式结果说明和结果文件提取Q1、Q2数值与图表 & 编程手独立重算费用和约束 \\
+合规检查 & 提示AI声明、支撑材料、匿名性和附件要求 & 全队完成最终提交检查 \\
+\bottomrule
+\end{tabular}
+}
+
+\section{主要提示方式与过程}
+
+主要提示要求AI在指定项目目录内工作，先读取顶层协作约定、题面分析、Q1--Q3建模文档、程序输出和论文格式文件，再根据官方规范搭建论文工程；要求所有结果只能来自已有计算记录，未完成部分保留结构；要求图表具有数据来源、单位和可编辑源文件。AI随后核对2026年官方论文格式和AI使用规定，读取本地模型及结果说明，检查现有科研图，并生成阶段论文与本说明。
+
+\section{采纳、修改和核验}
+
+阶段稿采纳了AI生成的章节组织、部分语言表述和LaTeX代码。Q1、Q2数值来自团队已有正式成果，AI未重新求解；Q3仅整理已有模型，未生成数值结论；Q4保留待补结构。提交前由参赛队完成以下人工核验：
+
+\begin{enumerate}
+  \item \verify 建模手逐式核对公共约束、Q1--Q4目标函数与信息集。
+  \item \verify 编程手从固定配置重新运行程序，核对论文表格、图和附件5。
+  \item \verify 论文手逐句审查摘要、结论、引用和所有百分比的比较基准。
+  \item \verify 全队检查匿名性、正文页数、PDF大小、源程序完整性和支撑材料文件树。
+\end{enumerate}
+
+本说明必须依据后续实际使用继续更新，不能把阶段记录直接视为最终声明。
+
+\end{document}

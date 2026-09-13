@@ -1,0 +1,11 @@
+{
+  "R_to_sigma_max_error_kw": 1.1368683772161603e-13,
+  "reliability_rows": 120240,
+  "score_rows": 465,
+  "scene_moment_rows": 12024,
+  "evaluation_days": 334,
+  "zero_pv_definition": "Actual PV equals zero; this post-hoc evaluation group includes night and potentially zero-generation daytime.",
+  "selected_mode": "binned",
+  "grouping": "lead_hour_bin=0 means all leads; scores in kW; repeated releases are not independent observations.",
+  "correlation_definition": "Scenario-probability-weighted L/G covariance and correlation at each time, then averaged over defined time points; not causal independence."
+}

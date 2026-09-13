@@ -1,0 +1,33 @@
+test_benders_matches_extensive_with_battery_and_pv (test_dispatch.DispatchTests.test_benders_matches_extensive_with_battery_and_pv) ... ok
+test_cross_day_state_is_carried_forward (test_dispatch.DispatchTests.test_cross_day_state_is_carried_forward) ... ok
+test_fixed_charging_can_trigger_emergency_purchase (test_dispatch.DispatchTests.test_fixed_charging_can_trigger_emergency_purchase) ... ok
+test_full_battery_curtails_free_pv (test_dispatch.DispatchTests.test_full_battery_curtails_free_pv) ... ok
+test_history_excludes_current_and_future_dates (test_dispatch.DispatchTests.test_history_excludes_current_and_future_dates) ... ok
+test_invalid_inputs_are_rejected (test_dispatch.DispatchTests.test_invalid_inputs_are_rejected) ... ok
+test_probabilities_are_not_silently_normalized (test_dispatch.DispatchTests.test_probabilities_are_not_silently_normalized) ... ok
+test_single_period_quantile_matches_hand_calculation (test_dispatch.DispatchTests.test_single_period_quantile_matches_hand_calculation) ... ok
+test_terminal_value_is_separate_from_cash_cost (test_dispatch.DispatchTests.test_terminal_value_is_separate_from_cash_cost) ... ok
+test_total_unused_can_be_free_pv (test_dispatch.DispatchTests.test_total_unused_can_be_free_pv) ... ok
+test_two_period_energy_loss_matches_hand_calculation (test_dispatch.DispatchTests.test_two_period_energy_loss_matches_hand_calculation) ... ok
+test_emergency_segments_preserve_sum_and_last_day_boundary (test_pipeline.PipelineTests.test_emergency_segments_preserve_sum_and_last_day_boundary) ... ok
+test_first_last_and_requested_time_mapping (test_pipeline.PipelineTests.test_first_last_and_requested_time_mapping) ... ok
+test_forecast_rejects_current_day_in_history (test_pipeline.PipelineTests.test_forecast_rejects_current_day_in_history) ... ok
+test_four_hour_aggregation_uses_24_periods (test_pipeline.PipelineTests.test_four_hour_aggregation_uses_24_periods) ... ok
+test_future_actual_values_cannot_change_current_plan_inputs (test_pipeline.PipelineTests.test_future_actual_values_cannot_change_current_plan_inputs) ... ok
+test_initial_boundary_tolerance_does_not_allow_real_violation (test_pipeline.PipelineTests.test_initial_boundary_tolerance_does_not_allow_real_violation) ... ok
+test_negative_emergency_reporting_threshold_is_rejected (test_pipeline.PipelineTests.test_negative_emergency_reporting_threshold_is_rejected) ... ok
+test_residuals_are_out_of_sample_and_paired (test_pipeline.PipelineTests.test_residuals_are_out_of_sample_and_paired) ... ok
+test_unsupported_model_configuration_is_not_ignored (test_pipeline.PipelineTests.test_unsupported_model_configuration_is_not_ignored) ... ok
+test_arima_reproduces_exact_periodic_signal (test_v2.ForecastTests.test_arima_reproduces_exact_periodic_signal) ... ok
+test_bootstrap_future_actual_changes_have_no_effect (test_v2.ForecastTests.test_bootstrap_future_actual_changes_have_no_effect) ... ok
+test_bootstrap_pairing_clipping_and_compression (test_v2.ForecastTests.test_bootstrap_pairing_clipping_and_compression) ... ok
+test_candidate_forecasts_use_history_prefix (test_v2.ForecastTests.test_candidate_forecasts_use_history_prefix) ... ok
+test_cold_start_uses_only_provided_prior (test_v2.ForecastTests.test_cold_start_uses_only_provided_prior) ... ok
+test_compressed_and_expanded_optimization_equivalent (test_v2.ForecastTests.test_compressed_and_expanded_optimization_equivalent) ... ok
+test_reject_future_history (test_v2.ForecastTests.test_reject_future_history) ... ok
+test_tree_features_no_same_day_target (test_v2.ForecastTests.test_tree_features_no_same_day_target) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 1.156s
+
+OK

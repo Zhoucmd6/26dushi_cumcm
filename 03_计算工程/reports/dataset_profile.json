@@ -1,0 +1,379 @@
+{
+  "scope": "2025全年描述性检查，不能作为任何训练或预测效果的无泄漏验证",
+  "baseline_time_python_types": {
+    "time": 60,
+    "str": 84
+  },
+  "input_excel_cell_types": {
+    "附件1.xlsx/Sheet1": {
+      "s": 88,
+      "d": 60,
+      "n": 432
+    },
+    "附件2.xlsx/小区负载": {
+      "s": 2,
+      "d": 508,
+      "n": 52560
+    },
+    "附件2.xlsx/光伏发电实际功率": {
+      "s": 2,
+      "d": 508,
+      "n": 52560
+    },
+    "附件3.xlsx/Sheet1": {
+      "s": 2946,
+      "n": 35040
+    },
+    "附件4.xlsx/Sheet1": {
+      "s": 2,
+      "d": 508,
+      "n": 52560
+    }
+  },
+  "stats": {
+    "baseline_price": {
+      "n": 144,
+      "min": 0.3713,
+      "p25": 0.4363,
+      "median": 0.80735,
+      "p75": 0.984475,
+      "p95": 1.347195,
+      "max": 1.3952,
+      "mean": 0.7661972222222223,
+      "zero_n": 0,
+      "negative_n": 0,
+      "nonfinite_n": 0
+    },
+    "baseline_load": {
+      "n": 144,
+      "min": 3309.3934,
+      "p25": 3546.0184,
+      "median": 4377.57425,
+      "p75": 5672.895,
+      "p95": 5895.870925,
+      "max": 5958.9696,
+      "mean": 4626.0336708333325,
+      "zero_n": 0,
+      "negative_n": 0,
+      "nonfinite_n": 0
+    },
+    "baseline_pv": {
+      "n": 144,
+      "min": 0.0,
+      "p25": 0.0,
+      "median": 387.61125,
+      "p75": 5012.76325,
+      "p95": 7470.71169,
+      "max": 7612.316,
+      "mean": 2311.7848194444446,
+      "zero_n": 55,
+      "negative_n": 0,
+      "nonfinite_n": 0
+    },
+    "load": {
+      "n": 52560,
+      "min": 1995.7176,
+      "p25": 3517.3475,
+      "median": 4270.6836,
+      "p75": 6138.408125,
+      "p95": 6916.4583299999995,
+      "max": 7978.8849,
+      "mean": 4626.033670125571,
+      "zero_n": 0,
+      "negative_n": 0,
+      "nonfinite_n": 0
+    },
+    "pv_actual": {
+      "n": 52560,
+      "min": 0.0,
+      "p25": 0.0,
+      "median": 18.8589,
+      "p75": 4903.734725,
+      "p95": 7956.01249,
+      "max": 10216.2,
+      "mean": 2311.7857090962707,
+      "zero_n": 23540,
+      "negative_n": 0,
+      "nonfinite_n": 0
+    },
+    "pv_forecast": {
+      "n": 35040,
+      "min": 0.0,
+      "p25": 0.0,
+      "median": 0.0,
+      "p75": 4740.548275,
+      "p95": 8034.005369999996,
+      "max": 9995.8875,
+      "mean": 2279.8011315325343,
+      "zero_n": 17525,
+      "negative_n": 0,
+      "nonfinite_n": 0
+    },
+    "price": {
+      "n": 52560,
+      "min": 0.0076,
+      "p25": 0.4537,
+      "median": 0.73845,
+      "p75": 1.0274,
+      "p95": 1.3419,
+      "max": 1.7936,
+      "mean": 0.7661976046423136,
+      "zero_n": 0,
+      "negative_n": 0,
+      "nonfinite_n": 0
+    }
+  },
+  "extrema": {
+    "load": {
+      "min": {
+        "date": "2025-10-11",
+        "label": "22:10",
+        "excel_row": 285,
+        "excel_col": 134,
+        "value": 1995.7176
+      },
+      "max": {
+        "date": "2025-07-16",
+        "label": "17:40",
+        "excel_row": 198,
+        "excel_col": 107,
+        "value": 7978.8849
+      }
+    },
+    "pv": {
+      "min": {
+        "date": "2025-01-01",
+        "label": "00:10",
+        "excel_row": 2,
+        "excel_col": 2,
+        "value": 0.0
+      },
+      "max": {
+        "date": "2025-04-26",
+        "label": "11:30",
+        "excel_row": 117,
+        "excel_col": 70,
+        "value": 10216.2
+      }
+    },
+    "price": {
+      "min": {
+        "date": "2025-04-26",
+        "label": "12:00",
+        "excel_row": 117,
+        "excel_col": 73,
+        "value": 0.0076
+      },
+      "max": {
+        "date": "2025-07-03",
+        "label": "20:40",
+        "excel_row": 185,
+        "excel_col": 125,
+        "value": 1.7936
+      }
+    }
+  },
+  "monthly": [
+    {
+      "month": 1,
+      "load_mean_kw": 4725.773469153226,
+      "pv_mean_kw": 1589.1838943548387,
+      "price_mean": 0.8596107750896057,
+      "pv_daily_peak_mean_kw": 6221.034270967743
+    },
+    {
+      "month": 2,
+      "load_mean_kw": 4516.8965253224205,
+      "pv_mean_kw": 1966.4803466517858,
+      "price_mean": 0.7695711805555556,
+      "pv_daily_peak_mean_kw": 7260.721796428571
+    },
+    {
+      "month": 3,
+      "load_mean_kw": 4355.698995407706,
+      "pv_mean_kw": 2304.1967555331544,
+      "price_mean": 0.7255331989247312,
+      "pv_daily_peak_mean_kw": 8039.656609677419
+    },
+    {
+      "month": 4,
+      "load_mean_kw": 4392.976799050925,
+      "pv_mean_kw": 2701.685689328704,
+      "price_mean": 0.6988464120370371,
+      "pv_daily_peak_mean_kw": 8769.790653333333
+    },
+    {
+      "month": 5,
+      "load_mean_kw": 4401.6777526881715,
+      "pv_mean_kw": 2806.502396550179,
+      "price_mean": 0.6912003360215054,
+      "pv_daily_peak_mean_kw": 8724.806499999999
+    },
+    {
+      "month": 6,
+      "load_mean_kw": 4800.372629444444,
+      "pv_mean_kw": 2369.8265653009257,
+      "price_mean": 0.7662756712962964,
+      "pv_daily_peak_mean_kw": 7449.212963333333
+    },
+    {
+      "month": 7,
+      "load_mean_kw": 5337.258656070789,
+      "pv_mean_kw": 2723.254275,
+      "price_mean": 0.8300811827956989,
+      "pv_daily_peak_mean_kw": 8517.335380645163
+    },
+    {
+      "month": 8,
+      "load_mean_kw": 5045.177050336021,
+      "pv_mean_kw": 2915.9930929883517,
+      "price_mean": 0.7864659722222223,
+      "pv_daily_peak_mean_kw": 9337.64197419355
+    },
+    {
+      "month": 9,
+      "load_mean_kw": 4535.910432824075,
+      "pv_mean_kw": 2607.5995060879627,
+      "price_mean": 0.7202801851851851,
+      "pv_daily_peak_mean_kw": 8927.761203333333
+    },
+    {
+      "month": 10,
+      "load_mean_kw": 4347.019491330645,
+      "pv_mean_kw": 2364.313051769713,
+      "price_mean": 0.7202710573476703,
+      "pv_daily_peak_mean_kw": 8648.278329032257
+    },
+    {
+      "month": 11,
+      "load_mean_kw": 4337.6713466898145,
+      "pv_mean_kw": 1854.376335601852,
+      "price_mean": 0.7610268287037036,
+      "pv_daily_peak_mean_kw": 7186.0658066666665
+    },
+    {
+      "month": 12,
+      "load_mean_kw": 4691.305896191756,
+      "pv_mean_kw": 1513.8368958781361,
+      "price_mean": 0.8617168234767025,
+      "pv_daily_peak_mean_kw": 6089.482500000001
+    }
+  ],
+  "pv_above_load_points": 10130,
+  "pv_above_load_days": 330,
+  "all_zero_pv_days": 0,
+  "all_zero_pv_forecast_batches": 0,
+  "identical_day_rows_extra": {
+    "load": 0,
+    "pv": 0,
+    "price": 0
+  },
+  "forecast_date_labels_filled": 1095,
+  "forecast_alignment": {
+    "method": "原始整点标签直接对齐实际值；未插值；各批预报分别保留",
+    "matched": 35004,
+    "outside_actual_range": 36,
+    "outside_samples": [
+      {
+        "issued_at": "2025-12-31T06:00:00",
+        "lead": 19,
+        "valid_at": "2026-01-01T01:00:00",
+        "pred": 0.0,
+        "excel_row": 1459,
+        "excel_col": 21
+      },
+      {
+        "issued_at": "2025-12-31T06:00:00",
+        "lead": 20,
+        "valid_at": "2026-01-01T02:00:00",
+        "pred": 0.0,
+        "excel_row": 1459,
+        "excel_col": 22
+      }
+    ],
+    "all": {
+      "n": 35004,
+      "mae_kw": 186.60920503942404,
+      "rmse_kw": 438.55766692537196,
+      "bias_kw": -30.7621921780368
+    },
+    "positive_actual": {
+      "n": 17499,
+      "mae_kw": 373.2823940339448,
+      "rmse_kw": 620.2673624252993,
+      "bias_kw": -61.534931996114075
+    },
+    "zero_actual": {
+      "n": 17505,
+      "mae_kw": 0.0,
+      "rmse_kw": 0.0,
+      "bias_kw": 0.0
+    },
+    "zero_nonzero_disagreement_n": 1,
+    "zero_nonzero_disagreement_samples": [
+      {
+        "issued_at": "2025-05-29T06:00:00",
+        "lead": 24,
+        "valid_at": "2025-05-30T06:00:00",
+        "pred": 0.0,
+        "excel_row": 595,
+        "excel_col": 26,
+        "actual": 1142.8875
+      }
+    ],
+    "lead_bands": {
+      "1-6": {
+        "n": 4379,
+        "mae_kw": 112.32719285224938,
+        "rmse_kw": 184.0645058374825,
+        "bias_kw": -2.9526832838547588
+      },
+      "7-12": {
+        "n": 4379,
+        "mae_kw": 289.4458538250742,
+        "rmse_kw": 422.58961882110276,
+        "bias_kw": -32.25099737382965
+      },
+      "13-18": {
+        "n": 4373,
+        "mae_kw": 452.6748187742968,
+        "rmse_kw": 649.0682799812886,
+        "bias_kw": -79.20026688772012
+      },
+      "19-24": {
+        "n": 4368,
+        "mae_kw": 639.459125297619,
+        "rmse_kw": 952.121788875024,
+        "bias_kw": -131.93683385989013
+      }
+    },
+    "same_target_positive_pairs": {
+      "n": 4379,
+      "nearer_mae_kw": 112.32719285224938,
+      "farther_mae_kw": 638.3703163964375,
+      "nearer_better_fraction": 0.8846768668645809
+    }
+  },
+  "no_changes": [
+    "未删除记录",
+    "未替换零值或极值",
+    "未平滑",
+    "未归一化",
+    "未选择区间积分方式",
+    "未填写模板"
+  ],
+  "baseline_vs_annual_label_mean": {
+    "price": {
+      "max_abs_difference": 5.150684931509719e-05,
+      "same_after_rounding_4_decimals": 142
+    },
+    "load": {
+      "max_abs_difference": 5.041095710112131e-05,
+      "same_after_rounding_4_decimals": 141
+    },
+    "pv": {
+      "max_abs_difference": 0.04310438356164384,
+      "same_after_rounding_4_decimals": 133
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "input_hash_checks": 13,
+  "numerical_code_sha256": {
+    "q3_dispatch.py": "95ed7b3dd5510ef1732832f54a7d620054e48a0ca4f0b74a2cd1a2b5f989c859",
+    "q3_forecasting.py": "7c69b35863b35a488ae706aa728b30bdf535bc3719e2511a47020a2de7e93b99",
+    "run_q3.py": "319b82944debd84f30eec1de547db15b0eb8be00e6ce85212d3b808ed3f13ad4",
+    "q3_workflow.py": "566f6cf06e07e2e1431b6bb5afba22abdb0f9c8c48f649e576bdc45c4010ce1e",
+    "forecasting.py": "aa1bd892b8253b79ad8b2259b708b55da9b1d0929dffdb31c7f7f751a8dee99a",
+    "microgrid_core.py": "9b846a6d2d37a510452bc35ddf69dc58ffe1b5e2cb1301ad8b3fdcc6643a60e5"
+  },
+  "completed_annual_experiments": 21,
+  "unique_annual_policies": 20,
+  "completed_rolling_solves": 28056,
+  "january_calibration_candidates": 72,
+  "january_risk_comparators": 4,
+  "solver_routes": {
+    "main": {
+      "milp": 1336
+    },
+    "point_official": {
+      "milp": 1336
+    },
+    "scale_pooled": {
+      "milp": 1336
+    },
+    "info_mask0": {
+      "milp": 1336
+    },
+    "info_mask1": {
+      "milp": 1336
+    },
+    "info_mask2": {
+      "milp": 1336
+    },
+    "info_mask3": {
+      "milp": 1336
+    },
+    "info_mask4": {
+      "milp": 1336
+    },
+    "info_mask5": {
+      "milp": 1336
+    },
+    "info_mask6": {
+      "milp": 1336
+    },
+    "scale_exponential": {
+      "milp": 1336
+    },
+    "cvar90_lambda005": {
+      "milp": 1336
+    },
+    "cvar90": {
+      "milp": 1336
+    },
+    "cvar95_lambda005": {
+      "milp": 1336
+    },
+    "cvar95": {
+      "milp": 1336
+    },
+    "terminal_zero": {
+      "milp": 1336
+    },
+    "terminal_hard": {
+      "milp": 1336
+    },
+    "settlement_alternative": {
+      "milp": 1336
+    },
+    "efficiency_roundtrip90": {
+      "milp": 1336
+    },
+    "hourly_mean": {
+      "milp": 1336
+    },
+    "global_cash_selected": {
+      "milp": 1336
+    }
+  },
+  "solver_fallbacks": [],
+  "unit_tests": {
+    "tests_run": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true,
+    "time_utc": "2026-09-12T13:12:53.523609+00:00"
+  },
+  "calibration_audit": {
+    "checked_evaluation_days": 334,
+    "checked_release_target_points": 120240,
+    "independent_formula_max_errors": {
+      "bias_kw": 2.842170943040401e-14,
+      "center_kw": 1.8189894035458565e-12,
+      "binned_sigma_kw": 2.2737367544323206e-13,
+      "pooled_sigma_kw": 1.9895196601282805e-13,
+      "beta_per_hour": 3.0531133177191805e-16,
+      "sigma0_kw": 9.094947017729282e-13,
+      "exponential_sigma_kw": 1.4779288903810084e-12
+    },
+    "passed": true,
+    "tolerance": 1e-06,
+    "variance_convention": "Equal complete-day weights, within-day population second moments."
+  },
+  "max_audit_residual": 7.553911700597382e-07,
+  "workbook_total_fee_yuan": 16627713.367881466,
+  "figure_count": 7,
+  "finalized_at_utc": "2026-09-12T13:23:59.817745+00:00"
+}

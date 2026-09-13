@@ -1,0 +1,25 @@
+test_cvar_milp_matches_direct_tail (test_q3.Q3Tests.test_cvar_milp_matches_direct_tail) ... ok
+test_discrete_cvar_fractional_quantile_mass (test_q3.Q3Tests.test_discrete_cvar_fractional_quantile_mass) ... ok
+test_future_actuals_and_unreleased_forecasts_do_not_leak (test_q3.Q3Tests.test_future_actuals_and_unreleased_forecasts_do_not_leak) ... ok
+test_hourly_linear_integral (test_q3.Q3Tests.test_hourly_linear_integral) ... ok
+test_old_forecast_retains_original_lead (test_q3.Q3Tests.test_old_forecast_retains_original_lead) ... ok
+test_only_final_version_is_paid (test_q3.Q3Tests.test_only_final_version_is_paid) ... ok
+test_settlement_examples_and_alternative (test_q3.Q3Tests.test_settlement_examples_and_alternative) ... ok
+test_shared_days_preserve_joint_standard_residuals (test_q3.Q3Tests.test_shared_days_preserve_joint_standard_residuals) ... ok
+test_single_period_adjustment_quantiles (test_q3.Q3Tests.test_single_period_adjustment_quantiles) ... ok
+test_timeout_requires_feasible_lp_bound_certificate (test_q3.Q3Tests.test_timeout_requires_feasible_lp_bound_certificate) ... ok
+test_weighted_crps_matches_pairwise_definition (test_q3.Q3Tests.test_weighted_crps_matches_pairwise_definition) ... ok
+test_b4_changes_only_risk_relative_to_b3 (test_q3_alignment.AlignmentTests.test_b4_changes_only_risk_relative_to_b3) ... ok
+test_exponential_and_reliability_inverse_including_low_scale (test_q3_alignment.AlignmentTests.test_exponential_and_reliability_inverse_including_low_scale) ... ok
+test_hard_terminal_really_changes_dispatch (test_q3_alignment.AlignmentTests.test_hard_terminal_really_changes_dispatch) ... ok
+test_hourly_mean_alternative_has_correct_energy (test_q3_alignment.AlignmentTests.test_hourly_mean_alternative_has_correct_energy) ... ok
+test_midday_actuals_after_decision_and_later_release_do_not_leak (test_q3_alignment.AlignmentTests.test_midday_actuals_after_decision_and_later_release_do_not_leak) ... ok
+test_pdf_bias_formula_retains_dawn_without_historical_support (test_q3_alignment.AlignmentTests.test_pdf_bias_formula_retains_dawn_without_historical_support) ... ok
+test_rmse_uses_squared_errors_not_mean_absolute_error (test_q3_alignment.AlignmentTests.test_rmse_uses_squared_errors_not_mean_absolute_error) ... ok
+test_scenario_window_follows_selected_cache (test_q3_alignment.AlignmentTests.test_scenario_window_follows_selected_cache) ... ok
+test_three_hour_bins_cover_each_valid_point_once (test_q3_alignment.AlignmentTests.test_three_hour_bins_cover_each_valid_point_once) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.200s
+
+OK

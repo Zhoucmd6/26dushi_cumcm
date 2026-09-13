@@ -1,0 +1,7 @@
+{
+  "python": "3.13.5",
+  "numpy": "2.4.6",
+  "scipy": "1.15.3",
+  "sklearn": "1.6.1",
+  "statsmodels": "0.14.4"
+}

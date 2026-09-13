@@ -1,0 +1,37 @@
+\section{问题一模型、求解与结果}
+
+\subsection{确定性混合整数规划}
+
+问题一令$r_t=q_t$、$e_t=0$，富余量退化为弃光$0\le u_t\le G_t$。目标为
+\begin{equation}
+ \min F_1=\sum_{t=1}^{144}p_tq_t,
+\end{equation}
+并满足式\eqref{eq:balance}--\eqref{eq:soc}及$s_1=s_{145}=6000$ kWh。二进制变量$z_t$严格排除同时充放电。另删除$z_t$求解LP松弛并计算同时充放电诊断量，用于验证整数约束是否影响结果。
+
+\subsection{调度结果}
+
+MILP与LP均得到全天购电费35126.948589元，计划购电量59482.698998 kWh，期初与期末储能量均为6000 kWh。与不使用储能的可行基线48052.046591元相比，费用下降26.898\%。由于MILP能够直接保证物理互斥，后文采用MILP调度。
+
+\begin{table}[H]
+\centering
+\caption{问题一指定时段计划购电量}
+\begin{tabular}{cccc}
+\toprule
+时段 & 购电量/kWh & 时段 & 购电量/kWh\\
+\midrule
+10:00--10:10 & 0.000 & 12:00--12:10 & 480.412\\
+14:00--14:10 & 0.000 & 16:00--16:10 & 445.432\\
+18:00--18:10 & 531.894 & 20:00--20:10 & 0.000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+图\ref{fig:q1-dispatch}表明，储能在低价时段和光伏富余时充电，在高价时段或净负荷较高时放电；状态始终处于1.2--10.8 MWh安全区间，并在日末回到6 MWh。图中功率由每个10 min时段电量换算，未进行平滑。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{q1_dispatch.png}
+  \caption{问题一典型日购电、充放电、储能状态与电价}
+  \label{fig:q1-dispatch}
+\end{figure}
+

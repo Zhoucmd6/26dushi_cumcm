@@ -1,0 +1,33 @@
+\section{数据处理与公共物理模型}
+
+\subsection{数据结构与时间对齐}
+
+附件1含144个日内点；附件2和附件4分别含365天$\times$144点的实际负荷、光伏和实时电价；附件3含365天每天4次、每次未来24小时的光伏预报，共35040个预报值。程序检查未发现缺失值、非有限值或负的负荷、光伏和电价值。全年负荷范围为1995.72--7978.88 kW，实际光伏范围为0--10216.20 kW，波动电价范围为0.0076--1.7936元/kWh。
+
+附件给出功率，进入平衡式前统一转为时段电量：
+\begin{equation}
+ L_t=P^{L}_t\Delta t,\qquad G_t=P^{G}_t\Delta t,\qquad \Delta t=\frac16\ \mathrm h.
+\end{equation}
+最大充、放电功率5000 kW对应单时段电量上界$\bar B=833.333$ kWh。状态$s_1$对应0:00，$s_{145}$对应24:00。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{data_overview.png}
+  \caption{全年输入数据概览。阴影为同一源时间标签跨日的P10--P90范围；附件3误差仅在实际光伏大于0的目标整点统计。}
+  \label{fig:data-overview}
+\end{figure}
+
+\subsection{公共约束}
+
+对任一时段，调整后正常购电、紧急购电、光伏和电池放电共同满足负荷及充电需求：
+\begin{equation}
+ r_t+e_t+G_t+d_t=L_t+c_t+u_t.
+ \label{eq:balance}
+\end{equation}
+其中$q_t$是0:00原计划，$r_t$是最终执行的正常购电量，二者不是两股同时进入母线的电量。电池状态满足
+\begin{align}
+ s_{t+1}&=s_t+\eta_c c_t-\frac{d_t}{\eta_d},\label{eq:soc}\\
+ 1200\le s_t&\le10800,\qquad t=1,\ldots,145,\\
+ 0\le c_t&\le\bar B z_t,\qquad 0\le d_t\le\bar B(1-z_t),\quad z_t\in\{0,1\}.
+\end{align}
+问题二至四按$s_{i+1,1}=s_{i,145}$跨日衔接。以上约束与光伏--储能微网的分层能量管理结构一致\cite{elkazaz2019}，构成四问共同的物理层；后续只改变可用信息、目标函数和结算规则。

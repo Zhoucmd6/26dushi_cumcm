@@ -1,0 +1,1132 @@
+{
+  "selected": {
+    "config_id": "w28_s3_b6",
+    "calibration": {
+      "window": 28,
+      "shrink": 3.0,
+      "bin_hours": 6,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    "mode": "binned",
+    "gamma": 0.8251111111111111,
+    "total_fee_yuan": 673947.8679159017,
+    "daylight_crps_kw": 142.45193976347798,
+    "exponential_eligible": false
+  },
+  "global_cash_selected": {
+    "config_id": "w28_s3_b6",
+    "calibration": {
+      "window": 28,
+      "shrink": 3.0,
+      "bin_hours": 6,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    "mode": "pooled",
+    "gamma": 0.8251111111111111,
+    "total_fee_yuan": 673807.4884009178,
+    "daylight_crps_kw": 141.77227129293723,
+    "exponential_eligible": false
+  },
+  "probability_selected": {
+    "config_id": "w28_s3_b6",
+    "calibration": {
+      "window": 28,
+      "shrink": 3.0,
+      "bin_hours": 6,
+      "floor": 25.0,
+      "interpretation": "linear_nodes"
+    },
+    "mode": "binned",
+    "gamma": 0.8251111111111111,
+    "total_fee_yuan": 673947.8679159017,
+    "daylight_crps_kw": 142.45193976347798,
+    "exponential_eligible": false
+  },
+  "all_candidates": [
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.0,
+      "total_fee_yuan": 675631.2445364532,
+      "daylight_crps_kw": 144.70247775785975,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675648.1187226466,
+      "daylight_crps_kw": 144.70247775785975,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674801.2579098645,
+      "daylight_crps_kw": 144.70247775785975,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.0,
+      "total_fee_yuan": 675791.1948392517,
+      "daylight_crps_kw": 143.37558335038034,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675808.0690254451,
+      "daylight_crps_kw": 143.37558335038034,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674961.2081817054,
+      "daylight_crps_kw": 143.37558335038034,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.0,
+      "total_fee_yuan": 675696.4971993475,
+      "daylight_crps_kw": 143.20270175807616,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675713.3713855409,
+      "daylight_crps_kw": 143.20270175807616,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674866.5105727589,
+      "daylight_crps_kw": 143.20270175807616,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.0,
+      "total_fee_yuan": 675321.2781024672,
+      "daylight_crps_kw": 143.5074368573414,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675338.1521527147,
+      "daylight_crps_kw": 143.5074368573414,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674491.2926997476,
+      "daylight_crps_kw": 143.5074368573414,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.0,
+      "total_fee_yuan": 675511.2727024448,
+      "daylight_crps_kw": 142.80851931862378,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675528.1467526923,
+      "daylight_crps_kw": 142.80851931862378,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674681.2872997255,
+      "daylight_crps_kw": 142.80851931862378,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.0,
+      "total_fee_yuan": 675407.7501560567,
+      "daylight_crps_kw": 142.4802630961183,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675424.6242063042,
+      "daylight_crps_kw": 142.4802630961183,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s3_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674577.7647533373,
+      "daylight_crps_kw": 142.4802630961183,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.0,
+      "total_fee_yuan": 675567.6805861162,
+      "daylight_crps_kw": 144.07475837916797,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675584.1958436929,
+      "daylight_crps_kw": 144.07475837916797,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674739.232842571,
+      "daylight_crps_kw": 144.07475837916797,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.0,
+      "total_fee_yuan": 675597.7974789492,
+      "daylight_crps_kw": 142.84719262633635,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675614.312736526,
+      "daylight_crps_kw": 142.84719262633635,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674769.3651475001,
+      "daylight_crps_kw": 142.84719262633635,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.0,
+      "total_fee_yuan": 675567.9320996341,
+      "daylight_crps_kw": 142.6793280444046,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675584.4473572108,
+      "daylight_crps_kw": 142.6793280444046,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b3",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674739.4843560889,
+      "daylight_crps_kw": 142.6793280444046,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.0,
+      "total_fee_yuan": 675252.2556554948,
+      "daylight_crps_kw": 142.94211009286536,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675268.7708030201,
+      "daylight_crps_kw": 142.94211009286536,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674423.8080033098,
+      "daylight_crps_kw": 142.94211009286536,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.0,
+      "total_fee_yuan": 675455.5216928888,
+      "daylight_crps_kw": 142.34030793954315,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675472.036840414,
+      "daylight_crps_kw": 142.34030793954315,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674627.0677872561,
+      "daylight_crps_kw": 142.34030793954315,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.0,
+      "total_fee_yuan": 675349.3923207839,
+      "daylight_crps_kw": 142.00812445922432,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675365.9074683093,
+      "daylight_crps_kw": 142.00812445922432,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w14_s7_b6",
+      "calibration": {
+        "window": 14,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674520.9446685989,
+      "daylight_crps_kw": 142.00812445922432,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.0,
+      "total_fee_yuan": 674891.3942650557,
+      "daylight_crps_kw": 142.76294303667382,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674877.5536630432,
+      "daylight_crps_kw": 142.76294303667382,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674109.2184518608,
+      "daylight_crps_kw": 142.76294303667382,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.0,
+      "total_fee_yuan": 674761.1902577942,
+      "daylight_crps_kw": 141.75308756731084,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674747.3496557816,
+      "daylight_crps_kw": 141.75308756731084,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 673979.0144445994,
+      "daylight_crps_kw": 141.75308756731084,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.0,
+      "total_fee_yuan": 674624.8537225773,
+      "daylight_crps_kw": 141.6894585498515,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674611.0131205647,
+      "daylight_crps_kw": 141.6894585498515,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 673842.6779093825,
+      "daylight_crps_kw": 141.6894585498515,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.0,
+      "total_fee_yuan": 674730.0436582747,
+      "daylight_crps_kw": 142.45193976347798,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674716.2032029949,
+      "daylight_crps_kw": 142.45193976347798,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 673947.8679159017,
+      "daylight_crps_kw": 142.45193976347798,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.0,
+      "total_fee_yuan": 674777.2814317362,
+      "daylight_crps_kw": 142.0777947204278,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674763.4409764565,
+      "daylight_crps_kw": 142.0777947204278,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 673995.1056893632,
+      "daylight_crps_kw": 142.0777947204278,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.0,
+      "total_fee_yuan": 674589.6641432908,
+      "daylight_crps_kw": 141.77227129293723,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674575.8236880112,
+      "daylight_crps_kw": 141.77227129293723,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s3_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 3.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 673807.4884009178,
+      "daylight_crps_kw": 141.77227129293723,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.0,
+      "total_fee_yuan": 675041.9766009431,
+      "daylight_crps_kw": 142.99431541900336,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 675030.9075052891,
+      "daylight_crps_kw": 142.99431541900336,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674263.1691118893,
+      "daylight_crps_kw": 142.99431541900336,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.0,
+      "total_fee_yuan": 674829.5784447835,
+      "daylight_crps_kw": 141.75024034716668,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674818.5093491295,
+      "daylight_crps_kw": 141.75024034716668,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674050.7709557296,
+      "daylight_crps_kw": 141.75024034716668,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.0,
+      "total_fee_yuan": 674708.1424970536,
+      "daylight_crps_kw": 141.64889555775363,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674697.0734013997,
+      "daylight_crps_kw": 141.64889555775363,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b3",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 3,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 673929.3350079999,
+      "daylight_crps_kw": 141.64889555775363,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.0,
+      "total_fee_yuan": 674965.7686398466,
+      "daylight_crps_kw": 142.59570052250103,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674954.6980631241,
+      "daylight_crps_kw": 142.59570052250103,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "binned",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674186.9604623934,
+      "daylight_crps_kw": 142.59570052250103,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.0,
+      "total_fee_yuan": 674895.1963334307,
+      "daylight_crps_kw": 142.17829509081346,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674884.1257567082,
+      "daylight_crps_kw": 142.17829509081346,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "exponential",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 674116.3881559774,
+      "daylight_crps_kw": 142.17829509081346,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.0,
+      "total_fee_yuan": 674687.8786865405,
+      "daylight_crps_kw": 141.767126965986,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.41255555555555556,
+      "total_fee_yuan": 674676.8081098179,
+      "daylight_crps_kw": 141.767126965986,
+      "exponential_eligible": false
+    },
+    {
+      "config_id": "w28_s7_b6",
+      "calibration": {
+        "window": 28,
+        "shrink": 7.0,
+        "bin_hours": 6,
+        "floor": 25.0,
+        "interpretation": "linear_nodes"
+      },
+      "mode": "pooled",
+      "gamma": 0.8251111111111111,
+      "total_fee_yuan": 673909.0705090872,
+      "daylight_crps_kw": 141.767126965986,
+      "exponential_eligible": false
+    }
+  ],
+  "initial_validation_kwh": 1252.9270659308422,
+  "feb1_initial_kwh": 1213.7962865188128,
+  "selection_date": "2025-01-31 after 24:00"
+}

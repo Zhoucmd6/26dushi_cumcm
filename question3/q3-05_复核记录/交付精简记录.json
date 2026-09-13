@@ -1,0 +1,29 @@
+{
+  "before_files": 1288,
+  "before_bytes": 475750304,
+  "relocated_items": [
+    "q3-05_复核记录/pdf_aligned_20260912",
+    "q3-05_复核记录/q3_20260912",
+    "q3-05_复核记录/覆盖前历史_20260912",
+    "q3-05_复核记录/整理记录",
+    "q3-03_计算工程/node_modules",
+    "q3-03_计算工程/reports",
+    "q3-03_计算工程/src/inspect_q3_template.mjs",
+    "q3-03_计算工程/src/review_q3_export.mjs",
+    "q3-03_计算工程/data/raw/C题.pdf",
+    "q3-03_计算工程/data/raw/附件/附件4.xlsx",
+    "q3-03_计算工程/data/raw/附件/附件5/result1.xlsx",
+    "q3-03_计算工程/data/raw/附件/附件5/result2.xlsx",
+    "q3-03_计算工程/data/raw/附件/附件5/result4-2.xlsx",
+    "q3-03_计算工程/data/raw/附件/附件5/result4-3.xlsx",
+    "q3-03_计算工程/data/processed/price_points.csv",
+    "q3-01_使用说明/编程工作准则.md",
+    "q3-04_正式成果/第三问各时刻完整计划版本.csv",
+    "q3-04_正式成果/预测尺度与可信度R完整记录.csv",
+    "q3-04_正式成果/非负截断与联合场景诊断.csv",
+    "q3-04_正式成果/指定日期结果.json"
+  ],
+  "recovery_archive": "C:\\Users\\谷金龙\\Documents\\ChatGPT\\2026数模\\question3_不上传归档_20260912",
+  "protected_files_verified": 45,
+  "description": "Moved redundant history, caches, debug exports, unrelated inputs and runtime junction to a recoverable local archive outside the Git delivery folder. No file contents permanently deleted."
+}

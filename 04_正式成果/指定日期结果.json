@@ -1,0 +1,643 @@
+[
+  {
+    "date": "2025-03-20",
+    "planned_purchase_kwh": 70997.05661331884,
+    "emergency_purchase_kwh": 252.82764396745836,
+    "planned_plus_emergency_kwh": 71249.88425728629,
+    "planned_cost_yuan": 43221.99145434535,
+    "emergency_cost_yuan": 907.726999248639,
+    "actual_total_cost_yuan": 44129.71845359399,
+    "initial_kwh": 1200.0000000000023,
+    "terminal_kwh": 1199.9999999999986,
+    "total_unused_kwh": 4864.485397585069,
+    "purchases_at_requested_intervals": [
+      [
+        "10:00-10:10",
+        0.0
+      ],
+      [
+        "12:00-12:10",
+        635.2946517753481
+      ],
+      [
+        "14:00-14:10",
+        0.0
+      ],
+      [
+        "16:00-16:10",
+        546.0846273748839
+      ],
+      [
+        "18:00-18:10",
+        705.6271261755287
+      ],
+      [
+        "20:00-20:10",
+        0.0
+      ]
+    ],
+    "battery_four_hour": [
+      [
+        "00:00-04:00",
+        8999.999999999998,
+        0.0,
+        "00:00",
+        1200.0000000000023
+      ],
+      [
+        "04:00-08:00",
+        1666.6666666666665,
+        5296.299171310131,
+        "24:00",
+        1199.9999999999986
+      ],
+      [
+        "08:00-12:00",
+        5928.901979860164,
+        3343.70082868987,
+        null,
+        null
+      ],
+      [
+        "12:00-16:00",
+        5385.678948391909,
+        524.8105518841812,
+        null,
+        null
+      ],
+      [
+        "16:00-20:00",
+        0.0,
+        5669.208298339698,
+        null,
+        null
+      ],
+      [
+        "20:00-24:00",
+        0.0,
+        2970.791701660302,
+        null,
+        null
+      ]
+    ],
+    "emergency_segments": [
+      {
+        "start_index": 2,
+        "end_index_exclusive": 3,
+        "interval": "00:20-00:30",
+        "energy_kwh": 22.4508269068117
+      },
+      {
+        "start_index": 6,
+        "end_index_exclusive": 9,
+        "interval": "01:00-01:30",
+        "energy_kwh": 20.07391758988092
+      },
+      {
+        "start_index": 15,
+        "end_index_exclusive": 16,
+        "interval": "02:30-02:40",
+        "energy_kwh": 1.2301935677139682
+      },
+      {
+        "start_index": 19,
+        "end_index_exclusive": 20,
+        "interval": "03:10-03:20",
+        "energy_kwh": 9.800661308729445
+      },
+      {
+        "start_index": 21,
+        "end_index_exclusive": 24,
+        "interval": "03:30-04:00",
+        "energy_kwh": 26.55268812199472
+      },
+      {
+        "start_index": 29,
+        "end_index_exclusive": 32,
+        "interval": "04:50-05:20",
+        "energy_kwh": 46.415639016800284
+      },
+      {
+        "start_index": 35,
+        "end_index_exclusive": 36,
+        "interval": "05:50-06:00",
+        "energy_kwh": 6.571262216484229
+      },
+      {
+        "start_index": 66,
+        "end_index_exclusive": 67,
+        "interval": "11:00-11:10",
+        "energy_kwh": 2.1277903963150493
+      },
+      {
+        "start_index": 94,
+        "end_index_exclusive": 98,
+        "interval": "15:40-16:20",
+        "energy_kwh": 38.55826112166284
+      },
+      {
+        "start_index": 100,
+        "end_index_exclusive": 101,
+        "interval": "16:40-16:50",
+        "energy_kwh": 1.7326966348908854
+      },
+      {
+        "start_index": 112,
+        "end_index_exclusive": 115,
+        "interval": "18:40-19:10",
+        "energy_kwh": 19.96757475416598
+      },
+      {
+        "start_index": 120,
+        "end_index_exclusive": 122,
+        "interval": "20:00-20:20",
+        "energy_kwh": 37.7332462055158
+      },
+      {
+        "start_index": 128,
+        "end_index_exclusive": 129,
+        "interval": "21:20-21:30",
+        "energy_kwh": 1.2727411039962817
+      },
+      {
+        "start_index": 141,
+        "end_index_exclusive": 142,
+        "interval": "23:30-23:40",
+        "energy_kwh": 18.340145022496245
+      }
+    ]
+  },
+  {
+    "date": "2025-06-21",
+    "planned_purchase_kwh": 81731.44108368989,
+    "emergency_purchase_kwh": 0.0,
+    "planned_plus_emergency_kwh": 81731.44108368989,
+    "planned_cost_yuan": 50918.55336457913,
+    "emergency_cost_yuan": 0.0,
+    "actual_total_cost_yuan": 50918.55336457913,
+    "initial_kwh": 1200.0000000000005,
+    "terminal_kwh": 1200.0,
+    "total_unused_kwh": 58015.38267019717,
+    "purchases_at_requested_intervals": [
+      [
+        "10:00-10:10",
+        0.0
+      ],
+      [
+        "12:00-12:10",
+        815.8278028636288
+      ],
+      [
+        "14:00-14:10",
+        0.0
+      ],
+      [
+        "16:00-16:10",
+        620.3300130740039
+      ],
+      [
+        "18:00-18:10",
+        712.2910051826018
+      ],
+      [
+        "20:00-20:10",
+        77.12513306266499
+      ]
+    ],
+    "battery_four_hour": [
+      [
+        "00:00-04:00",
+        9000.0,
+        0.0,
+        "00:00",
+        1200.0000000000005
+      ],
+      [
+        "04:00-08:00",
+        1666.6666666666665,
+        4382.279255716101,
+        "24:00",
+        1200.0
+      ],
+      [
+        "08:00-12:00",
+        5833.333333333333,
+        3717.7207442838976,
+        null,
+        null
+      ],
+      [
+        "12:00-16:00",
+        6559.568492066956,
+        1938.2504785742365,
+        null,
+        null
+      ],
+      [
+        "16:00-20:00",
+        0.0,
+        5833.333333333333,
+        null,
+        null
+      ],
+      [
+        "20:00-24:00",
+        0.0,
+        2806.6666666666665,
+        null,
+        null
+      ]
+    ],
+    "emergency_segments": []
+  },
+  {
+    "date": "2025-09-23",
+    "planned_purchase_kwh": 66676.10714454038,
+    "emergency_purchase_kwh": 2072.2640432541148,
+    "planned_plus_emergency_kwh": 68748.37118779449,
+    "planned_cost_yuan": 41233.826227456666,
+    "emergency_cost_yuan": 8737.79909735268,
+    "actual_total_cost_yuan": 49971.62532480934,
+    "initial_kwh": 1200.0000000000005,
+    "terminal_kwh": 1200.0000000000023,
+    "total_unused_kwh": 2540.262211753752,
+    "purchases_at_requested_intervals": [
+      [
+        "10:00-10:10",
+        0.0
+      ],
+      [
+        "12:00-12:10",
+        431.4645836024391
+      ],
+      [
+        "14:00-14:10",
+        0.0
+      ],
+      [
+        "16:00-16:10",
+        517.114871129751
+      ],
+      [
+        "18:00-18:10",
+        755.4984816747557
+      ],
+      [
+        "20:00-20:10",
+        0.0
+      ]
+    ],
+    "battery_four_hour": [
+      [
+        "00:00-04:00",
+        9000.0,
+        0.0,
+        "00:00",
+        1200.0000000000005
+      ],
+      [
+        "04:00-08:00",
+        1666.6666666666665,
+        6289.243683874203,
+        "24:00",
+        1200.0000000000023
+      ],
+      [
+        "08:00-12:00",
+        5846.542559001362,
+        2353.7897228127795,
+        null,
+        null
+      ],
+      [
+        "12:00-16:00",
+        5020.966525423575,
+        159.64895169721638,
+        null,
+        null
+      ],
+      [
+        "16:00-20:00",
+        0.0,
+        5578.206362569027,
+        null,
+        null
+      ],
+      [
+        "20:00-24:00",
+        0.0,
+        3061.7936374309725,
+        null,
+        null
+      ]
+    ],
+    "emergency_segments": [
+      {
+        "start_index": 3,
+        "end_index_exclusive": 8,
+        "interval": "00:30-01:20",
+        "energy_kwh": 67.31786770373174
+      },
+      {
+        "start_index": 10,
+        "end_index_exclusive": 11,
+        "interval": "01:40-01:50",
+        "energy_kwh": 1.6906248852521912
+      },
+      {
+        "start_index": 12,
+        "end_index_exclusive": 16,
+        "interval": "02:00-02:40",
+        "energy_kwh": 81.04929718463927
+      },
+      {
+        "start_index": 22,
+        "end_index_exclusive": 24,
+        "interval": "03:40-04:00",
+        "energy_kwh": 34.58112231218104
+      },
+      {
+        "start_index": 26,
+        "end_index_exclusive": 27,
+        "interval": "04:20-04:30",
+        "energy_kwh": 14.463424176002945
+      },
+      {
+        "start_index": 29,
+        "end_index_exclusive": 31,
+        "interval": "04:50-05:10",
+        "energy_kwh": 48.163816932426016
+      },
+      {
+        "start_index": 34,
+        "end_index_exclusive": 35,
+        "interval": "05:40-05:50",
+        "energy_kwh": 6.12882181800444
+      },
+      {
+        "start_index": 37,
+        "end_index_exclusive": 39,
+        "interval": "06:10-06:30",
+        "energy_kwh": 30.759643061411793
+      },
+      {
+        "start_index": 40,
+        "end_index_exclusive": 44,
+        "interval": "06:40-07:20",
+        "energy_kwh": 39.203919210367985
+      },
+      {
+        "start_index": 45,
+        "end_index_exclusive": 47,
+        "interval": "07:30-07:50",
+        "energy_kwh": 17.48150705587335
+      },
+      {
+        "start_index": 57,
+        "end_index_exclusive": 59,
+        "interval": "09:30-09:50",
+        "energy_kwh": 40.13528755439438
+      },
+      {
+        "start_index": 60,
+        "end_index_exclusive": 62,
+        "interval": "10:00-10:20",
+        "energy_kwh": 4.291292191282309
+      },
+      {
+        "start_index": 63,
+        "end_index_exclusive": 67,
+        "interval": "10:30-11:10",
+        "energy_kwh": 221.49364578938844
+      },
+      {
+        "start_index": 86,
+        "end_index_exclusive": 93,
+        "interval": "14:20-15:30",
+        "energy_kwh": 487.13124651124156
+      },
+      {
+        "start_index": 95,
+        "end_index_exclusive": 101,
+        "interval": "15:50-16:50",
+        "energy_kwh": 257.3752906964522
+      },
+      {
+        "start_index": 102,
+        "end_index_exclusive": 104,
+        "interval": "17:00-17:20",
+        "energy_kwh": 36.53864457602029
+      },
+      {
+        "start_index": 105,
+        "end_index_exclusive": 107,
+        "interval": "17:30-17:50",
+        "energy_kwh": 29.989815043042807
+      },
+      {
+        "start_index": 108,
+        "end_index_exclusive": 113,
+        "interval": "18:00-18:50",
+        "energy_kwh": 134.83290783962627
+      },
+      {
+        "start_index": 115,
+        "end_index_exclusive": 117,
+        "interval": "19:10-19:30",
+        "energy_kwh": 86.70858996415666
+      },
+      {
+        "start_index": 119,
+        "end_index_exclusive": 123,
+        "interval": "19:50-20:30",
+        "energy_kwh": 127.41747510733592
+      },
+      {
+        "start_index": 125,
+        "end_index_exclusive": 129,
+        "interval": "20:50-21:30",
+        "energy_kwh": 164.41893649993403
+      },
+      {
+        "start_index": 130,
+        "end_index_exclusive": 132,
+        "interval": "21:40-22:00",
+        "energy_kwh": 36.8765373759386
+      },
+      {
+        "start_index": 134,
+        "end_index_exclusive": 136,
+        "interval": "22:20-22:40",
+        "energy_kwh": 71.94443117278956
+      },
+      {
+        "start_index": 141,
+        "end_index_exclusive": 143,
+        "interval": "23:30-23:50",
+        "energy_kwh": 32.269898592621075
+      }
+    ]
+  },
+  {
+    "date": "2025-12-21",
+    "planned_purchase_kwh": 97958.77437401828,
+    "emergency_purchase_kwh": 762.5689931054876,
+    "planned_plus_emergency_kwh": 98721.34336712377,
+    "planned_cost_yuan": 62726.22157751913,
+    "emergency_cost_yuan": 3142.7025026640954,
+    "actual_total_cost_yuan": 65868.92408018322,
+    "initial_kwh": 1200.0000000000027,
+    "terminal_kwh": 1200.0000000000005,
+    "total_unused_kwh": 4818.952582116171,
+    "purchases_at_requested_intervals": [
+      [
+        "10:00-10:10",
+        0.0
+      ],
+      [
+        "12:00-12:10",
+        980.2600244961785
+      ],
+      [
+        "14:00-14:10",
+        0.0
+      ],
+      [
+        "16:00-16:10",
+        850.8809792928133
+      ],
+      [
+        "18:00-18:10",
+        705.1117378936159
+      ],
+      [
+        "20:00-20:10",
+        0.0
+      ]
+    ],
+    "battery_four_hour": [
+      [
+        "00:00-04:00",
+        8999.999999999996,
+        0.0,
+        "00:00",
+        1200.0000000000027
+      ],
+      [
+        "04:00-08:00",
+        2500.0,
+        1508.3333333333333,
+        "24:00",
+        1200.0000000000005
+      ],
+      [
+        "08:00-12:00",
+        5833.333333333333,
+        7806.666666666667,
+        null,
+        null
+      ],
+      [
+        "12:00-16:00",
+        8269.87150003998,
+        2783.5959150323833,
+        null,
+        null
+      ],
+      [
+        "16:00-20:00",
+        0.0,
+        5718.859367611489,
+        null,
+        null
+      ],
+      [
+        "20:00-24:00",
+        0.0,
+        2921.140632388512,
+        null,
+        null
+      ]
+    ],
+    "emergency_segments": [
+      {
+        "start_index": 0,
+        "end_index_exclusive": 1,
+        "interval": "00:00-00:10",
+        "energy_kwh": 0.2638673915921572
+      },
+      {
+        "start_index": 7,
+        "end_index_exclusive": 8,
+        "interval": "01:10-01:20",
+        "energy_kwh": 10.018464218191639
+      },
+      {
+        "start_index": 18,
+        "end_index_exclusive": 20,
+        "interval": "03:00-03:20",
+        "energy_kwh": 30.97947500082455
+      },
+      {
+        "start_index": 21,
+        "end_index_exclusive": 23,
+        "interval": "03:30-03:50",
+        "energy_kwh": 64.86926173699726
+      },
+      {
+        "start_index": 62,
+        "end_index_exclusive": 70,
+        "interval": "10:20-11:40",
+        "energy_kwh": 310.5493463526028
+      },
+      {
+        "start_index": 92,
+        "end_index_exclusive": 93,
+        "interval": "15:20-15:30",
+        "energy_kwh": 22.515565958925833
+      },
+      {
+        "start_index": 101,
+        "end_index_exclusive": 102,
+        "interval": "16:50-17:00",
+        "energy_kwh": 16.6095724191141
+      },
+      {
+        "start_index": 103,
+        "end_index_exclusive": 106,
+        "interval": "17:10-17:40",
+        "energy_kwh": 42.50813384242194
+      },
+      {
+        "start_index": 107,
+        "end_index_exclusive": 117,
+        "interval": "17:50-19:30",
+        "energy_kwh": 120.38931591208092
+      },
+      {
+        "start_index": 118,
+        "end_index_exclusive": 121,
+        "interval": "19:40-20:10",
+        "energy_kwh": 113.03783610978155
+      },
+      {
+        "start_index": 130,
+        "end_index_exclusive": 132,
+        "interval": "21:40-22:00",
+        "energy_kwh": 14.809340423350363
+      },
+      {
+        "start_index": 137,
+        "end_index_exclusive": 139,
+        "interval": "22:50-23:10",
+        "energy_kwh": 13.058244957431157
+      },
+      {
+        "start_index": 142,
+        "end_index_exclusive": 143,
+        "interval": "23:40-23:50",
+        "energy_kwh": 2.960568782173368
+      }
+    ]
+  }
+]

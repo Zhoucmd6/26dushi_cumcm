@@ -1,0 +1,23 @@
+{
+  "result1/计划购电量": {
+    "rows": 144,
+    "all_values_verified": true
+  },
+  "result1/充放电量": {
+    "rows": 6,
+    "all_values_verified": true
+  },
+  "result2/计划购电量": {
+    "rows": 334,
+    "all_values_verified": true
+  },
+  "result2/充放电量": {
+    "rows": 2004,
+    "all_values_verified": true
+  },
+  "result2/紧急购电量": {
+    "rows": 4031,
+    "all_values_verified": true
+  },
+  "total_cash_cost_yuan": 14479309.67208748
+}

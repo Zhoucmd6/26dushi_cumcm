@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="518.4pt" height="432pt" viewBox="0 0 518.4 432" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-12T06:57:16.319637</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.0, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 432 
+L 518.4 432 
+L 518.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 134.784 160.895267 
+L 497.664 160.895267 
+L 497.664 38.88 
+L 134.784 38.88 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 134.784 57.18229 
+L 497.664 57.18229 
+L 497.664 79.043359 
+L 134.784 79.043359 
+z
+" clip-path="url(#p28f5246543)" style="fill: #009e73; opacity: 0.07"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 134.784 60.995267 
+L 331.882589 60.995267 
+L 331.882589 75.230382 
+L 134.784 75.230382 
+z
+" clip-path="url(#p28f5246543)" style="fill: #4477aa"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 134.784 86.415115 
+L 333.483776 86.415115 
+L 333.483776 100.650229 
+L 134.784 100.650229 
+z
+" clip-path="url(#p28f5246543)" style="fill: #4477aa"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 134.784 111.834962 
+L 282.908618 111.834962 
+L 282.908618 126.070076 
+L 134.784 126.070076 
+z
+" clip-path="url(#p28f5246543)" style="fill: #4477aa"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 134.784 137.254809 
+L 381.431485 137.254809 
+L 381.431485 151.489924 
+L 134.784 151.489924 
+z
+" clip-path="url(#p28f5246543)" style="fill: #4477aa"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 331.882589 60.995267 
+L 347.304935 60.995267 
+L 347.304935 75.230382 
+L 331.882589 75.230382 
+z
+" clip-path="url(#p28f5246543)" style="fill: #d55e00"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 333.483776 86.415115 
+L 347.696349 86.415115 
+L 347.696349 100.650229 
+L 333.483776 100.650229 
+z
+" clip-path="url(#p28f5246543)" style="fill: #d55e00"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 282.908618 111.834962 
+L 439.725176 111.834962 
+L 439.725176 126.070076 
+L 282.908618 126.070076 
+z
+" clip-path="url(#p28f5246543)" style="fill: #d55e00"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 381.431485 137.254809 
+L 395.171979 137.254809 
+L 395.171979 151.489924 
+L 381.431485 151.489924 
+z
+" clip-path="url(#p28f5246543)" style="fill: #d55e00"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m9445ea17a5" d="M 0 0 
+L 0 3 
+" style="stroke: #202630; stroke-width: 0.7"/>
+      </defs>
+      <g>
+       <use xlink:href="#m9445ea17a5" x="134.784" y="160.895267" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="134.784" y="173.121517" transform="rotate(-0 134.784 173.121517)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="198.160822" y="160.895267" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="198.160822" y="173.121517" transform="rotate(-0 198.160822 173.121517)">500</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="261.537644" y="160.895267" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="261.537644" y="173.121517" transform="rotate(-0 261.537644 173.121517)">1000</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="324.914465" y="160.895267" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="324.914465" y="173.121517" transform="rotate(-0 324.914465 173.121517)">1500</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="388.291287" y="160.895267" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="388.291287" y="173.121517" transform="rotate(-0 388.291287 173.121517)">2000</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="451.668109" y="160.895267" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="451.668109" y="173.121517" transform="rotate(-0 451.668109 173.121517)">2500</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 9px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="316.224" y="186.212455" transform="rotate(-0 316.224 186.212455)">334天实际购电费 (万元)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_7"/>
+     <g id="text_8">
+      <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: end; fill: #202630" x="131.284" y="71.202199" transform="rotate(-0 131.284 71.202199)">加权历史 + 场景规划</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_8"/>
+     <g id="text_9">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: end; fill: #202630" x="131.284" y="96.612672" transform="rotate(-0 131.284 96.612672)">7日均值 + 场景规划</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_9"/>
+     <g id="text_10">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: end; fill: #202630" x="131.284" y="122.071894" transform="rotate(-0 131.284 122.071894)">加权历史 + 单一预测</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_10"/>
+     <g id="text_11">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: end; fill: #202630" x="131.284" y="147.502991" transform="rotate(-0 131.284 147.502991)">同场景 + 无储能</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_12">
+    <path d="M 134.784 160.895267 
+L 497.664 160.895267 
+" style="fill: none; stroke: #202630; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="96.6816" y="31.828608" transform="rotate(-0 96.6816 31.828608)">a</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="350.854037" y="70.186574" transform="rotate(-0 350.854037 70.186574)">1,676.65</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="351.245451" y="95.600797" transform="rotate(-0 351.245451 95.600797)">1,679.73</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="443.274278" y="121.020644" transform="rotate(-0 443.274278 121.020644)">2,405.78</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="398.721081" y="146.440491" transform="rotate(-0 398.721081 146.440491)">2,054.28</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 9.5px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="134.784" y="29.88" transform="rotate(-0 134.784 29.88)">实际购电费及其构成</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_13">
+     <path d="M 140.384 50.72625 
+L 157.984 50.72625 
+L 157.984 45.12625 
+L 140.384 45.12625 
+z
+" style="fill: #4477aa"/>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="164.384" y="50.72625" transform="rotate(-0 164.384 50.72625)">计划购电费</text>
+    </g>
+    <g id="patch_14">
+     <path d="M 220.384 50.72625 
+L 237.984 50.72625 
+L 237.984 45.12625 
+L 220.384 45.12625 
+z
+" style="fill: #d55e00"/>
+    </g>
+    <g id="text_19">
+     <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="244.384" y="50.72625" transform="rotate(-0 244.384 50.72625)">紧急购电费</text>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_15">
+    <path d="M 134.784 358.56 
+L 497.664 358.56 
+L 497.664 236.544733 
+L 134.784 236.544733 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 134.784 242.090881 
+L 497.664 242.090881 
+L 497.664 267.803484 
+L 134.784 267.803484 
+z
+" clip-path="url(#p071d738835)" style="fill: #009e73; opacity: 0.07"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 134.784 246.575638 
+L 167.389339 246.575638 
+L 167.389339 263.318727 
+L 134.784 263.318727 
+z
+" clip-path="url(#p071d738835)" style="fill: #009e73"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 134.784 276.474012 
+L 164.982951 276.474012 
+L 164.982951 293.217102 
+L 134.784 293.217102 
+z
+" clip-path="url(#p071d738835)" style="fill: #56b4e9"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 134.784 306.372387 
+L 439.725176 306.372387 
+L 439.725176 323.115477 
+L 134.784 323.115477 
+z
+" clip-path="url(#p071d738835)" style="fill: #d55e00"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 134.784 336.270762 
+L 161.691345 336.270762 
+L 161.691345 353.013851 
+L 134.784 353.013851 
+z
+" clip-path="url(#p071d738835)" style="fill: #8c6bb1"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_7">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="134.784" y="358.56" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_20">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="134.784" y="370.78625" transform="rotate(-0 134.784 370.78625)">0</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="185.678452" y="358.56" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_21">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="185.678452" y="370.78625" transform="rotate(-0 185.678452 370.78625)">500</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="236.572905" y="358.56" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_22">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="236.572905" y="370.78625" transform="rotate(-0 236.572905 370.78625)">1000</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="287.467357" y="358.56" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_23">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="287.467357" y="370.78625" transform="rotate(-0 287.467357 370.78625)">1500</text>
+     </g>
+    </g>
+    <g id="xtick_11">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="338.361809" y="358.56" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_24">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="338.361809" y="370.78625" transform="rotate(-0 338.361809 370.78625)">2000</text>
+     </g>
+    </g>
+    <g id="xtick_12">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="389.256261" y="358.56" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_25">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="389.256261" y="370.78625" transform="rotate(-0 389.256261 370.78625)">2500</text>
+     </g>
+    </g>
+    <g id="xtick_13">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="440.150714" y="358.56" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_26">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="440.150714" y="370.78625" transform="rotate(-0 440.150714 370.78625)">3000</text>
+     </g>
+    </g>
+    <g id="xtick_14">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m9445ea17a5" x="491.045166" y="358.56" style="fill: #202630; stroke: #202630; stroke-width: 0.7"/>
+      </g>
+     </g>
+     <g id="text_27">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="491.045166" y="370.78625" transform="rotate(-0 491.045166 370.78625)">3500</text>
+     </g>
+    </g>
+    <g id="text_28">
+     <text style="font-size: 9px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: middle; fill: #202630" x="316.224" y="383.957344" transform="rotate(-0 316.224 383.957344)">334天紧急购电量 (MWh)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_5">
+     <g id="line2d_19"/>
+     <g id="text_29">
+      <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: end; fill: #202630" x="131.284" y="258.036557" transform="rotate(-0 131.284 258.036557)">加权历史 + 场景规划</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_20"/>
+     <g id="text_30">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: end; fill: #202630" x="131.284" y="287.925557" transform="rotate(-0 131.284 287.925557)">7日均值 + 场景规划</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_21"/>
+     <g id="text_31">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: end; fill: #202630" x="131.284" y="317.863307" transform="rotate(-0 131.284 317.863307)">加权历史 + 单一预测</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_22"/>
+     <g id="text_32">
+      <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: end; fill: #202630" x="131.284" y="347.772932" transform="rotate(-0 131.284 347.772932)">同场景 + 无储能</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_21">
+    <path d="M 134.784 358.56 
+L 497.664 358.56 
+" style="fill: none; stroke: #202630; stroke-width: 0.7; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_33">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="96.6816" y="229.493341" transform="rotate(-0 96.6816 229.493341)">b</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="170.646583" y="257.015307" transform="rotate(-0 170.646583 257.015307)">320.32</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="168.240196" y="286.913682" transform="rotate(-0 168.240196 286.913682)">296.68</text>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="442.982421" y="316.812057" transform="rotate(-0 442.982421 316.812057)">2,995.82</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 8px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="164.94859" y="346.710432" transform="rotate(-0 164.94859 346.710432)">264.34</text>
+   </g>
+   <g id="text_38">
+    <text style="font-size: 9.5px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; text-anchor: start; fill: #202630" x="134.784" y="227.544733" transform="rotate(-0 134.784 227.544733)">实际紧急购电量</text>
+   </g>
+  </g>
+  <g id="text_39">
+   <text style="font-size: 7.2px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; fill: #62717d" transform="translate(134.784 413.01495)">主方案费用较单一预测低 30.31%，较无储能低 18.38%。</text>
+   <text style="font-size: 7.2px; font-family: 'Arial', 'Microsoft YaHei', 'DejaVu Sans'; fill: #62717d" transform="translate(134.784 421.2)">期间：2025年2-12月；所有对照使用相同日期和初末储量条件。</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p28f5246543">
+   <rect x="134.784" y="38.88" width="362.88" height="122.015267"/>
+  </clipPath>
+  <clipPath id="p071d738835">
+   <rect x="134.784" y="236.544733" width="362.88" height="122.015267"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "01_预测方法与调度费用",
+    "width_mm": 215.9,
+    "height_mm": 94.0,
+    "png_dpi": 450,
+    "axes": 2,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "01_预测方法与调度费用.png",
+        "bytes": 250355,
+        "sha256": "28b109d38301e40131296f6dec31842a8f60cd6221890176a518a8ac5193a627"
+      },
+      {
+        "file": "01_预测方法与调度费用.svg",
+        "bytes": 20252,
+        "sha256": "09c797d2a580ebfd6e33ec79fdaa6a888d21a001ecb60577a36491b616558711"
+      }
+    ]
+  },
+  {
+    "name": "02_逐月费用与紧急购电",
+    "width_mm": 215.9,
+    "height_mm": 88.9,
+    "png_dpi": 450,
+    "axes": 2,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "02_逐月费用与紧急购电.png",
+        "bytes": 330081,
+        "sha256": "0164471e3d928066f2ca33634f439e51ed692f8021a397e6e5fc0e9b8c6311f8"
+      },
+      {
+        "file": "02_逐月费用与紧急购电.svg",
+        "bytes": 33626,
+        "sha256": "9009c1617c4adcd9b7737b9865274e43fe2e1193ba857bebb7d995acd6091764"
+      }
+    ]
+  },
+  {
+    "name": "03_指定日期调度与储能",
+    "width_mm": 215.9,
+    "height_mm": 231.1,
+    "png_dpi": 450,
+    "axes": 8,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "03_指定日期调度与储能.png",
+        "bytes": 791716,
+        "sha256": "c882bd331b62db65fb7ef46bdc95bae0d2f70de325f1e55b1df14be944a22d32"
+      },
+      {
+        "file": "03_指定日期调度与储能.svg",
+        "bytes": 114924,
+        "sha256": "978bcbbea31c54ff3067ddf1217ffd09bdd6818d4e7330a99340f8ff7b08ec18"
+      }
+    ]
+  },
+  {
+    "name": "04_参数与抽样稳定性",
+    "width_mm": 215.9,
+    "height_mm": 96.5,
+    "png_dpi": 450,
+    "axes": 2,
+    "text_bounds": "passed",
+    "glyph_check": "passed",
+    "files": [
+      {
+        "file": "04_参数与抽样稳定性.png",
+        "bytes": 231556,
+        "sha256": "9e8ed1151abb1e583aaf10c2642f65b7b7ecccb83c5cd825b076e4b435a58e2e"
+      },
+      {
+        "file": "04_参数与抽样稳定性.svg",
+        "bytes": 16365,
+        "sha256": "4f3156b3f8e34e4e5deb24eaacb6f76561755275671bf91b848899556bf2e758"
+      }
+    ]
+  }
+]
