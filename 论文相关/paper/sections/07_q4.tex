@@ -1,0 +1,162 @@
+\section{问题四：波动电价下的调控策略}
+
+\subsection{信息结构、价格预测与统一评价}
+
+问题四沿用式\eqref{eq:balance}--\eqref{eq:soc}，但所有正常购电、调整与紧急购电均按交付时段的真实波动价结算。预测价格仅服务决策，绝不替代真实账单。研究期为2025年2月1日至12月31日，共334天；1月只用于热身和固定参数，正式期后不再倒选。
+
+记净负荷$N_{i,t}=L_{i,t}-G_{i,t}$。价格基线在加权均值、14日均值和28日均值中用1月验证选择28日均值；在日内更新点，以节点前已实现的对数价格残差按$\alpha=0.2$、衰减率$0.1\,\mathrm h^{-1}$修正未来基线。最近至多28个完整历史日的净负荷残差和价格对数残差按同一历史日配对，构成因果场景。指数变换保证价格为正，净负荷则允许为负，从而保留光伏富余。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{q4_price.png}
+  \caption{问题四价格预测、日内残差修正和信息更新时间线}
+  \label{fig:q4-price}
+\end{figure}
+
+仅制定日前计划的实际账单为
+\begin{equation}
+ F_{4,2}^{\mathrm{real}}=\sum_t p_{i,t}^{\mathrm{real}}
+ \left(q_{i,t}+5e_{i,t}^{\mathrm{real}}\right).
+\end{equation}
+允许日内调整时，令$b(q,r)=r+0.5|r-q|$，则
+\begin{equation}
+ F_{4,3}^{\mathrm{real}}=\sum_t p_{i,t}^{\mathrm{real}}
+ \left\{b(q_{i,t},r_{i,t}^{\mathrm{exec}})+5e_{i,t}^{\mathrm{real}}\right\}.
+\end{equation}
+两类策略均按同一日期、同一真实样本和连续库存回放。1月热身产生的2月1日初始库存约为6000 kWh，非人为重置；12月31日末统一约束回到6000 kWh。
+
+\subsection{仅日前决策：价量依赖收缩模型}
+
+小样本下直接使用经验价格--净负荷配对分布，可能把偶然依赖误当作稳定规律。引入全局收缩系数$\rho\in[0,1]$：
+\begin{equation}
+ \widehat{\mathbb P}^{\rho}_t=\rho\widehat{\mathbb P}^{\mathrm{pair}}_t+
+ (1-\rho)(\widehat{\mathbb P}^{p}_t\otimes\widehat{\mathbb P}^{N}_t),
+\end{equation}
+相应的价格加权缺电函数为
+\begin{equation}
+ H_t^\rho(A)=\sum_\omega\pi_\omega
+ \{\rho p_t^\omega+(1-\rho)\bar p_t\}(N_t^\omega-A)^+ .
+\end{equation}
+$\rho=1$保留同日配对，$\rho=0$保留各自边际分布但在期望费用中独立组合。1月历史验证选择$\rho=0$；这不是声称价格与净负荷真实独立，而是说明现有样本不足以支持依赖项带来稳定收益。终端价值倍率同样在1月固定为$\gamma=0.5$。
+
+表\ref{tab:q42-compare}给出严格样本外对照。主方案费用为1520.11万元，比点预测策略减少124.60万元（7.576\%）。$\rho=0$比$\rho=1$少6433.06元，但7日移动块Bootstrap的95\%区间为$[-689.82,13358.52]$元，跨过0，故不宣称独立收缩具有确定优势。
+
+\begin{table}[H]
+\centering
+\caption{问题四仅日前决策的334天对照}
+\label{tab:q42-compare}
+\begin{tabularx}{\textwidth}{Xrrr}
+\toprule
+方案 & 实际总费/万元 & 紧急费/万元 & 紧急购电/MWh\\
+\midrule
+点预测 & 1644.71 & 350.15 & --\\
+成对场景，$\rho=1$ & 1520.75 & 100.67 & --\\
+边际独立收缩，$\rho=0$（主方案） & 1520.11 & 104.05 & 256.56\\
+主方案但$\gamma=0$ & 1522.22 & -- & --\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+主方案正常购电费14160543.12元，未利用电量3091.10 MWh，充、放电量分别为6900.89 MWh和5589.72 MWh。全年有71个日末库存落在1200 kWh下界，无日末落在10800 kWh上界，说明波动价格下电池更多被当作风险缓冲和套利资源，而非被终端价值长期推至满电。
+
+\subsection{允许日内调整：下一节点条件前瞻}
+
+在更新点$k\in\{0,6,12,18\}$，模型只展开下一更新点$\kappa$。用届时可观测的光伏预报修订量和节点前已实现价格偏差构成信号，并将场景划成$K\in\{1,2,3\}$组。分叉前正常购电、充放电和库存对所有场景共享；各分支必须从同一桥接库存$S_b$出发：
+\begin{equation}
+ S_b^1=\cdots=S_b^K,
+\end{equation}
+分叉后动作才允许随信息组变化。这样，下一阶段继续运行的价值能够影响当前留存电量，同时不使用下一节点以后才会知道的真实负荷、价格或最优费用。$K=1$是无条件分组基准；1月验证选择$K=1$为提交主方案，尽管$K=2,3$在正式期事后费用更低，也不追溯改选。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{q4_bridge.png}
+  \caption{问题四条件分组信号、非预见性与桥接库存示意}
+  \label{fig:q4-bridge}
+\end{figure}
+
+表\ref{tab:q43-compare}显示，主方案全年实际费用14997167.51元，其中原计划费14400074.38元、调整净费用$-102744.03$元、紧急购电费699837.16元；紧急购电176.24 MWh，上调145.26 MWh、下调749.15 MWh。相对同机制点预测策略节省1060565.04元（6.605\%）。价格残差修正比不修正少1507.00元，但Bootstrap区间$[-905.59,3938.87]$元仍跨0。
+
+\begin{table}[H]
+\centering
+\caption{问题四允许日内调整的334天对照}
+\label{tab:q43-compare}
+\begin{tabularx}{\textwidth}{Xrrr}
+\toprule
+方案 & 实际总费/万元 & 紧急费/万元 & 相对主方案差额/元\\
+\midrule
+点预测 & 1605.77 & 275.31 & 1060565.04\\
+不做价格残差修正 & 1499.87 & -- & 1507.00\\
+$K=1$（1月验证所选主方案） & 1499.72 & 69.98 & 0\\
+$K=2$ & 1499.48 & -- & $-2350.94$\\
+$K=3$ & 1498.90 & -- & $-8205.12$\\
+主方案但$\gamma=0$ & 1501.90 & -- & 21848.34\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+$K=2$相对$K=1$的7日移动块Bootstrap区间为$[-2110.17,6774.51]$元；$K=3$为$[168.62,16792.18]$元。后者在正式期显示正节省，但$K=2,3$均未通过事前1月验证，因此只能作为样本外敏感性证据，不能替代冻结的主方案。1002个可形成下一节点的更新中，$K=2$成功分成两组884次，$K=3$成功分成三组616次，其余自动退化；18:00后没有下一次更新，因而不构造虚假分支。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{q4_compare.png}
+  \caption{问题四各方案全年真实账单对照；主方案由1月验证预先冻结}
+  \label{fig:q4-compare}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{q4_monthly.png}
+  \caption{问题四主方案逐月总费、紧急购电费及紧急购电量}
+  \label{fig:q4-monthly}
+\end{figure}
+
+\subsection{两种权限的比较与指定日期}
+
+允许日内调整的主方案比仅日前决策主方案少203918.18元，即1.341\%。这是一项“制度包”比较：后者同时获得官方光伏预报更新和调整正常购电的权限，不能把差额全部归因为预报更新频率。四个指定日期见表\ref{tab:q4-days}；库存跨日连续，因此6月21日的日初库存并非整值6000 kWh。
+
+\begin{table}[H]
+\centering
+\caption{问题四指定日期实际执行汇总}
+\label{tab:q4-days}
+\begin{tabular}{llrrr}
+\toprule
+权限 & 日期 & 正常购电/kWh & 紧急购电/kWh & 实际总费/元\\
+\midrule
+仅日前 & 3月20日 & 71444.89 & 635.62 & 46935.03\\
+仅日前 & 6月21日 & 39044.28 & 145.32 & 19815.66\\
+仅日前 & 9月23日 & 72473.21 & 454.94 & 49460.39\\
+仅日前 & 12月21日 & 98632.66 & 551.06 & 76913.47\\
+日内调整 & 3月20日 & 68591.13 & 965.91 & 48349.16\\
+日内调整 & 6月21日 & 36993.31 & 138.25 & 19065.54\\
+日内调整 & 9月23日 & 73107.88 & 127.93 & 49748.49\\
+日内调整 & 12月21日 & 97959.73 & 470.69 & 76490.46\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{q4_days_dayahead.png}
+  \caption{问题四仅日前决策主方案在四个指定日期的购电与储能轨迹}
+  \label{fig:q4-days-da}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{q4_days_intraday.png}
+  \caption{问题四允许日内调整主方案在四个指定日期的购电与储能轨迹}
+  \label{fig:q4-days-id}
+\end{figure}
+
+\subsection{参数冻结、数值审计与可解释性}
+
+图\ref{fig:q4-validation}并列展示1月参数选择和正式期样本外结果，避免把事后最优误写成可执行选择。价格预测方面，仅日前模型的MAE、RMSE、CRPS和80\%区间覆盖率分别为0.085214、0.109005、0.056824元/kWh和79.26\%；日内修正后分别为0.060565、0.080700、0.041726元/kWh和78.57\%。点指标改善并未自动转化为统计显著的费用改善，说明预测检验和决策检验必须同时报告。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{q4_validation.png}
+  \caption{问题四参数选择、样本外差额及块Bootstrap区间}
+  \label{fig:q4-validation}
+\end{figure}
+
+第四问18项机制测试全部通过。独立审计覆盖29组计算、3912个策略日、10248次求解，能量守恒、SOC、结算和信息时序的最大绝对误差为$1.863\times10^{-9}$，阈值为$2\times10^{-5}$；另抽取32个真实日进行LP与MILP比较，最大目标差$7.276\times10^{-12}$。在正电价、允许无收益富余处置且紧急购电无上限的条件下，可将LP中的同时充放电净化而保持库存路径并不增费，故大规模主计算采用LP并在输出端净化，并非接受不物理的松弛解。结果工作簿只读复核163722个数值单元，最大读回差$8.731\times10^{-11}$。

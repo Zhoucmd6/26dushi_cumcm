@@ -1,10 +1,82 @@
+\clearpage
 \appendix
-\section{支撑材料文件清单}
+\label{sec:appendix-start}
+\section{支撑材料清单与复现说明}
 
-最终支撑材料至少应包含数据预处理、预测、场景生成、优化求解、结果审计、Excel导出和科研绘图的全部可运行源程序，以及“AI工具使用详情.pdf”。当前工程中前两问相关源程序位于“03 计算工程”的源代码目录，固定配置为“q1 q2 baseline.json”，正式结果位于“04 正式成果”。
+电子支撑材料按问题分为四组：问题一、二的预测与优化程序，问题三的滚动预测与CVaR程序，问题四的价格预测、场景调度、独立审计与工作簿校验程序，以及单独的“AI工具使用详情.pdf”。原始赛题附件不重复分发。正式结果还包括完整10 min轨迹、每日与月度汇总、指定日期表、参数选择记录、测试日志和结果工作簿；配置在正式期开始前冻结。
 
-\todo{提交前生成匿名化的最终文件树，确保论文、结果表、代码及支撑材料版本完全一致。}
+运行环境为Python 3，主要依赖NumPy、pandas、SciPy、scikit-learn、statsmodels、openpyxl和Matplotlib。各组入口分别为\texttt{run\_q1.py}、\texttt{run\_v2.py}、\texttt{run\_q3.py}和\texttt{run\_all\_q4.py}；审计程序读取固定配置与正式结果，独立重算约束和账单。以下附录直接编入实际建模所用完整源文件，便于在论文之外的支撑材料丢失时仍可检查算法。
 
-\section{完整源程序}
+\newcommand{\codefile}[2]{%
+  \par\medskip\noindent\textbf{#1}\par\smallskip
+  \VerbatimInput[fontsize=\tiny,breaklines=true,breakanywhere=true,numbers=left,numbersep=3pt]{#2}}
 
-\todo{按2026格式规范，将建模所用全部完整、可运行源程序编入附录；同时保留在支撑材料压缩包中。阶段稿不在此重复粘贴代码。}
+\section{问题一源程序}
+\codefile{microgrid\_core.py}{../03_计算工程/src/microgrid_core.py}
+\codefile{prepare\_data.py}{../03_计算工程/src/prepare_data.py}
+\codefile{run\_q1.py}{../03_计算工程/src/run_q1.py}
+\codefile{reporting.py}{../03_计算工程/src/reporting.py}
+\codefile{academic\_figures.py}{../03_计算工程/src/academic_figures.py}
+\codefile{audit\_results.py}{../03_计算工程/src/audit_results.py}
+
+\section{问题二源程序}
+\codefile{forecasting.py}{../q2-version2/02_计算工程/src/forecasting.py}
+\codefile{forecasting\_v2.py}{../q2-version2/02_计算工程/src/forecasting_v2.py}
+\codefile{microgrid\_core.py}{../q2-version2/02_计算工程/src/microgrid_core.py}
+\codefile{stochastic\_dispatch.py}{../q2-version2/02_计算工程/src/stochastic_dispatch.py}
+\codefile{prepare\_local\_inputs.py}{../q2-version2/02_计算工程/src/prepare_local_inputs.py}
+\codefile{prepare\_v2.py}{../q2-version2/02_计算工程/src/prepare_v2.py}
+\codefile{precompute\_v2.py}{../q2-version2/02_计算工程/src/precompute_v2.py}
+\codefile{run\_v2.py}{../q2-version2/02_计算工程/src/run_v2.py}
+\codefile{run\_pipeline.py}{../q2-version2/02_计算工程/src/run_pipeline.py}
+\codefile{audit\_v2.py}{../q2-version2/02_计算工程/src/audit_v2.py}
+\codefile{finalize\_v2.py}{../q2-version2/02_计算工程/src/finalize_v2.py}
+\codefile{report\_v2.py}{../q2-version2/02_计算工程/src/report_v2.py}
+\codefile{reporting.py}{../q2-version2/02_计算工程/src/reporting.py}
+\codefile{reporting\_v2.py}{../q2-version2/02_计算工程/src/reporting_v2.py}
+\codefile{scientific\_style.py}{../q2-version2/02_计算工程/src/scientific_style.py}
+\codefile{verify\_workbooks\_v2.py}{../q2-version2/02_计算工程/src/verify_workbooks_v2.py}
+
+\section{问题三源程序}
+\codefile{forecasting.py}{../question3/q3-03_计算工程/src/forecasting.py}
+\codefile{microgrid\_core.py}{../question3/q3-03_计算工程/src/microgrid_core.py}
+\codefile{q3\_forecasting.py}{../question3/q3-03_计算工程/src/q3_forecasting.py}
+\codefile{q3\_dispatch.py}{../question3/q3-03_计算工程/src/q3_dispatch.py}
+\codefile{q3\_workflow.py}{../question3/q3-03_计算工程/src/q3_workflow.py}
+\codefile{prepare\_q3.py}{../question3/q3-03_计算工程/src/prepare_q3.py}
+\codefile{run\_q3.py}{../question3/q3-03_计算工程/src/run_q3.py}
+\codefile{q3\_diagnostics.py}{../question3/q3-03_计算工程/src/q3_diagnostics.py}
+\codefile{q3\_extra\_figures.py}{../question3/q3-03_计算工程/src/q3_extra_figures.py}
+\codefile{q3\_report.py}{../question3/q3-03_计算工程/src/q3_report.py}
+\codefile{summarize\_q3.py}{../question3/q3-03_计算工程/src/summarize_q3.py}
+\codefile{finalize\_q3\_records.py}{../question3/q3-03_计算工程/src/finalize_q3_records.py}
+\codefile{audit\_q3.py}{../question3/q3-03_计算工程/src/audit_q3.py}
+\codefile{audit\_q3\_calibration.py}{../question3/q3-03_计算工程/src/audit_q3_calibration.py}
+\codefile{verify\_q3\_workbook.py}{../question3/q3-03_计算工程/src/verify_q3_workbook.py}
+\codefile{reporting.py}{../question3/q3-03_计算工程/src/reporting.py}
+\codefile{scientific\_style.py}{../question3/q3-03_计算工程/src/scientific_style.py}
+
+\section{问题四源程序}
+\codefile{forecasting.py}{../02_计算工程/src/forecasting.py}
+\codefile{forecasting\_v2.py}{../02_计算工程/src/forecasting_v2.py}
+\codefile{q3\_forecasting.py}{../02_计算工程/src/q3_forecasting.py}
+\codefile{q4\_forecasting.py}{../02_计算工程/src/q4_forecasting.py}
+\codefile{q4\_dispatch.py}{../02_计算工程/src/q4_dispatch.py}
+\codefile{prepare\_q4.py}{../02_计算工程/src/prepare_q4.py}
+\codefile{run\_q4.py}{../02_计算工程/src/run_q4.py}
+\codefile{run\_all\_q4.py}{../02_计算工程/src/run_all_q4.py}
+\codefile{plot\_q4.py}{../02_计算工程/src/plot_q4.py}
+\codefile{report\_q4.py}{../02_计算工程/src/report_q4.py}
+\codefile{prepare\_deliverables.py}{../02_计算工程/src/prepare_deliverables.py}
+\codefile{audit\_q4.py}{../02_计算工程/src/audit_q4.py}
+\codefile{structural\_checks.py}{../02_计算工程/src/structural_checks.py}
+\codefile{verify\_delivery.py}{../02_计算工程/src/verify_delivery.py}
+\codefile{verify\_workbooks.py}{../02_计算工程/src/verify_workbooks.py}
+\codefile{scientific\_style.py}{../02_计算工程/src/scientific_style.py}
+
+\section{机制测试源程序}
+\codefile{问题二test\_v2.py}{../q2-version2/02_计算工程/tests/test_v2.py}
+\codefile{问题三test\_q3.py}{../question3/q3-03_计算工程/tests/test_q3.py}
+\codefile{问题三test\_q3\_alignment.py}{../question3/q3-03_计算工程/tests/test_q3_alignment.py}
+\codefile{问题四test\_q4\_forecasting.py}{../02_计算工程/tests/test_q4_forecasting.py}
+\codefile{问题四test\_q4\_dispatch.py}{../02_计算工程/tests/test_q4_dispatch.py}
