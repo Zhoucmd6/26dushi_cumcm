@@ -121,6 +121,15 @@
 5. 信息价值与事件触发：比较8种可用更新时间组合，区分预报发布、重优化与调电；检索 `value of information energy scheduling event triggered MPC`。理解免费信息在同一正确优化模型下的价值非负，不虚构固定交易费用。
 6. 提前量条件尺度与概率评价：读10号第3.3—3.4节、11号第4节。掌握位置尺度、收缩、CRPS、覆盖率和区间宽度；检索 `lead time dependent forecast error scale`、`probabilistic forecast calibration CRPS interval score`。本题指数与R映射为候选假设，需要对照，不是真实概率。当前不学、不实施Tube MPC和DRO。
 
+## 第三问预测继承修订的最低补学
+
+对应docs/model-q3-prediction-inheritance.tex：
+
+1. 预测组合：读文献15第13.4节，理解历史预测、校准官方预报的凸组合，保留0、0.5、1权重对照；权重不是真实性概率。
+2. 误差协方差：融合误差方差含协方差项，不能把两个标准差简单平均；检索“forecast combination error covariance”。
+3. 因果预测档案：预测器、训练截止日、目标日、官方发布时间和残差必须对应；换中心不能沿用旧缓存。
+4. 控制变量与退化：仅屏蔽新预报和取消重排不同；theta=0且仍四次重排，不等于第二问。
+
 ## 第四问专项补学
 
 对应 `docs/model-q4.tex`，不需要先学强化学习：
