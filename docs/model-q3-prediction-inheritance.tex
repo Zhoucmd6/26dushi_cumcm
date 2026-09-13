@@ -1,0 +1,482 @@
+\documentclass[UTF8,11pt]{ctexart}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs,longtable,array,enumitem,xurl,hyperref}
+\hypersetup{hidelinks}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+\renewcommand{\arraystretch}{1.2}
+\setlist{itemsep=0.15em,topsep=0.25em}
+\allowdisplaybreaks[2]
+\newcommand{\E}{\mathbb E}
+\newcommand{\R}{\mathbb R}
+\newcommand{\pos}[1]{[#1]^+}
+\title{问题3建模修订：继承问题2的有效预测基础\\
+{\large 历史预测、官方预报融合与一致残差驱动的随机滚动调度}}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{用途与版本。}
+本文件是独立、可供后续算法实现的中文建模说明，保留原
+\texttt{model-q3.tex}，不覆盖已有模型、论文、程序或数值成果。
+本次不运行求解、不填写结果工作簿，不将旧版第三问费用用于评价新版。
+核心修改是：\textbf{负荷继承第二问实际选中的预测器，光伏保留历史预测，
+将官方预报作为新增信息；残差与场景必须随预测器一起更新。}
+不新增鲁棒优化、强化学习或第四问的下一节点分组前瞻。
+
+\section{改动边界：继承的不是一个算法名称}
+\begin{longtable}{p{2.3cm}p{5.3cm}p{6.2cm}}
+\toprule 部分 & 原实现的情况 & 本次推荐处理\\ \midrule
+\endhead
+负荷预测 & 第三问另用加权历史均值 & 继承第二问已选预测器、特征、训练窗口及回退规则。\\
+光伏预测 & 主要使用官方预报及校准 & 保留第二问历史预测，校准官方预报后比较端点与凸组合。\\
+残差档案 & 旧预测器对应的误差 & 重建所选预测器及融合候选的因果样本外残差，不能只换中心。\\
+日内控制 & 四次重排、区间内固定电池动作 & 保持不变，只执行下一6小时。\\
+终端处理 & 第三问日末不足软惩罚 & 本次保持原形式；比较预测模块时固定参数，不同步改库存价值。\\
+风险模块 & 条件尺度与CVaR候选 & 基础版先用直接残差、风险中性；尺度和CVaR另行对照。\\
+\bottomrule
+\end{longtable}
+
+第二问现有选型为分别预测负荷、光伏的随机森林。
+该事实来自本地第二问version2实现说明，不是对新版性能的计算结论。
+未来若团队按合法验证改变第二问预测器，第三问同步继承其版本。
+随机森林的已选结构保持不变，但每个预测日仍只用过去数据重新拟合，
+\textbf{不把全年训练好的同一棵森林用于回放年初。}
+
+本版只修正预测衔接。终端价值改型、10分钟自适应储能、额外预报发布等
+是不同的建模改动，不在本次一起引入，否则不能判断收益来自哪里。
+
+\section{时间、信息与单位}
+\subsection{物理时间轴}
+日索引为$i$，时段索引为$t$，定义
+\begin{equation}
+ \Delta t=\frac16\ {\rm h},\quad T=144,\quad
+ I_t=[(t-1)\Delta t,t\Delta t).
+\end{equation}
+更新小时$k\in\{0,6,12,18\}$，定义
+\begin{equation}
+ m(k)=6k+1,\quad
+ \mathcal T_k=\{m(k),\ldots,144\},\quad
+ \mathcal E_k=\{m(k),\ldots,m(k)+35\}.
+\end{equation}
+$\mathcal T_k$是本次优化的剩余日时域，$\mathcal E_k$是实际执行的36段。
+6:00从第37段开始；18:00从第109段开始。每天144个流量、145个库存状态。
+附件00:10暂按前一10分钟区间终点解释，原功率暂作区间平均值；
+这是待确认口径，不能仅凭图形判定。所有输入与模板映射须一起对齐。
+
+\subsection{预测量用功率，调度量用电量}
+预测中心$\mu$、原始预报$\widehat P$和残差$\epsilon$统一用kW；
+进入模型的$L,G,q,r,e,c,d,u,s$统一用kWh。
+电价$p_t$为元/kWh，采用附件1给出的固定日型，不引入第四问波动价格。
+功率乘$\Delta t$转为电量；价格乘电量得到元，费用中不再乘$\Delta t$。
+储能参数为
+\begin{equation}
+ \underline S=1200,\quad\overline S=10800,\quad
+ B=5000\Delta t=\frac{2500}{3}\ {\rm kWh},\quad
+ \eta_c=\eta_d=0.9.
+\end{equation}
+两侧各0.9为主解释；总往返效率0.9的解释只在独立敏感性中比较。
+
+\subsection{当前可见什么}
+$\mathcal F_{i,k}$包含日期$i$之前的历史数据、当天已结束时段实际值、
+当前库存、当时已发布预报、固定电价及已执行决策。
+当前不可读取尚未结束时段的负荷、光伏实际值，也不可读取未来发布的官方预报。
+完整历史日$j<i$才可用于本版日块校准。
+
+用$a\leq k$表示当前允许使用的最新官方预报的\textbf{原始发布小时}。
+正常策略$a=k$；屏蔽某次预报的对照可能$a<k$。
+以目标区间终点作为提前量分组标签：
+\begin{equation}
+ h_{t,a}=t\Delta t-a,\qquad A_{k,a}=k-a,\qquad
+ H_{t,k}=t\Delta t-k,\qquad h_{t,a}=A_{k,a}+H_{t,k}.
+\end{equation}
+三者单位均为小时。以终点标记是分组约定，不把时段电量当瞬时值。
+复用旧预报时，$a$不变，不能用$H_{t,k}$替换其原始提前量。
+
+\section{继承问题2：两个历史预测器及其档案}
+\subsection{继承接口}
+令$f_L^\star,f_G^\star$为第二问在正式评价开始前选定的负荷、
+历史光伏预测器。每天0:00产生
+\begin{equation}
+ \mu^{L,H}_{i,t}=f_L^\star(\mathcal H_{i-1},\chi_{i,t}),\qquad
+ \mu^{G,H}_{i,t}=f_G^\star(\mathcal H_{i-1},\chi_{i,t}),
+ \quad t=1,\ldots,144.
+\end{equation}
+$\mathcal H_{i-1}$只包含此前已完成日；$\chi$为已知日历、时刻和合法滞后特征。
+两输出非负，单位kW。本文上标$H$表示历史预测，不是预测距离。
+
+现有第二问随机森林配置为64棵树、最大深度10、最小叶样本8；
+训练目标最多28日，特征使用前1日、前7日同点、前7日均值、
+前1日相邻点、时刻、星期与月份。最早训练行还需要此前7日资料。
+这些是继承配置，不是本次新调出的最优参数。
+历史不足时沿用第二问已登记的回退；无历史首日使用附件1先验。
+若继承版本改变，以明确版本记录为准。
+
+\subsection{主版日内不重新更换负荷预测}
+\begin{equation}\label{eq:loadinherit}
+ \mu^L_{i,t|k}=\mu^{L,H}_{i,t},\qquad t\in\mathcal T_k.
+\end{equation}
+即日内只截取0:00预测的剩余部分，不退回加权均值，也不临时增加一个新模型。
+历史光伏预测同样保留为全天固定的$\mu^{G,H}_{i,t}$。
+主版不额外利用当日负荷残差更新中心；这可以以后作为独立增强，
+但不是本次“继承预测基础”的必要步骤。
+
+\subsection{继承残差，而非复用旧模型误差}
+对每个历史日保存其当时用更早数据拟合得到的预测：
+\begin{equation}
+ \epsilon^{L,H}_{j,t}=P^{L,\mathrm{real}}_{j,t}-\mu^{L,H,(-)}_{j,t},
+ \qquad
+ \epsilon^{G,H}_{j,t}=P^{G,\mathrm{real}}_{j,t}-\mu^{G,H,(-)}_{j,t}.
+\end{equation}
+$(-)$表示训练未使用日$j$及更晚数据。这些是kW样本外残差。
+不能把随机森林中心与旧历史均值的误差拼在一起，
+也不能用今天重新拟合的森林回填历史日的训练内残差。
+每个预先登记的候选可以保留独立因果档案，选型后引用对应档案。
+
+\section{官方光伏预报是补充信息，不是强制替代}
+\subsection{小时预报转换到10分钟}
+令$\widehat P^O_{i,a,j}$为$a$点发布、未来$j$小时的官方功率节点，
+$j=1,\ldots,24$。用当时最后已结束时段的实测功率作为$j=0$锚点；
+将其当发布瞬间值是插值近似，须在历史验证中使用同一规则。
+0:00使用前一日末值，首日无观测时用已登记先验，不能读取当天首段真值。
+相邻节点之间线性插值，记曲线为$f^O_{i,a}(x)$，则
+\begin{equation}
+ \widehat P^O_{i,t|a}
+ =\frac1{\Delta t}\int_{(t-1)\Delta t-a}^{t\Delta t-a}
+                      f^O_{i,a}(x)\,\mathrm dx .
+\end{equation}
+结果仍为平均功率kW。小时均值解释则用分段常值，单列敏感性。
+本版只使用当天剩余时域，发布跨日预报仅归档。
+
+\subsection{先校正官方预报偏差}
+将$h$按$(0,6],(6,12],(12,18],(18,24]$分箱，组号记$\ell(h)$。
+主版先共享发布时间的同提前量组；需要更细条件时再单独验证。
+在过去窗口内，先算每个历史日在组内的平均原始预测误差，
+再按日等权求组均值$\bar\epsilon_{i,\ell}^O$。
+记独立日数为$n_{i,\ell}$，合并组均值为$\bar\epsilon_{i,\mathrm{pool}}^O$，定义
+\begin{equation}
+ b_{i,\ell}=
+ \frac{n_{i,\ell}\bar\epsilon_{i,\ell}^O+
+             \nu_b\bar\epsilon_{i,\mathrm{pool}}^O}{n_{i,\ell}+\nu_b},
+ \qquad
+ \mu^O_{i,t|a}=\max\{0,\widehat P^O_{i,t|a}+b_{i,\ell(h_{t,a})}\}.
+\end{equation}
+$b$为kW，$\nu_b>0$为以历史日计的无量纲收缩强度。
+无组样本退回合并组，无任何历史令$b=0$。
+窗口与$\nu_b$先沿用已登记配置，对比融合时不得同步改它们。
+保存历史当时的校准预报及误差
+\begin{equation}
+ \epsilon^O_{j,t|a}=P^{G,\mathrm{real}}_{j,t}-\mu^{O,(-)}_{j,t|a}.
+\end{equation}
+不能用当前估计的偏差$b_i$重写历史$j$的校准预测。
+
+\subsection{融合式及简单端点}\label{sec:fusion}
+对预先确定的外层权重函数$\theta(h)\in[0,1]$，定义
+\begin{equation}\label{eq:fusion}
+ \mu^{G,F}_{i,t|k}
+ =(1-\theta(h_{t,a}))\mu^{G,H}_{i,t}
+          +\theta(h_{t,a})\mu^O_{i,t|a}.
+\end{equation}
+上标$F$表示融合。$\theta=0$保留历史预测，$\theta=1$采用校准官方预报，
+$\theta=1/2$为简单平均。两分量均非负，凸组合不需再次截零。
+$\theta$不是可信度概率、调度变量或未来真实天气类别。
+
+预测组合的参考是Hyndman与Athanasopoulos教材第13.4节\cite{fpp3}；
+本题采用凸组合、端点对照与少量历史校准，不照搬其数据或性能结果。
+主版本只比较全时域共用的
+\begin{equation}
+ \Theta_0=\{0,0.25,0.5,0.75,1\}.
+\end{equation}
+先验证一个权重是否有用，不直接估计144个权重。
+若样本支持提前量差异，另比较少量预先登记的双段权重，
+如$h\leq6$与$h>6$两段；必须保留常权重和端点。
+不规定“预报越近，官方权重必然越大”，不以指数形式代替实证。
+
+\section{融合后必须重新定义概率场景}
+\subsection{正确的融合误差}
+对每个固定候选$\theta$，按同一个历史日、目标时段和发布时间组成
+\begin{equation}\label{eq:fusedres}
+ \epsilon^{G,F,\theta}_{j,t|a}
+ =(1-\theta(h_{t,a}))\epsilon^{G,H}_{j,t}
+                  +\theta(h_{t,a})\epsilon^O_{j,t|a}.
+\end{equation}
+该式恰等于真实光伏减去同一候选的历史融合中心。
+因此融合误差取决于两种预测误差的相关性：
+\begin{equation}
+ \operatorname{Var}(\epsilon^F)
+ =(1-\theta)^2\operatorname{Var}(\epsilon^H)
+ +\theta^2\operatorname{Var}(\epsilon^O)
+ +2\theta(1-\theta)\operatorname{Cov}(\epsilon^H,\epsilon^O).
+\end{equation}
+这是固定时段和权重下的代数恒等式，不额外假设误差独立；
+各项单位均为$\mathrm{kW}^2$。
+不能把融合后的尺度写成两种标准差的简单平均，
+也不能不经检验继续使用旧官方预测的尺度。
+
+\subsection{最小可执行场景版：直接配对残差}
+令$\mathcal D_i=\{j:\max(1,i-W)\leq j<i\}$中具有所需完整档案的日期，
+$W=28$日为继承的窗口候选。每个日块同时包括144点负荷历史残差、
+历史光伏残差以及各发布时刻的校准官方残差。
+主版建议对现有日块直接枚举，$\Omega_i=\mathcal D_i$，
+$\pi_j=1/|\mathcal D_i|$。以$\omega$对应历史日$j$：
+\begin{align}
+ P^{L,\omega}_{i,t|k}
+ &=\max\{0,\mu^{L,H}_{i,t}+\epsilon^{L,H}_{j,t}\},\\
+ P^{G,\omega}_{i,t|k}
+ &=\max\{0,\mu^{G,F}_{i,t|k}+\epsilon^{G,F,\theta}_{j,t|a}\},\\
+ L^\omega_{i,t|k}&=\Delta t\,P^{L,\omega}_{i,t|k},\qquad
+ G^\omega_{i,t|k}=\Delta t\,P^{G,\omega}_{i,t|k}.
+\end{align}
+无可用完整日时，明确回退为当前中心的单场景，不虚构方差。
+不能对负荷、历史光伏和官方误差分别抽不同日，也不能独立打乱144个点。
+所有方案采用相同合法日块索引；改变官方来源$a$只改变该来源的误差，
+不顺便改变抽样日期。
+
+若为了与原结果严格对接而保留原256次抽样，则另设“继承抽样版”，
+固定共同索引及频数，不能将抽样改为枚举的变化归因于预测融合。
+直接枚举不会增加独立数据，只是避免对小历史池重复抽样产生额外随机权重。
+截零会改变均值和分布，须诊断截断比例；不宣称场景均值必然等于预测中心。
+
+\subsection{尺度、可信度及因果档案}
+本版先不新增标准化尺度，以便验证预测基础本身。
+若后续比较统一或提前量条件尺度，必须按同一融合候选的历史误差
+估计$\sigma^{F,\theta}$，再成对标准化及还原；不能复用旧模型$\sigma$。
+旧指标$R=1/[1+(\sigma/s_{\mathrm{ref}})^2]$仅作为误差尺度展示，
+不是额外优化贡献。CVaR及多时段风险需要保留完整配对路径；
+仅风险中性、共同电池动作且补救逐时独立时，逐时联合边际足以表达期望费用。
+
+\section{完整调度模型：改变输入，不改变物理与结算}
+下式省略日下标$i$，$\theta$、场景及参数在每次优化前已固定。
+\subsection{变量与取值域}
+\begin{longtable}{p{3.1cm}p{6.0cm}p{4.7cm}}
+\toprule 变量 & 含义与共享范围 & 单位及取值域\\ \midrule
+\endhead
+$q_t$ & 0:00原计划；全天共同，日内固定为参数 & kWh，$q_t\geq0$\\
+$r_{t|k}$ & 本次未来正常购电量，场景共同 & kWh，非负\\
+$c_{t|k},d_{t|k}$ & 母线侧充、放电量，场景共同 & kWh，非负，上界$B$\\
+$s_{t|k}$ & 时段开始库存，含末状态，场景共同 & kWh，$[\underline S,\overline S]$\\
+$z_{t|k}$ & 充放电模式，场景共同 & $\{0,1\}$\\
+$a^+_{t|k},a^-_{t|k}$ & 相对0:00计划的上、下调量 & kWh，非负\\
+$e^\omega_{t|k},u^\omega_{t|k}$ & 紧急购电与富余，场景补救 & kWh，非负\\
+$b_k$ & 日末目标不足量 & kWh，非负\\
+$\zeta_k,v_\omega$ & 可选CVaR阈值与超额损失 & 元，$\zeta_k\in\R,v_\omega\geq0$\\
+\bottomrule
+\end{longtable}
+所有时段变量取$t\in\mathcal T_k$，库存取$t=m(k),\ldots,145$，
+所有补救变量取$\omega\in\Omega_i$。$q,r$不是两股同时送入母线的电。
+富余$u$合并弃光及未使用付费配额，不统一加$u\leq G$；
+不允许售电，主口径假设无并网及紧急购电上限。
+
+\subsection{每次共同满足的约束}
+\begin{align}
+ r_{t|k}+e^\omega_{t|k}+G^\omega_{t|k}+d_{t|k}
+ &=L^\omega_{t|k}+c_{t|k}+u^\omega_{t|k},\label{eq:bal}\\
+ s_{t+1|k}&=s_{t|k}+\eta_c c_{t|k}-d_{t|k}/\eta_d,\\
+ s_{m(k)|k}&=s^{\mathrm{obs}}_{i,m(k)},\\
+ \underline S\leq s_{t|k}&\leq\overline S
+       \quad(t=m(k),\ldots,145),\\
+ 0\leq c_{t|k}&\leq Bz_{t|k},\quad
+ 0\leq d_{t|k}\leq B(1-z_{t|k}),\quad z_{t|k}\in\{0,1\},\\
+ b_k&\geq S^{\mathrm{tar}}-s_{145|k},\quad b_k\geq0.\label{eq:end}
+\end{align}
+除库存边界已另标索引外，以上逐时约束对$t\in\mathcal T_k$成立，
+平衡式对全部场景成立，并附变量表的非负域。
+$S^{\mathrm{tar}}=6000$ kWh沿用第三问软目标；目标中加入$\gamma b_k$，
+$\gamma\geq0$单位元/kWh。这不是每天强制6000。
+比较预测模块时$\gamma$固定为同一已登记值，不同时重新选择终端结构。
+12月31日另加$s_{145|k}=6000$ kWh；跨日实际库存连续传递。
+
+\subsection{0:00制定原始承诺}
+令$r_{t|0}=q_t$，$a^+_{t|0}=a^-_{t|0}=0$，定义
+$C^\omega_k=\sum_{t\in\mathcal T_k}5p_te^\omega_{t|k}$，单位元。
+风险中性模型为
+\begin{equation}\label{eq:day}
+ \min\ \sum_{t=1}^{144}p_tq_t+
+              \sum_\omega\pi_\omega C^\omega_0+\gamma b_0,
+\end{equation}
+满足共同约束及$r=q\geq0$。保存$q^\star$为原始承诺，
+但仅执行$\mathcal E_0$内的动作。
+
+\subsection{6:00、12:00、18:00的调整}
+固定原始$q$，对尚未执行时段增加
+\begin{equation}
+ r_{t|k}=q_t+a^+_{t|k}-a^-_{t|k},\qquad a^\pm_{t|k}\geq0,
+\end{equation}
+并求解
+\begin{equation}\label{eq:roll}
+ \min\ \sum_{t\in\mathcal T_k}
+       (p_tq_t+1.5p_ta^+_{t|k}-0.5p_ta^-_{t|k})
+       +\sum_\omega\pi_\omega C^\omega_k+\gamma b_k .
+\end{equation}
+配合全部共同约束，不改变已经执行的时段。
+正价下，上下调同时减少相同电量会降低费用，因此无需另设调整方向整数变量。
+下调退费是主解释；下调另罚、每次相对上一版本计费为不同备选结算，
+不能混入本次继承效果比较。
+
+\subsection{分解形式与可选CVaR}
+令$x$为本次共同购电、电池及终端变量，$\mathcal X_k$含其物理约束；
+$f_k(x)$为正常结算与终端项。补救函数可写
+\begin{equation}
+ Q_k(x,\omega)=
+ \min_{\substack{e^\omega,u^\omega\geq0\\
+                 \text{满足式}\eqref{eq:bal}}}
+           \sum_{t\in\mathcal T_k}5p_te^\omega_{t|k},
+ \qquad \min_{x\in\mathcal X_k}\{f_k(x)+\sum_\omega\pi_\omega Q_k(x,\omega)\}.
+\end{equation}
+这是重复两阶段近似，不是完整全天多阶段最优策略；不要求使用Benders算法。
+每次共同电池动作不随完整未来场景分叉，补救逐时执行即可。
+
+CVaR仅作为同一预测输入上的风险扩展\cite{cvar}，在目标上增加
+\begin{equation}
+ \lambda\left(\zeta_k+\frac1{1-\alpha}\sum_\omega\pi_\omega v_\omega\right),
+ \quad v_\omega\geq C^\omega_k-\zeta_k,\quad v_\omega\geq0,
+ \quad \zeta_k\in\R,
+\end{equation}
+$0<\alpha<1$、$\lambda\geq0$无量纲。风险中性主版$\lambda=0$时删除辅助变量。
+损失是剩余紧急费用，不是未供电量、预测误差或全年滚动后总费的精确风险。
+保留模式变量为MILP；删除互斥得到LP松弛，物理净化或等价性须另行核验。
+
+\section{执行、热身与真实账单}
+对$t\in\mathcal E_k$执行$r^\star,c^\star,d^\star$，
+实际偏差只由
+\begin{align}
+ e^{\mathrm{real}}_{i,t}
+ &=\pos{L^{\mathrm{real}}_{i,t}+c^{\mathrm{exe}}_{i,t}
+                 -G^{\mathrm{real}}_{i,t}-d^{\mathrm{exe}}_{i,t}-r^{\mathrm{exe}}_{i,t}},\\
+ u^{\mathrm{real}}_{i,t}
+ &=\pos{r^{\mathrm{exe}}_{i,t}+G^{\mathrm{real}}_{i,t}
+                 +d^{\mathrm{exe}}_{i,t}-L^{\mathrm{real}}_{i,t}-c^{\mathrm{exe}}_{i,t}},\\
+ s^{\mathrm{real}}_{i,t+1}
+ &=s^{\mathrm{real}}_{i,t}+\eta_c c^{\mathrm{exe}}_{i,t}
+                                    -d^{\mathrm{exe}}_{i,t}/\eta_d
+\end{align}
+响应。它没有新增10分钟自适应电池动作；如果取消紧急充电等，需另建因果规则。
+下次更新读取真实库存，跨日$s^{\mathrm{real}}_{i+1,1}=s^{\mathrm{real}}_{i,145}$。
+全年334个评价日、每日四次，共1336次外层求解，不含热身和验证。
+
+1月1日从6000 kWh开始，沿用预先登记的合法1月热身策略；
+为隔离预测改动，所有第三问修订对照使用同一热身末库存，
+不能按每个新权重重写已经执行的1月。
+1月验证分支可以统一起止库存，但其末状态不得覆盖实际热身状态。
+2月起各策略独立连续传递库存，不每天复制其他策略的状态。
+
+每段按最终执行版本相对0:00原计划结算一次：
+\begin{equation}\label{eq:bill}
+ F_i^{\mathrm{real}}=\sum_{t=1}^{144}p_t
+ \left[q_{i,t}+1.5\pos{r^{\mathrm{exe}}_{i,t}-q_{i,t}}
+ -0.5\pos{q_{i,t}-r^{\mathrm{exe}}_{i,t}}+5e^{\mathrm{real}}_{i,t}\right].
+\end{equation}
+不加总四次重叠目标，不将$\gamma b$和CVaR项计入账单。
+指定时段购电、充放电与紧急量按单段电量求和，不再乘$\Delta t$。
+
+\section{权重如何选择：合法回测，不让优化器挑有利预测}
+先登记$\Theta_0$、偏差校准配置、场景规则、终端和控制权限。
+主版权重在正式评价前选择后冻结，日内不根据尚未实现结果改变。
+对每个固定候选$\theta$，重建其历史融合中心与式\eqref{eq:fusedres}残差，
+在过去验证日集合$\mathcal V$内连续回放，按真实现金费用选取
+\begin{equation}
+ \theta^\star\in\arg\min_{\theta\in\Theta_0}
+                \sum_{j\in\mathcal V}F_j^{\mathrm{real}}(\theta).
+\end{equation}
+各验证日$j$的预测拟合、偏差校准和日块必须只用$j$之前的数据。
+验证日内场景使用同一候选的更早误差，不能用验证日自己的残差构造该日场景。
+验证为候选的离线比较，不声称当时已经选定后来胜出的模型。
+
+若沿用1月21日至31日验证，只有11个日样本。
+第二问预测器选择与第三问融合选择共享这段数据时，
+不能将后一步称为独立验证；须披露连续选参及小样本风险，
+不增加大量权重或同时搜索所有尺度、终端和风险参数。
+差异小于预先登记的费用容差时，优先简单平均或端点等预先规定的简单方案。
+没有有效验证日时先用$\theta=0$回退，冷启动不宣称已证实融合更好。
+未来可另做按月仅用过去资料更新的预序贯检验，但不能回头用全年结果改写2月选择。
+以历史调度费选型借鉴决策导向思想\cite{spo}，不是直接套用SPO+理论。
+
+\section{对照设计：先辨认继承效果，再比较融合}
+\begin{longtable}{p{1.6cm}p{7.0cm}p{5.2cm}}
+\toprule 标识 & 固定或改变的内容 & 回答什么\\ \midrule
+\endhead
+A0 & 原第三问配置及原残差规则 & 保留已有策略参考，不移用其费用作新结果。\\
+A1 & A0只把负荷中心及负荷残差替换为第二问预测器对应档案；
+其余尺度、抽样、官方光伏、终端及风险规则固定 & 负荷继承本身的作用；若有尺度，负荷尺度也须匹配新误差。\\
+F0 & 继承两个历史预测器，$\theta=0$，直接配对残差，四次求解 & 新版历史信息基准。\\
+F1 & F0改为$\theta=1$，使用校准官方光伏及对应误差 & 官方与历史预测的端点比较。\\
+F2 & F0采用$\theta=1/2$ & 简单平均是否已足够。\\
+F3 & F0采用历史费用选出的固定权重 & 校准权重是否有增量价值。\\
+P/F & 同一融合中心：单场景与配对场景 & 单独辨认不确定性处理，不能同时取消偏差校准。\\
+S/R & 固定融合和场景基础，分别加条件尺度或CVaR & 不把多个模块同时加入后合并归因。\\
+\bottomrule
+\end{longtable}
+A1与F组场景结构可能不同，二者差额不能单独归因于光伏融合。
+F组统一日块、概率、负荷预测、偏差配置、终端参数和控制权限。
+权重端点不是保留原始官方预报偏差的弱基线；原始官方预报可额外列出诊断。
+
+\subsection{怎样公平比较第二问与第三问}
+既有第二问线性终端价值和第三问软目标不同，原始全年费用只作背景。
+另建“第二问同口径对照”：保留第二问0:00固定计划权限，
+使用同一预测档案、场景规则、效率、评价起止库存及第三问相同终端函数。
+它是新对照，不覆盖原第二问成果。
+在此基础上分别比较：增加0:00官方信息、增加日内重排、
+以及在相同四次求解下增加新官方预报。
+
+精确退化检查必须同时满足：$\theta=0$，相同输入日块及概率，
+仅0:00求解且冻结全天电池与购电，$\lambda=0$，
+相同终端和初值。此时本模型退化为该同口径第二问模型。
+\textbf{仅令$\theta=0$但保留四次重排，不等于原第二问。}
+更多信息可被忽略是同一正确模型及嵌套策略集下的理论性质，
+不保证两个不同预测分布和滚动近似的样本外账单必然单调改善。
+
+\subsection{预报时刻价值}
+固定0:00，比较$\{6,12,18\}$的8个信息子集，均保留四次重算。
+屏蔽新发布时沿用旧$a$及其历史误差；历史预测分量保持0:00原值。
+所有方案使用相同历史日块或共同抽样索引，避免来源时刻改变时顺便改变随机权重。
+不得读取不存在的额外发布预报，不将重新处理旧预报当成新气象信息。
+
+\section{后续验收与交接}
+\begin{enumerate}
+ \item \textbf{模型继承：}记录第二问模型版本、特征、训练起止日期、回退规则；
+ 同日第三问的基础负荷预测须与继承接口完全一致。
+ \item \textbf{残差一致：}独立重算真实值减去当时预测，核验式\eqref{eq:fusedres}；
+ 换预测器不能继续读取旧残差缓存，改变权重也须更新对应残差。
+ \item \textbf{端点退化：}$\theta=0,1,1/2$分别恢复历史、校准官方和平均中心；
+ 同时检查场景端点，不仅检查点预测；再检验完整第二问退化条件。
+ \item \textbf{信息隔离：}扰动未来负荷、光伏和未发布预报不应改变当前决策；
+ 旧预报的原始$a$和$h$保持不变。
+ \item \textbf{物理与结算：}144段145状态、母线守恒、效率、容量、功率、互斥、
+ 跨日库存与式\eqref{eq:bill}逐项核对，容差按kWh与元分别登记。
+ \item \textbf{预测证据：}负荷、光伏及净负荷误差分开报告；
+ 检验覆盖率、区间宽度、CRPS及截断比例，不以重复场景数替代独立日数。
+ \item \textbf{经济证据：}按相同日期报告正常、调整、紧急及总费，
+ 月度变化、独立状态轨迹、运行时间和最优间隙。
+ \item \textbf{版本：}新模型对应新实验ID，不将旧第三问结果或不同CVaR配置的
+ 图表混入；当前验收只是建模与文档验收，不宣称数值测试已通过。
+\end{enumerate}
+算法成员需要的新增输入为历史预测器版本、三类成对残差档案、
+当前允许的官方来源$a$、已冻结权重及统一日块。
+调度器仍只接收电量场景、概率、当前库存和原计划等，
+不接收未来真值，也不在内层选择$\theta$。
+最少补学：预测组合、误差协方差、因果残差档案和滚动验证；
+现有LP、IP及随机规划知识足以理解调度层。
+
+\begingroup\small
+\begin{thebibliography}{9}
+\bibitem{fpp3}
+Hyndman R J, Athanasopoulos G.
+Forecasting: Principles and Practice, 3rd ed.
+第13.4节 Forecast combinations（在线版）。
+\url{https://otexts.com/fpp3/combinations.html}.
+用途：简单平均、预测组合与误差相关性；本题的权重候选及调度接口另行定义。
+\bibitem{spo}
+Elmachtoub A N, Grigas P. Smart Predict, then Optimize.
+Management Science, 2022, 68(1): 9--26.
+\url{https://doi.org/10.1287/mnsc.2020.3922}.
+用途：借鉴历史决策费用导向选择，不直接移用成本向量预测的SPO+保证。
+\bibitem{cvar}
+Rockafellar R T, Uryasev S. Optimization of Conditional Value-at-Risk.
+Journal of Risk, 2000, 2(3): 21--41.
+\url{https://doi.org/10.21314/jor.2000.038}.
+用途：可选风险项的阈值与辅助变量表示。
+\end{thebibliography}
+\endgroup
+\end{document}

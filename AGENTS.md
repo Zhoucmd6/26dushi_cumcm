@@ -33,6 +33,7 @@ docs/assumptions.md          歧义、主假设和备选口径
 docs/modeling-ideas.md       公共模型与四问建模思路
 docs/model-q1-q2.tex         问题1、2的详细中文 LaTeX 模型
 docs/model-q3.tex            问题3独立详细模型（提前量校准与CVaR）
+docs/model-q3-prediction-inheritance.tex 问题3预测继承修订（历史预测、官方融合与一致残差）
 docs/model-q4.tex            问题4独立详细模型（价量依赖收缩与下一节点前瞻）
 docs/model-q4-revision-notes.md 问题4新旧版本差异与专项验收
 docs/collaboration-handoff.md 已有成果、待评审事项与协作分工
